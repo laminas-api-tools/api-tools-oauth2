@@ -1,18 +1,20 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\OAuth2\Factory;
+namespace Laminas\ApiTools\OAuth2\Factory;
 
 use Interop\Container\ContainerInterface;
+use Laminas\ApiTools\OAuth2\Controller\AuthController;
+use Laminas\ApiTools\OAuth2\Provider\UserId;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 use OAuth2\Server as OAuth2Server;
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use ZF\OAuth2\Controller\AuthController;
-use ZF\OAuth2\Provider\UserId;
 
 class AuthControllerFactory implements FactoryInterface
 {
@@ -66,7 +68,7 @@ class AuthControllerFactory implements FactoryInterface
      */
     private function getOAuth2ServerFactory(ContainerInterface $container)
     {
-        $oauth2ServerFactory = $container->get('ZF\OAuth2\Service\OAuth2Server');
+        $oauth2ServerFactory = $container->get('Laminas\ApiTools\OAuth2\Service\OAuth2Server');
         if (! $oauth2ServerFactory instanceof OAuth2Server) {
             return $oauth2ServerFactory;
         }
@@ -90,7 +92,7 @@ class AuthControllerFactory implements FactoryInterface
 
         $config = $container->get('config');
 
-        return (isset($config['zf-oauth2']['api_problem_error_response'])
-            && $config['zf-oauth2']['api_problem_error_response'] === true);
+        return (isset($config['api-tools-oauth2']['api_problem_error_response'])
+            && $config['api-tools-oauth2']['api_problem_error_response'] === true);
     }
 }

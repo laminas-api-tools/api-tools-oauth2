@@ -1,13 +1,15 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\OAuth2\Controller\TestAsset;
+namespace LaminasTest\ApiTools\OAuth2\Controller\TestAsset;
 
 use RuntimeException;
-use ZF\ApiProblem\Exception\ProblemExceptionInterface;
+use Laminas\ApiTools\ApiProblem\Exception\ProblemExceptionInterface;
 
 class CustomProblemDetailsException extends RuntimeException implements ProblemExceptionInterface
 {

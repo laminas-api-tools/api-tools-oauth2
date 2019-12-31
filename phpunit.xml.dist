@@ -7,7 +7,7 @@
         <testsuite name="adapter-pdo">
             <directory>./test/Adapter/Pdo</directory>
         </testsuite>
-        <testsuite name="ZF\OAuth2 Tests">
+        <testsuite name="Laminas\ApiTools\OAuth2 Tests">
             <directory>./test</directory>
         </testsuite>
     </testsuites>

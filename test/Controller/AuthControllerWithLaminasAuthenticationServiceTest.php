@@ -1,17 +1,19 @@
 <?php
+
 /**
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\OAuth2\Controller;
+namespace LaminasTest\ApiTools\OAuth2\Controller;
 
+use Laminas\Stdlib\Parameters;
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use Mockery as M;
 use ReflectionProperty;
-use Zend\Stdlib\Parameters;
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
-class AuthControllerWithZendAuthenticationServiceTest extends AbstractHttpControllerTestCase
+class AuthControllerWithLaminasAuthenticationServiceTest extends AbstractHttpControllerTestCase
 {
     protected $loader;
     protected $db;
@@ -19,7 +21,7 @@ class AuthControllerWithZendAuthenticationServiceTest extends AbstractHttpContro
     protected function setUp()
     {
         $this->setApplicationConfig(
-            include __DIR__ . '/../TestAsset/zend.authenticationservice.application.config.php'
+            include __DIR__ . '/../TestAsset/laminas.authenticationservice.application.config.php'
         );
 
         parent::setUp();
@@ -28,7 +30,7 @@ class AuthControllerWithZendAuthenticationServiceTest extends AbstractHttpContro
 
     public function setupDb()
     {
-        $pdo = $this->getApplication()->getServiceManager()->get('ZF\OAuth2\Adapter\PdoAdapter');
+        $pdo = $this->getApplication()->getServiceManager()->get('Laminas\ApiTools\OAuth2\Adapter\PdoAdapter');
         $r = new ReflectionProperty($pdo, 'db');
         $r->setAccessible(true);
         $db = $r->getValue($pdo);
@@ -45,12 +47,12 @@ class AuthControllerWithZendAuthenticationServiceTest extends AbstractHttpContro
 
     public function getAuthenticationService()
     {
-        $storage = M::mock('Zend\Authentication\Storage\StorageInterface');
+        $storage = M::mock('Laminas\Authentication\Storage\StorageInterface');
         $storage->shouldReceive('isEmpty')->once()->andReturn(false);
         $storage->shouldReceive('read')->once()->andReturn(123);
 
         $authentication = $this->getApplication()->
-            getServiceManager()->get('Zend\Authentication\AuthenticationService');
+            getServiceManager()->get('Laminas\Authentication\AuthenticationService');
 
         $authentication->setStorage($storage);
 
@@ -75,7 +77,7 @@ class AuthControllerWithZendAuthenticationServiceTest extends AbstractHttpContro
 
         $this->dispatch('/oauth/authorize');
         $this->assertTrue($this->getResponse()->isRedirect(), var_export($this->getResponse(), 1));
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('authorize');
 
         $location = $this->getResponse()->getHeaders()->get('Location')->getUri();
@@ -104,7 +106,7 @@ class AuthControllerWithZendAuthenticationServiceTest extends AbstractHttpContro
 
         $this->getApplication()->bootstrap();
         $this->dispatch('/oauth');
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('token');
         $this->assertResponseStatusCode(200);
 
