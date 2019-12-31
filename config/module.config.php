@@ -2,24 +2,24 @@
 return array(
     'controllers' => array(
         'factories' => array(
-            'ZF\OAuth2\Controller\Auth' => 'ZF\OAuth2\Controller\AuthControllerFactory',
+            'Laminas\ApiTools\OAuth2\Controller\Auth' => 'Laminas\ApiTools\OAuth2\Controller\AuthControllerFactory',
         ),
     ),
     'router' => array(
         'routes' => array(
             'oauth' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Laminas\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/oauth',
                     'defaults' => array(
-                        'controller' => 'ZF\OAuth2\Controller\Auth',
+                        'controller' => 'Laminas\ApiTools\OAuth2\Controller\Auth',
                         'action'     => 'token',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
                     'authorize' => array(
-                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'type' => 'Laminas\Mvc\Router\Http\Literal',
                         'options' => array(
                             'route' => '/authorize',
                             'defaults' => array(
@@ -28,7 +28,7 @@ return array(
                         ),
                     ),
                     'resource' => array(
-                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'type' => 'Laminas\Mvc\Router\Http\Literal',
                         'options' => array(
                             'route' => '/resource',
                             'defaults' => array(
@@ -37,7 +37,7 @@ return array(
                         ),
                     ),
                     'code' => array(
-                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'type' => 'Laminas\Mvc\Router\Http\Literal',
                         'options' => array(
                             'route' => '/receivecode',
                             'defaults' => array(

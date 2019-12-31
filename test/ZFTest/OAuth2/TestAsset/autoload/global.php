@@ -1,7 +1,9 @@
 <?php
+
 /**
- * @copyright Copyright (c) 2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
 return array(
@@ -20,7 +22,7 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
-    'zf-oauth2' => array(
+    'api-tools-oauth2' => array(
         'db' => array(
             'dsn'      => 'sqlite:' . __DIR__ . '/dbtest.sqlite',
         ),

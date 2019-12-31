@@ -1,18 +1,20 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\OAuth2\Controller;
+namespace Laminas\ApiTools\OAuth2\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use OAuth2\Server as OAuth2Server;
+use Laminas\ApiTools\ApiProblem\ApiProblem;
+use Laminas\ApiTools\ApiProblem\ApiProblemResponse;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
 use OAuth2\Request as OAuth2Request;
 use OAuth2\Response as OAuth2Response;
-use Zend\View\Model\ViewModel;
-use ZF\ApiProblem\ApiProblem;
-use ZF\ApiProblem\ApiProblemResponse;
+use OAuth2\Server as OAuth2Server;
 
 class AuthController extends AbstractActionController
 {
@@ -141,10 +143,10 @@ class AuthController extends AbstractActionController
     }
 
     /**
-     * Convert the OAuth2 response to a \Zend\Http\Response
+     * Convert the OAuth2 response to a \Laminas\Http\Response
      *
      * @param $response OAuth2Response
-     * @return \Zend\Http\Response
+     * @return \Laminas\Http\Response
      */
     private function setHttpResponse(OAuth2Response $response)
     {
