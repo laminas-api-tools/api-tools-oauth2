@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="./Bootstrap.php">
     <testsuites>
-        <testsuite name="ZF\OAuth2 Tests">
-            <directory>./ZFTest</directory>
+        <testsuite name="Laminas\ApiTools\OAuth2 Tests">
+            <directory>./LaminasTest</directory>
         </testsuite>
     </testsuites>
 

@@ -1,16 +1,26 @@
 {
-    "name": "zfcampus/zf-oauth2",
-    "description": "ZF2 module for implementing an OAuth2 server",
+    "name": "laminas-api-tools/api-tools-oauth2",
+    "description": "Laminas module for implementing an OAuth2 server",
     "license": "BSD-3-Clause",
     "keywords": [
+        "laminas",
+        "api-tools",
         "api",
         "oauth2",
-        "framework",
-        "zf2"
+        "framework"
     ],
-    "repositories": [
-        { "type": "composer", "url": "https://packages.zendframework.com/" }
-    ],
+    "homepage": "https://api-tools.getlaminas.org",
+    "support": {
+        "docs": "https://api-tools.getlaminas.org/documentation",
+        "issues": "https://github.com/laminas-api-tools/api-tools-oauth2/issues",
+        "source": "https://github.com/laminas-api-tools/api-tools-oauth2",
+        "rss": "https://github.com/laminas-api-tools/api-tools-oauth2/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
+    },
+    "config": {
+        "sort-packages": true
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
@@ -19,20 +29,24 @@
     "require": {
         "php": ">=5.3.23",
         "bshaffer/oauth2-server-php": "dev-develop",
-        "zendframework/zendframework": "~2.3-dev",
-        "zfcampus/zf-api-problem": "~1.0-dev",
-        "zfcampus/zf-content-negotiation": "~1.0-dev"
+        "laminas-api-tools/api-tools-api-problem": "~1.0-dev",
+        "laminas-api-tools/api-tools-content-negotiation": "~1.0-dev",
+        "laminas/laminas": "~2.3-dev",
+        "laminas/laminas-zendframework-bridge": "^1.0"
     },
     "require-dev": {
-        "phpunit/PHPUnit": "3.7.*"
+        "phpunit/phpunit": "3.7.*"
     },
     "autoload": {
         "psr-0": {
-            "ZF\\OAuth2\\": "src/",
-            "ZFTest\\OAuth2\\": "test/"
+            "Laminas\\ApiTools\\OAuth2\\": "src/",
+            "LaminasTest\\ApiTools\\OAuth2\\": "test/"
         },
         "classmap": [
             "Module.php"
         ]
+    },
+    "replace": {
+        "zfcampus/zf-oauth2": "self.version"
     }
 }

@@ -1,13 +1,15 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\OAuth2;
+namespace Laminas\ApiTools\OAuth2;
 
 /**
- * ZF2 module
+ * Laminas module
  */
 class Module
 {
@@ -18,8 +20,8 @@ class Module
      */
     public function getAutoloaderConfig()
     {
-        return array('Zend\Loader\StandardAutoloader' => array('namespaces' => array(
-            __NAMESPACE__ => __DIR__ . '/src/ZF/OAuth2/',
+        return array('Laminas\Loader\StandardAutoloader' => array('namespaces' => array(
+            __NAMESPACE__ => __DIR__ . '/src/Laminas/OAuth2/',
         )));
     }
 
