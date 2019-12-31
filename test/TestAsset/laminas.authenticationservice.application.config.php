@@ -1,11 +1,11 @@
 <?php
 $modules = [
-    'ZF\ContentNegotiation',
-    'ZF\OAuth2',
+    'Laminas\ApiTools\ContentNegotiation',
+    'Laminas\ApiTools\OAuth2',
 ];
 
-if (class_exists('Zend\Router\Module')) {
-    $modules[] = 'Zend\Router';
+if (class_exists('Laminas\Router\Module')) {
+    $modules[] = 'Laminas\Router';
 }
 
 return [
@@ -27,7 +27,7 @@ return [
         // modules are loaded. These effectively override configuration
         // provided by modules themselves. Paths may use GLOB_BRACE notation.
         'config_glob_paths' => [
-            __DIR__ . '/autoload_zend_authenticationservice/{,*.}{global,local}.php',
+            __DIR__ . '/autoload_laminas_authenticationservice/{,*.}{global,local}.php',
         ],
     ],
 ];

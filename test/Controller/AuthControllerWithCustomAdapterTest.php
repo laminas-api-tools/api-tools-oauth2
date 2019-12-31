@@ -1,12 +1,14 @@
 <?php
+
 /**
- * @copyright Copyright (c) 2016 João Dias <mail@joaodias.eu>
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\OAuth2\Controller;
+namespace LaminasTest\ApiTools\OAuth2\Controller;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class AuthControllerWithCustomAdapterTest extends AbstractHttpControllerTestCase
 {
@@ -19,7 +21,7 @@ class AuthControllerWithCustomAdapterTest extends AbstractHttpControllerTestCase
 
     public function testToken()
     {
-        /** @var \Zend\Http\Request $request */
+        /** @var \Laminas\Http\Request $request */
         $request = $this->getRequest();
         $request->getPost()->set('grant_type', 'password');
         $request->getPost()->set('client_id', 'public');
@@ -28,11 +30,11 @@ class AuthControllerWithCustomAdapterTest extends AbstractHttpControllerTestCase
         $request->setMethod('POST');
 
         $this->dispatch('/oauth');
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('token');
         $this->assertResponseStatusCode(401);
 
-        /** @var \Zend\Http\Response $response */
+        /** @var \Laminas\Http\Response $response */
         $response = $this->getResponse();
         $headers = $response->getHeaders();
         $this->assertEquals('application/problem+json', $headers->get('content-type')->getFieldValue());

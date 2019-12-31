@@ -1,13 +1,15 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\OAuth2\Provider\UserId;
+namespace Laminas\ApiTools\OAuth2\Provider\UserId;
 
-use Zend\Authentication\AuthenticationServiceInterface;
-use Zend\Stdlib\RequestInterface;
+use Laminas\Authentication\AuthenticationServiceInterface;
+use Laminas\Stdlib\RequestInterface;
 
 class AuthenticationService implements UserIdProviderInterface
 {
@@ -31,13 +33,13 @@ class AuthenticationService implements UserIdProviderInterface
     {
         $this->authenticationService = $service;
 
-        if (isset($config['zf-oauth2']['user_id'])) {
-            $this->userId = $config['zf-oauth2']['user_id'];
+        if (isset($config['api-tools-oauth2']['user_id'])) {
+            $this->userId = $config['api-tools-oauth2']['user_id'];
         }
     }
 
     /**
-     * Use implementation of Zend\Authentication\AuthenticationServiceInterface to fetch the identity.
+     * Use implementation of Laminas\Authentication\AuthenticationServiceInterface to fetch the identity.
      *
      * @param  RequestInterface $request
      * @return mixed

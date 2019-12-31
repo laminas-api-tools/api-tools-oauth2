@@ -1,5 +1,3 @@
-sudo: false
-
 language: php
 
 cache:
@@ -16,6 +14,7 @@ env:
     - MONGO_DRIVER=mongodb
 
 matrix:
+  fast_finish: true
   include:
     - php: 5.6
       env:
@@ -23,20 +22,11 @@ matrix:
         - MONGO_DRIVER=mongo
     - php: 5.6
       env:
-        - DEPS=locked
-        - MONGO_DRIVER=mongo
-        - LEGACY_DEPS="phpunit/phpunit"
-    - php: 5.6
-      env:
         - DEPS=latest
         - MONGO_DRIVER=mongo
     - php: 7
       env:
         - DEPS=lowest
-    - php: 7
-      env:
-        - DEPS=locked
-        - LEGACY_DEPS="phpunit/phpunit"
     - php: 7
       env:
         - DEPS=latest
@@ -45,18 +35,12 @@ matrix:
         - DEPS=lowest
     - php: 7.1
       env:
-        - DEPS=locked
+        - DEPS=latest
         - CS_CHECK=true
         - TEST_COVERAGE=true
-    - php: 7.1
-      env:
-        - DEPS=latest
     - php: 7.2
       env:
         - DEPS=lowest
-    - php: 7.2
-      env:
-        - DEPS=locked
     - php: 7.2
       env:
         - DEPS=latest

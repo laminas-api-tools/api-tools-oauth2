@@ -1,16 +1,18 @@
 <?php
+
 /**
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\OAuth2\Factory;
+namespace LaminasTest\ApiTools\OAuth2\Factory;
 
-use Zend\Mvc\Controller\ControllerManager;
-use Zend\ServiceManager\ServiceManager;
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
-use ZF\OAuth2\Controller\AuthController;
-use ZF\OAuth2\Factory\AuthControllerFactory;
+use Laminas\ApiTools\OAuth2\Controller\AuthController;
+use Laminas\ApiTools\OAuth2\Factory\AuthControllerFactory;
+use Laminas\Mvc\Controller\ControllerManager;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class AuthControllerFactoryTest extends AbstractHttpControllerTestCase
 {
@@ -33,16 +35,16 @@ class AuthControllerFactoryTest extends AbstractHttpControllerTestCase
     {
         $oauthServerFactory = function () {
         };
-        $this->services->setService('ZF\OAuth2\Service\OAuth2Server', $oauthServerFactory);
+        $this->services->setService('Laminas\ApiTools\OAuth2\Service\OAuth2Server', $oauthServerFactory);
 
-        $userIdProvider = $this->getMockBuilder('ZF\OAuth2\Provider\UserId\UserIdProviderInterface')->getMock();
-        $this->services->setService('ZF\OAuth2\Provider\UserId', $userIdProvider);
+        $userIdProvider = $this->getMockBuilder('Laminas\ApiTools\OAuth2\Provider\UserId\UserIdProviderInterface')->getMock();
+        $this->services->setService('Laminas\ApiTools\OAuth2\Provider\UserId', $userIdProvider);
 
         $controller = $this->isV2ServiceManager($this->services)
             ? $controller = $this->factory->createService($this->controllers)
             : $controller = $this->factory->__invoke($this->services, AuthController::class);
 
-        $this->assertInstanceOf('ZF\OAuth2\Controller\AuthController', $controller);
+        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Controller\AuthController', $controller);
         $this->assertEquals(new AuthController($oauthServerFactory, $userIdProvider), $controller);
     }
 
@@ -53,7 +55,7 @@ class AuthControllerFactoryTest extends AbstractHttpControllerTestCase
         $this->services = $services = new ServiceManager();
 
         $this->services->setService('config', [
-            'zf-oauth2' => [
+            'api-tools-oauth2' => [
                 'api_problem_error_response' => true,
             ],
         ]);
@@ -64,7 +66,7 @@ class AuthControllerFactoryTest extends AbstractHttpControllerTestCase
 
         $this->setApplicationConfig([
             'modules' => [
-                'ZF\OAuth2',
+                'Laminas\ApiTools\OAuth2',
             ],
             'module_listener_options' => [
                 'module_paths' => [__DIR__ . '/../../'],
