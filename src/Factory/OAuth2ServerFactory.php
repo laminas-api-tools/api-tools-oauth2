@@ -1,19 +1,21 @@
 <?php
-/**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
- */
-namespace ZF\OAuth2\Factory;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use ZF\OAuth2\Controller\Exception;
-use OAuth2\Server as OAuth2Server;
+/**
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
+ */
+namespace Laminas\ApiTools\OAuth2\Factory;
+
+use Laminas\ApiTools\OAuth2\Controller\Exception;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 use OAuth2\GrantType\AuthorizationCode;
 use OAuth2\GrantType\ClientCredentials;
+use OAuth2\GrantType\JwtBearer;
 use OAuth2\GrantType\RefreshToken;
 use OAuth2\GrantType\UserCredentials;
-use OAuth2\GrantType\JwtBearer;
+use OAuth2\Server as OAuth2Server;
 
 class OAuth2ServerFactory implements FactoryInterface
 {
@@ -27,20 +29,20 @@ class OAuth2ServerFactory implements FactoryInterface
     {
         $config   = $services->get('Config');
 
-        if (!isset($config['zf-oauth2']['storage']) || empty($config['zf-oauth2']['storage'])) {
+        if (!isset($config['api-tools-oauth2']['storage']) || empty($config['api-tools-oauth2']['storage'])) {
             throw new Exception\RuntimeException(
-                'The storage configuration [\'zf-oauth2\'][\'storage\'] for OAuth2 is missing'
+                'The storage configuration [\'api-tools-oauth2\'][\'storage\'] for OAuth2 is missing'
             );
         }
 
         $storagesServices = array();
-        if (is_string($config['zf-oauth2']['storage'])) {
-            $storagesServices[] = $config['zf-oauth2']['storage'];
-        } elseif (is_array($config['zf-oauth2']['storage'])) {
-            $storagesServices = $config['zf-oauth2']['storage'];
+        if (is_string($config['api-tools-oauth2']['storage'])) {
+            $storagesServices[] = $config['api-tools-oauth2']['storage'];
+        } elseif (is_array($config['api-tools-oauth2']['storage'])) {
+            $storagesServices = $config['api-tools-oauth2']['storage'];
         } else {
             throw new Exception\RuntimeException(
-                'The storage configuration [\'zf-oauth2\'][\'storage\'] for OAuth2 should be string or array'
+                'The storage configuration [\'api-tools-oauth2\'][\'storage\'] for OAuth2 should be string or array'
             );
         }
 
@@ -51,20 +53,20 @@ class OAuth2ServerFactory implements FactoryInterface
             $storage[$storageKey] = $services->get($storagesService);
         }
 
-        $enforceState   = isset($config['zf-oauth2']['enforce_state'])
-            ? $config['zf-oauth2']['enforce_state']
+        $enforceState   = isset($config['api-tools-oauth2']['enforce_state'])
+            ? $config['api-tools-oauth2']['enforce_state']
             : true;
-        $allowImplicit  = isset($config['zf-oauth2']['allow_implicit'])
-            ? $config['zf-oauth2']['allow_implicit']
+        $allowImplicit  = isset($config['api-tools-oauth2']['allow_implicit'])
+            ? $config['api-tools-oauth2']['allow_implicit']
             : false;
-        $accessLifetime = isset($config['zf-oauth2']['access_lifetime'])
-            ? $config['zf-oauth2']['access_lifetime']
+        $accessLifetime = isset($config['api-tools-oauth2']['access_lifetime'])
+            ? $config['api-tools-oauth2']['access_lifetime']
             : 3600;
-        $audience = isset($config['zf-oauth2']['audience'])
-            ? $config['zf-oauth2']['audience']
+        $audience = isset($config['api-tools-oauth2']['audience'])
+            ? $config['api-tools-oauth2']['audience']
             : '';
-        $options        = isset($config['zf-oauth2']['options'])
-            ? $config['zf-oauth2']['options']
+        $options        = isset($config['api-tools-oauth2']['options'])
+            ? $config['api-tools-oauth2']['options']
             : array();
         $options        = array_merge(array(
             'enforce_state'   => $enforceState,
@@ -74,7 +76,7 @@ class OAuth2ServerFactory implements FactoryInterface
 
         // Pass a storage object or array of storage objects to the OAuth2 server class
         $server = new OAuth2Server($storage, $options);
-        $availableGrantTypes = $config['zf-oauth2']['grant_types'];
+        $availableGrantTypes = $config['api-tools-oauth2']['grant_types'];
 
         if (isset($availableGrantTypes['client_credentials']) && $availableGrantTypes['client_credentials'] === true) {
             $clientOptions = array();

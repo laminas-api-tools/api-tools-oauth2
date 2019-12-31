@@ -1,14 +1,16 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\OAuth2\Factory;
+namespace Laminas\ApiTools\OAuth2\Factory;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use ZF\OAuth2\Controller\AuthController;
+use Laminas\ApiTools\OAuth2\Controller\AuthController;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class AuthControllerFactory implements FactoryInterface
 {
@@ -20,13 +22,13 @@ class AuthControllerFactory implements FactoryInterface
     {
         $services = $controllers->getServiceLocator()->get('ServiceManager');
         $authController = new AuthController(
-            $services->get('ZF\OAuth2\Service\OAuth2Server'),
-            $services->get('ZF\OAuth2\Provider\UserId')
+            $services->get('Laminas\ApiTools\OAuth2\Service\OAuth2Server'),
+            $services->get('Laminas\ApiTools\OAuth2\Provider\UserId')
         );
 
         $config = $services->get('Config');
-        $authController->setApiProblemErrorResponse((isset($config['zf-oauth2']['api_problem_error_response'])
-            && $config['zf-oauth2']['api_problem_error_response'] === true));
+        $authController->setApiProblemErrorResponse((isset($config['api-tools-oauth2']['api_problem_error_response'])
+            && $config['api-tools-oauth2']['api_problem_error_response'] === true));
 
         return $authController;
     }

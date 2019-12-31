@@ -1,12 +1,14 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\OAuth2\Adapter\Pdo;
+namespace LaminasTest\ApiTools\OAuth2\Adapter\Pdo;
 
-abstract class BaseTest extends \Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase
+abstract class BaseTest extends \Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase
 {
     protected function setUp()
     {
@@ -38,7 +40,7 @@ abstract class BaseTest extends \Zend\Test\PHPUnit\Controller\AbstractHttpContro
         $this->setUp();
 
         $serviceManager = $this->getApplication()->getServiceManager();
-        $pdo = $serviceManager->get('ZF\OAuth2\Adapter\PdoAdapter');
+        $pdo = $serviceManager->get('Laminas\ApiTools\OAuth2\Adapter\PdoAdapter');
 
         return array(array($pdo));
     }

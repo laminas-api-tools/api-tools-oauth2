@@ -1,7 +1,9 @@
 <?php
+
 /**
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
 // @codingStandardsIgnoreFile
@@ -21,8 +23,8 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
-    'zf-oauth2' => array(
-        'storage' => 'ZF\OAuth2\Adapter\PdoAdapter',
+    'api-tools-oauth2' => array(
+        'storage' => 'Laminas\ApiTools\OAuth2\Adapter\PdoAdapter',
         'db' => array(
             'dsn' => 'sqlite:' . sys_get_temp_dir() . '/dbtest.sqlite',
         ),
@@ -42,13 +44,13 @@ return array(
     'service_manager' => array(
         'aliases' => array(
             'translator' => 'MvcTranslator',
-            'ZF\OAuth2\Provider\UserId' => 'ZF\OAuth2\Provider\UserId\AuthenticationService',
+            'Laminas\ApiTools\OAuth2\Provider\UserId' => 'Laminas\ApiTools\OAuth2\Provider\UserId\AuthenticationService',
         ),
         'invokables' => array(
-            'Zend\Authentication\AuthenticationService' => 'Zend\Authentication\AuthenticationService',
+            'Laminas\Authentication\AuthenticationService' => 'Laminas\Authentication\AuthenticationService',
         ),
         'factories' => array(
-            'ZF\OAuth2\Provider\UserId\AuthenticationService' => 'ZF\OAuth2\Provider\UserId\AuthenticationServiceFactory',
+            'Laminas\ApiTools\OAuth2\Provider\UserId\AuthenticationService' => 'Laminas\ApiTools\OAuth2\Provider\UserId\AuthenticationServiceFactory',
         ),
     ),
 );
