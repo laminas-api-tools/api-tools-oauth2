@@ -1,15 +1,17 @@
 <?php
+
 /**
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\OAuth2\Factory;
+namespace LaminasTest\ApiTools\OAuth2\Factory;
 
-use Zend\Mvc\Controller\ControllerManager;
-use Zend\ServiceManager\ServiceManager;
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
-use ZF\OAuth2\Factory\AuthControllerFactory;
+use Laminas\ApiTools\OAuth2\Factory\AuthControllerFactory;
+use Laminas\Mvc\Controller\ControllerManager;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class AuthControllerFactoryTest extends AbstractHttpControllerTestCase
 {
@@ -34,12 +36,12 @@ class AuthControllerFactoryTest extends AbstractHttpControllerTestCase
     {
         $oauthServer = $this->getMockBuilder('OAuth2\Server')->disableOriginalConstructor()->getMock();
 
-        $this->services->setService('ZF\OAuth2\Service\OAuth2Server', $oauthServer);
+        $this->services->setService('Laminas\ApiTools\OAuth2\Service\OAuth2Server', $oauthServer);
 
         $controller = $this->factory->createService($this->controllers);
 
-        $this->assertInstanceOf('ZF\OAuth2\Controller\AuthController', $controller);
-        $this->assertEquals(new \ZF\OAuth2\Controller\AuthController($oauthServer), $controller);
+        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Controller\AuthController', $controller);
+        $this->assertEquals(new \Laminas\ApiTools\OAuth2\Controller\AuthController($oauthServer), $controller);
     }
 
     protected function setUp()
