@@ -1,21 +1,23 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\OAuth2\Factory;
+namespace Laminas\ApiTools\OAuth2\Factory;
 
+use Laminas\ApiTools\OAuth2\Adapter\MongoAdapter;
+use Laminas\ApiTools\OAuth2\Controller\Exception;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 use MongoClient;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use ZF\OAuth2\Adapter\MongoAdapter;
-use ZF\OAuth2\Controller\Exception;
 
 /**
  * Class MongoAdapterFactory
  *
- * @package ZF\OAuth2\Factory
+ * @package Laminas\ApiTools\OAuth2\Factory
  * @author Chuck "MANCHUCK" Reeves <chuck@manchuck.com>
  */
 class MongoAdapterFactory implements FactoryInterface
@@ -40,23 +42,23 @@ class MongoAdapterFactory implements FactoryInterface
     protected function getMongoDb($services)
     {
         $config  = $services->get('Config');
-        $dbLocatorName = isset($config['zf-oauth2']['mongo']['locator_name'])
-            ? $config['zf-oauth2']['mongo']['locator_name']
+        $dbLocatorName = isset($config['api-tools-oauth2']['mongo']['locator_name'])
+            ? $config['api-tools-oauth2']['mongo']['locator_name']
             : 'MongoDB';
 
         if ($services->has($dbLocatorName)) {
             return $services->get($dbLocatorName);
         }
 
-        if (!isset($config['zf-oauth2']['mongo']) || empty($config['zf-oauth2']['mongo']['database'])) {
+        if (!isset($config['api-tools-oauth2']['mongo']) || empty($config['api-tools-oauth2']['mongo']['database'])) {
             throw new Exception\RuntimeException(
-                'The database configuration [\'zf-oauth2\'][\'mongo\'] for OAuth2 is missing'
+                'The database configuration [\'api-tools-oauth2\'][\'mongo\'] for OAuth2 is missing'
             );
         }
 
-        $server = isset($config['zf-oauth2']['mongo']['dsn']) ? $config['zf-oauth2']['mongo']['dsn'] : null;
+        $server = isset($config['api-tools-oauth2']['mongo']['dsn']) ? $config['api-tools-oauth2']['mongo']['dsn'] : null;
         $mongo  = new MongoClient($server, array('connect' => false));
-        return $mongo->{$config['zf-oauth2']['mongo']['database']};
+        return $mongo->{$config['api-tools-oauth2']['mongo']['database']};
     }
 
     /**
@@ -67,8 +69,8 @@ class MongoAdapterFactory implements FactoryInterface
     protected function getOauth2ServerConfig($config)
     {
         $oauth2ServerConfig = array();
-        if (isset($config['zf-oauth2']['storage_settings']) && is_array($config['zf-oauth2']['storage_settings'])) {
-            $oauth2ServerConfig = $config['zf-oauth2']['storage_settings'];
+        if (isset($config['api-tools-oauth2']['storage_settings']) && is_array($config['api-tools-oauth2']['storage_settings'])) {
+            $oauth2ServerConfig = $config['api-tools-oauth2']['storage_settings'];
         }
 
         return $oauth2ServerConfig;

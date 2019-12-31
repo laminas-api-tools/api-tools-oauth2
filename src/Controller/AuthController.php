@@ -1,20 +1,22 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\OAuth2\Controller;
+namespace Laminas\ApiTools\OAuth2\Controller;
 
+use Laminas\ApiTools\ApiProblem\ApiProblem;
+use Laminas\ApiTools\ApiProblem\ApiProblemResponse;
+use Laminas\ApiTools\ContentNegotiation\ViewModel;
+use Laminas\Http\PhpEnvironment\Request as PhpEnvironmentRequest;
+use Laminas\Http\Request as HttpRequest;
+use Laminas\Mvc\Controller\AbstractActionController;
 use OAuth2\Request as OAuth2Request;
 use OAuth2\Response as OAuth2Response;
 use OAuth2\Server as OAuth2Server;
-use Zend\Http\PhpEnvironment\Request as PhpEnvironmentRequest;
-use Zend\Http\Request as HttpRequest;
-use Zend\Mvc\Controller\AbstractActionController;
-use ZF\ApiProblem\ApiProblem;
-use ZF\ApiProblem\ApiProblemResponse;
-use ZF\ContentNegotiation\ViewModel;
 
 class AuthController extends AbstractActionController
 {
@@ -160,7 +162,7 @@ class AuthController extends AbstractActionController
     }
 
     /**
-     * Create an OAuth2 request based on the ZF2 request object
+     * Create an OAuth2 request based on the Laminas request object
      *
      * Marshals:
      *
@@ -177,8 +179,8 @@ class AuthController extends AbstractActionController
      */
     protected function getOAuth2Request()
     {
-        $zf2Request = $this->getRequest();
-        $headers    = $zf2Request->getHeaders();
+        $laminasRequest = $this->getRequest();
+        $headers    = $laminasRequest->getHeaders();
 
         // Marshal content type, so we can seed it into the $_SERVER array
         $contentType = '';
@@ -188,12 +190,12 @@ class AuthController extends AbstractActionController
 
         // Get $_SERVER superglobal
         $server = array();
-        if ($zf2Request instanceof PhpEnvironmentRequest) {
-            $server = $zf2Request->getServer()->toArray();
+        if ($laminasRequest instanceof PhpEnvironmentRequest) {
+            $server = $laminasRequest->getServer()->toArray();
         } elseif (!empty($_SERVER)) {
             $server = $_SERVER;
         }
-        $server['REQUEST_METHOD'] = $zf2Request->getMethod();
+        $server['REQUEST_METHOD'] = $laminasRequest->getMethod();
 
         // Seed headers with HTTP auth information
         $headers = $headers->toArray();
@@ -208,22 +210,22 @@ class AuthController extends AbstractActionController
         $bodyParams = $this->bodyParams() ?: array();
 
         return new OAuth2Request(
-            $zf2Request->getQuery()->toArray(),
+            $laminasRequest->getQuery()->toArray(),
             $this->bodyParams(),
             array(), // attributes
             array(), // cookies
             array(), // files
             $server,
-            $zf2Request->getContent(),
+            $laminasRequest->getContent(),
             $headers
         );
     }
 
     /**
-     * Convert the OAuth2 response to a \Zend\Http\Response
+     * Convert the OAuth2 response to a \Laminas\Http\Response
      *
      * @param $response OAuth2Response
-     * @return \Zend\Http\Response
+     * @return \Laminas\Http\Response
      */
     private function setHttpResponse(OAuth2Response $response)
     {
