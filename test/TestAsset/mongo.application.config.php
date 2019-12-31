@@ -1,11 +1,11 @@
 <?php
 $modules = [
-    'ZF\ContentNegotiation',
-    'ZF\OAuth2',
+    'Laminas\ApiTools\ContentNegotiation',
+    'Laminas\ApiTools\OAuth2',
 ];
 
-if (class_exists('Zend\Router\Module')) {
-    $modules[] = 'Zend\Router';
+if (class_exists('Laminas\Router\Module')) {
+    $modules[] = 'Laminas\Router';
 }
 
 return [

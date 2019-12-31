@@ -1,9 +1,9 @@
-# zf-oauth2
+# api-tools-oauth2
 
-[![Build Status](https://secure.travis-ci.org/zfcampus/zf-oauth2.svg?branch=master)](https://secure.travis-ci.org/zfcampus/zf-oauth2)
-[![Coverage Status](https://coveralls.io/repos/github/zfcampus/zf-oauth2/badge.svg?branch=master)](https://coveralls.io/github/zfcampus/zf-oauth2?branch=master)
+[![Build Status](https://travis-ci.org/laminas-api-tools/api-tools-oauth2.svg?branch=master)](https://travis-ci.org/laminas-api-tools/api-tools-oauth2)
+[![Coverage Status](https://coveralls.io/repos/github/laminas-api-tools/api-tools-oauth2/badge.svg?branch=master)](https://coveralls.io/github/laminas-api-tools/api-tools-oauth2?branch=master)
 
-ZF module for [OAuth2](http://oauth.net/2/) authentication.
+Laminas module for [OAuth2](http://oauth.net/2/) authentication.
 
 This module uses the [oauth2-server-php](https://github.com/bshaffer/oauth2-server-php)
 library by Brent Shaffer to provide OAuth2 support.
@@ -17,7 +17,7 @@ Please see the [composer.json](composer.json) file.
 You can install using:
 
 ```bash
-$ composer require zfcampus/zf-oauth2
+$ composer require laminas-api-tools/api-tools-oauth2
 ```
 
 If you are using ext/mongodb, you will also need to install a compatibility
@@ -33,16 +33,16 @@ configuration:
 ```php
 'modules' => [
     /* ... */
-    'ZF\ApiProblem',
-    'ZF\ContentNegotiation',
-    'ZF\OAuth2',
+    'Laminas\ApiTools\ApiProblem',
+    'Laminas\ApiTools\ContentNegotiation',
+    'Laminas\ApiTools\OAuth2',
 ],
 ```
 
-> ### zf-component-installer
+> ### laminas-component-installer
 >
-> If you use [zf-component-installer](https://github.com/zendframework/zf-component-installer),
-> that plugin will install zf-oauth2 and its other Apigility dependencies as
+> If you use [laminas-component-installer](https://github.com/laminas/laminas-component-installer),
+> that plugin will install api-tools-oauth2 and its other Laminas API Tools dependencies as
 > modules for you.
 
 ## Configuration
@@ -115,11 +115,11 @@ CREATE TABLE oauth_jwt (
 For security reasons, we encrypt the fields `client_secret` (table
 `oauth_clients`) and `password` (table `oauth_users`) using the
 [bcrypt](http://en.wikipedia.org/wiki/Bcrypt) algorithm (via the class
-[Zend\Crypt\Password\Bcrypt](http://framework.zend.com/manual/2.2/en/modules/zend.crypt.password.html#bcrypt)).
+[Laminas\Crypt\Password\Bcrypt](https://getlaminas.org/manual/2.2/en/modules/laminas.crypt.password.html#bcrypt)).
 
-In order to configure the zf-oauth2 module for database access, you need to copy
+In order to configure the api-tools-oauth2 module for database access, you need to copy
 the file `config/oauth2.local.php.dist` to `config/autoload/oauth2.local.php` in
-your ZF2 application, and edit it to provide your DB credentials (DNS, username,
+your Laminas application, and edit it to provide your DB credentials (DNS, username,
 password).
 
 We also include a SQLite database in `data/dbtest.sqlite` that you can use in a
@@ -130,9 +130,9 @@ file as follow:
 
 ```php
 return array(
-    'zf-oauth2' => array(
+    'api-tools-oauth2' => array(
         'db' => array(
-            'dsn' => 'sqlite:<path to zf-oauth2 module>/data/dbtest.sqlite',
+            'dsn' => 'sqlite:<path to api-tools-oauth2 module>/data/dbtest.sqlite',
         ),
     ),
 );
@@ -141,7 +141,7 @@ return array(
 ## Mongo Configuration
 
 The Mongo OAuth2 adapter wraps the bshaffer adapter by adding the same password encryption
-as the rest of apigility.  The collections needed are the same as above in the PDO
+as the rest of api-tools.  The collections needed are the same as above in the PDO
 adapter.  To create an OAuth2 client, insert a document like the following into the
 oauth_clients collection:
 
@@ -160,24 +160,24 @@ When a user requests an authorization code they may provide their user_id as a r
 the `/oauth/authorize` route.  This will store the `user_id` in the `access_token`, `refresh_token`,
 and `authorization_code` tables as the user goes throught the oauth2 process.
 
-A user may be authenticated through `Zend\Authentication\AuthenticationService` or another
+A user may be authenticated through `Laminas\Authentication\AuthenticationService` or another
 authentication means.  When a user must provide authentication before they may access the
 `/oauth/authorize` route, the authenticated user ID should be used. This is done with the service
-manager alias `ZF\OAuth2\Provider\UserId`.
+manager alias `Laminas\ApiTools\OAuth2\Provider\UserId`.
 
 The default User ID Provider uses the request query parameter `user_id` and is handled via the class
-`ZF\OAuth2\Provider\UserId\Request`.
+`Laminas\ApiTools\OAuth2\Provider\UserId\Request`.
 
 Provided with this repository is an alternative provider,
-`ZF\OAuth2\Provider\UserId\AuthorizationService`, which uses
-`Zend\Authentication\AuthenticationService` to fetch the identity.  To change the User ID Provider
-to use this service, change the `ZF\OAuth2\Provider\UserId` service alias to point at it:
+`Laminas\ApiTools\OAuth2\Provider\UserId\AuthorizationService`, which uses
+`Laminas\Authentication\AuthenticationService` to fetch the identity.  To change the User ID Provider
+to use this service, change the `Laminas\ApiTools\OAuth2\Provider\UserId` service alias to point at it:
 
 ```php
 return array(
     'service_manager' => 
         'aliases' => array(
-            'ZF\OAuth2\Provider\UserId' => 'ZF\OAuth2\Provider\UserId\AuthenticationService',
+            'Laminas\ApiTools\OAuth2\Provider\UserId' => 'Laminas\ApiTools\OAuth2\Provider\UserId\AuthenticationService',
         ),
     ),
 );
@@ -190,8 +190,8 @@ into the oauth2 database. If you are using the SQLite test database, you don't
 need to add a `client_id`; just use the default "testclient"/"testpass" account.
 
 Because we encrypt the password using the `bcrypt` algorithm, you need to
-encrypt the password using the [Zend\Crypt\Password\Bcrypt](http://framework.zend.com/manual/2.2/en/modules/zend.crypt.password.html#bcrypt)
-class from Zend Framework 2. We provided a simple script in `/bin/bcrypt.php` to
+encrypt the password using the [Laminas\Crypt\Password\Bcrypt](https://getlaminas.org/manual/2.2/en/modules/laminas.crypt.password.html#bcrypt)
+class from Laminas. We provided a simple script in `/bin/bcrypt.php` to
 generate the hash value of a user's password. You can use this tool from the
 command line, with the following syntax:
 
@@ -231,7 +231,7 @@ examples below use HTTPie and the test account "testclient"/"testpass".
 You can request an OAuth2 token using the following HTTPie command:
 
 ```bash
-http --auth testclient:testpass -f POST http://<URL of your ZF2 app>/oauth grant_type=client_credentials
+http --auth testclient:testpass -f POST http://<URL of your Laminas app>/oauth grant_type=client_credentials
 ```
 
 This POST requests a new token to the OAuth2 server using the *client_credentials*
@@ -263,7 +263,7 @@ provides a simple form to authorize a specific client. This form can be accessed
 by a browser using the following URL:
 
 ```bash
-http://<URL of your ZF2 app>/oauth/authorize?response_type=code&client_id=testclient&redirect_uri=/oauth/receivecode&state=xyz
+http://<URL of your Laminas app>/oauth/authorize?response_type=code&client_id=testclient&redirect_uri=/oauth/receivecode&state=xyz
 ```
 
 This page will render the form asking the user to authorize or deny the access
@@ -272,7 +272,7 @@ an Authorization code. This code must be used to request an OAuth2 token; the
 following HTTPie command provides an example of how to do that:
 
 ```bash
-http --auth testclient:testpass -f POST http://<URL of your ZF2 app>/oauth grant_type=authorization_code&code=YOUR_CODE&redirect_uri=/oauth/receivecode
+http --auth testclient:testpass -f POST http://<URL of your Laminas app>/oauth grant_type=authorization_code&code=YOUR_CODE&redirect_uri=/oauth/receivecode
 ```
 
 In client-side scenarios (i.e mobile) where you cannot store the Client
@@ -288,7 +288,7 @@ configuration of `allow_implicit` to `true` in the
 
 ```php
 return array(
-    'zf-oauth2' => array(
+    'api-tools-oauth2' => array(
         // ...
         'allow_implicit' => true,
         // ...
@@ -300,7 +300,7 @@ To request a token from the client side, you need to request authorization via
 the OAuth2 server:
 
 ```
-http://<URL of your ZF2 app>/oauth/authorize?response_type=token&client_id=testclient&redirect_uri=/oauth/receivecode&state=xyz
+http://<URL of your Laminas app>/oauth/authorize?response_type=token&client_id=testclient&redirect_uri=/oauth/receivecode&state=xyz
 ```
 
 This request will render the authorization form as in the previous example. If
@@ -359,9 +359,9 @@ OAuth2 module is shipped with a test resource that is accessible with the URL
 To access the test resource, you can use the following HTTPie command:
 
 ```bash
-http -f POST http://<URL of your ZF2 app>/oauth/resource access_token=000ab5afab4cbbbda803fb9e50e7943f5e766748
+http -f POST http://<URL of your Laminas app>/oauth/resource access_token=000ab5afab4cbbbda803fb9e50e7943f5e766748
 # or
-http http://<<URL of your ZF2 app>/oauth/resource "Authorization:Bearer 000ab5afab4cbbbda803fb9e50e7943f5e766748"
+http http://<<URL of your Laminas app>/oauth/resource "Authorization:Bearer 000ab5afab4cbbbda803fb9e50e7943f5e766748"
 ```
 
 As you can see, the OAuth2 module supports the data either via POST, using the

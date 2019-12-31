@@ -1,15 +1,13 @@
 #!/usr/bin/env php
 <?php
+
 /**
- * Bcrypt utility
- *
- * Generates the bcrypt hash value of a string
- *
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014-2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-use Zend\Crypt\Password\Bcrypt;
+use Laminas\Crypt\Password\Bcrypt;
 
 $autoload = realpath(__DIR__ . '/../vendor/autoload.php');
 if (! $autoload) {

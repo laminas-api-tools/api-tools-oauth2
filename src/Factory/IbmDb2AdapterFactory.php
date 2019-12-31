@@ -1,14 +1,16 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014-2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\OAuth2\Factory;
+namespace Laminas\ApiTools\OAuth2\Factory;
 
 use Interop\Container\ContainerInterface;
-use ZF\OAuth2\Adapter\IbmDb2Adapter;
-use ZF\OAuth2\Controller\Exception;
+use Laminas\ApiTools\OAuth2\Adapter\IbmDb2Adapter;
+use Laminas\ApiTools\OAuth2\Controller\Exception;
 
 class IbmDb2AdapterFactory
 {
@@ -20,31 +22,31 @@ class IbmDb2AdapterFactory
     {
         $config = $container->get('config');
 
-        if (! isset($config['zf-oauth2']['db']) || empty($config['zf-oauth2']['db'])) {
+        if (! isset($config['api-tools-oauth2']['db']) || empty($config['api-tools-oauth2']['db'])) {
             throw new Exception\RuntimeException(
-                'The database configuration [\'zf-oauth2\'][\'db\'] for OAuth2 is missing'
+                'The database configuration [\'api-tools-oauth2\'][\'db\'] for OAuth2 is missing'
             );
         }
 
-        $username = isset($config['zf-oauth2']['db']['username'])
-            ? $config['zf-oauth2']['db']['username']
+        $username = isset($config['api-tools-oauth2']['db']['username'])
+            ? $config['api-tools-oauth2']['db']['username']
             : null;
-        $password = isset($config['zf-oauth2']['db']['password'])
-            ? $config['zf-oauth2']['db']['password']
+        $password = isset($config['api-tools-oauth2']['db']['password'])
+            ? $config['api-tools-oauth2']['db']['password']
             : null;
-        $driver_options  = isset($config['zf-oauth2']['db']['driver_options'])
-            ? $config['zf-oauth2']['db']['driver_options']
+        $driver_options  = isset($config['api-tools-oauth2']['db']['driver_options'])
+            ? $config['api-tools-oauth2']['db']['driver_options']
             : [];
 
         $oauth2ServerConfig = [];
-        if (isset($config['zf-oauth2']['storage_settings'])
-            && is_array($config['zf-oauth2']['storage_settings'])
+        if (isset($config['api-tools-oauth2']['storage_settings'])
+            && is_array($config['api-tools-oauth2']['storage_settings'])
         ) {
-            $oauth2ServerConfig = $config['zf-oauth2']['storage_settings'];
+            $oauth2ServerConfig = $config['api-tools-oauth2']['storage_settings'];
         }
 
         return new IbmDb2Adapter([
-            'database'       => $config['zf-oauth2']['db']['database'],
+            'database'       => $config['api-tools-oauth2']['db']['database'],
             'username'       => $username,
             'password'       => $password,
             'driver_options' => $driver_options,
@@ -54,7 +56,7 @@ class IbmDb2AdapterFactory
     /**
      * Provided for backwards compatibility; proxies to __invoke().
      *
-     * @param \Zend\ServiceManager\ServiceLocatorInterface $container
+     * @param \Laminas\ServiceManager\ServiceLocatorInterface $container
      * @return IbmDb2Adapter
      */
     public function createService($container)
