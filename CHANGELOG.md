@@ -18,6 +18,6 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#120](https://github.com/zfcampus/zf-oauth2/pull/120) fixes a typo in the
-  `ZF\OAuth2\Provider\UserId\AuthenticationService` which prevented returning of
+- [zfcampus/zf-oauth2#120](https://github.com/zfcampus/zf-oauth2/pull/120) fixes a typo in the
+  `Laminas\ApiTools\OAuth2\Provider\UserId\AuthenticationService` which prevented returning of
   the user identifier.

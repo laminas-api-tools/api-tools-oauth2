@@ -4,10 +4,10 @@
  * FIXME:  This adapter logic is not supported in the PDO adapter
  */
 
-namespace ZFTest\OAuth2\Adapter\Pdo;
+namespace LaminasTest\ApiTools\OAuth2\Adapter\Pdo;
 
-use OAuth2\Encryption\Jwt;
 use DateTime;
+use OAuth2\Encryption\Jwt;
 
 class JwtAccessTokenTest extends BaseTest
 {
