@@ -1,13 +1,15 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\OAuth2\Provider\UserId;
+namespace Laminas\ApiTools\OAuth2\Provider\UserId;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class AuthenticationServiceFactory implements FactoryInterface
 {
@@ -19,9 +21,9 @@ class AuthenticationServiceFactory implements FactoryInterface
     {
         $config = $services->get('Config');
 
-        if ($services->has('Zend\Authentication\AuthenticationService')) {
+        if ($services->has('Laminas\Authentication\AuthenticationService')) {
             return new AuthenticationService(
-                $services->get('Zend\Authentication\AuthenticationService'),
+                $services->get('Laminas\Authentication\AuthenticationService'),
                 $config
             );
         }
