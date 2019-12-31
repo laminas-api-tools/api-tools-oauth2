@@ -2,24 +2,24 @@
 return array(
     'controllers' => array(
         'factories' => array(
-            'ZF\OAuth2\Controller\Auth' => 'ZF\OAuth2\Factory\AuthControllerFactory',
+            'Laminas\ApiTools\OAuth2\Controller\Auth' => 'Laminas\ApiTools\OAuth2\Factory\AuthControllerFactory',
         ),
     ),
     'router' => array(
         'routes' => array(
             'oauth' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Laminas\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/oauth',
                     'defaults' => array(
-                        'controller' => 'ZF\OAuth2\Controller\Auth',
+                        'controller' => 'Laminas\ApiTools\OAuth2\Controller\Auth',
                         'action'     => 'token',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
                     'authorize' => array(
-                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'type' => 'Laminas\Mvc\Router\Http\Literal',
                         'options' => array(
                             'route' => '/authorize',
                             'defaults' => array(
@@ -28,7 +28,7 @@ return array(
                         ),
                     ),
                     'resource' => array(
-                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'type' => 'Laminas\Mvc\Router\Http\Literal',
                         'options' => array(
                             'route' => '/resource',
                             'defaults' => array(
@@ -37,7 +37,7 @@ return array(
                         ),
                     ),
                     'code' => array(
-                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'type' => 'Laminas\Mvc\Router\Http\Literal',
                         'options' => array(
                             'route' => '/receivecode',
                             'defaults' => array(
@@ -51,29 +51,29 @@ return array(
     ),
     'service_manager' => array(
         'aliases' => array(
-            'ZF\OAuth2\Provider\UserId' => 'ZF\OAuth2\Provider\UserId\AuthenticationService',
+            'Laminas\ApiTools\OAuth2\Provider\UserId' => 'Laminas\ApiTools\OAuth2\Provider\UserId\AuthenticationService',
         ),
         'factories' => array(
-            'ZF\OAuth2\Adapter\PdoAdapter'    => 'ZF\OAuth2\Factory\PdoAdapterFactory',
-            'ZF\OAuth2\Adapter\IbmDb2Adapter' => 'ZF\OAuth2\Factory\IbmDb2AdapterFactory',
-            'ZF\OAuth2\Adapter\MongoAdapter'  => 'ZF\OAuth2\Factory\MongoAdapterFactory',
-            'ZF\OAuth2\Provider\UserId\AuthenticationService' => 'ZF\OAuth2\Provider\UserId\AuthenticationServiceFactory',
-            'ZF\OAuth2\Service\OAuth2Server'  => 'ZF\OAuth2\Factory\OAuth2ServerFactory'
+            'Laminas\ApiTools\OAuth2\Adapter\PdoAdapter'    => 'Laminas\ApiTools\OAuth2\Factory\PdoAdapterFactory',
+            'Laminas\ApiTools\OAuth2\Adapter\IbmDb2Adapter' => 'Laminas\ApiTools\OAuth2\Factory\IbmDb2AdapterFactory',
+            'Laminas\ApiTools\OAuth2\Adapter\MongoAdapter'  => 'Laminas\ApiTools\OAuth2\Factory\MongoAdapterFactory',
+            'Laminas\ApiTools\OAuth2\Provider\UserId\AuthenticationService' => 'Laminas\ApiTools\OAuth2\Provider\UserId\AuthenticationServiceFactory',
+            'Laminas\ApiTools\OAuth2\Service\OAuth2Server'  => 'Laminas\ApiTools\OAuth2\Factory\OAuth2ServerFactory'
         )
     ),
     'view_manager' => array(
         'template_map' => array(
-            'oauth/authorize'    => __DIR__ . '/../view/zf/auth/authorize.phtml',
-            'oauth/receive-code' => __DIR__ . '/../view/zf/auth/receive-code.phtml',
+            'oauth/authorize'    => __DIR__ . '/../view/laminas/auth/authorize.phtml',
+            'oauth/receive-code' => __DIR__ . '/../view/laminas/auth/receive-code.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
     ),
-    'zf-oauth2' => array(
+    'api-tools-oauth2' => array(
         /*
          * Config can include:
-         * - 'storage' => 'name of storage service' - typically ZF\OAuth2\Adapter\PdoAdapter
+         * - 'storage' => 'name of storage service' - typically Laminas\ApiTools\OAuth2\Adapter\PdoAdapter
          * - 'db' => [ // database configuration for the above PdoAdapter
          *       'dsn'      => 'PDO DSN',
          *       'username' => 'username',
@@ -100,14 +100,14 @@ return array(
          */
         'api_problem_error_response' => true,
     ),
-    'zf-content-negotiation' => array(
+    'api-tools-content-negotiation' => array(
         'controllers' => array(
-            'ZF\OAuth2\Controller\Auth' => array(
-                'ZF\ContentNegotiation\JsonModel' => array(
+            'Laminas\ApiTools\OAuth2\Controller\Auth' => array(
+                'Laminas\ApiTools\ContentNegotiation\JsonModel' => array(
                     'application/json',
                     'application/*+json',
                 ),
-                'Zend\View\Model\ViewModel' => array(
+                'Laminas\View\Model\ViewModel' => array(
                     'text/html',
                     'application/xhtml+xml',
                 ),

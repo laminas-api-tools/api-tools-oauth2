@@ -4,7 +4,7 @@
  * FIXME:  This adapter logic is not supported in the PDO adapter
  */
 
-namespace ZFTest\OAuth2\Adapter\Pdo;
+namespace LaminasTest\ApiTools\OAuth2\Adapter\Pdo;
 
 use OAuth2\Storage\JwtBearerInterface;
 

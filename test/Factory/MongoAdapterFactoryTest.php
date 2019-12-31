@@ -1,15 +1,17 @@
 <?php
+
 /**
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\OAuth2\Factory;
+namespace LaminasTest\ApiTools\OAuth2\Factory;
 
+use Laminas\ApiTools\OAuth2\Factory\MongoAdapterFactory;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use ReflectionObject;
-use Zend\ServiceManager\ServiceManager;
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
-use ZF\OAuth2\Factory\MongoAdapterFactory;
 
 class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
 {
@@ -34,7 +36,7 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
 
         $this->setApplicationConfig(array(
             'modules' => array(
-                'ZF\OAuth2',
+                'Laminas\ApiTools\OAuth2',
             ),
             'module_listener_options' => array(
                 'module_paths' => array(__DIR__ . '/../../'),
@@ -47,20 +49,20 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
     }
 
     /**
-     * @expectedException \ZF\OAuth2\Controller\Exception\RuntimeException
+     * @expectedException \Laminas\ApiTools\OAuth2\Controller\Exception\RuntimeException
      */
     public function testExceptionThrownWhenMissingMongoCredentials()
     {
         $this->services->setService('Config', array());
         $adapter = $this->factory->createService($this->services);
 
-        $this->assertInstanceOf('ZF\OAuth2\Adapter\PdoAdapter', $adapter);
+        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Adapter\PdoAdapter', $adapter);
     }
 
     public function testInstanceCreated()
     {
         $this->services->setService('Config', array(
-            'zf-oauth2' => array(
+            'api-tools-oauth2' => array(
                 'mongo' => array(
                     'database' => 'test',
                     'dsn'      => 'mongodb://127.0.0.1:27017'
@@ -69,13 +71,13 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
         ));
 
         $adapter = $this->factory->createService($this->services);
-        $this->assertInstanceOf('ZF\OAuth2\Adapter\MongoAdapter', $adapter);
+        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Adapter\MongoAdapter', $adapter);
     }
 
     public function testInstanceCreatedWithMongoDbInServiceLocator()
     {
         $this->services->setService('Config', array(
-            'zf-oauth2' => array(
+            'api-tools-oauth2' => array(
                 'mongo' => array(
                     'locator_name' => 'testdb',
                 ),
@@ -85,13 +87,13 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
         $this->services->setService('testdb', $mock);
 
         $adapter = $this->factory->createService($this->services);
-        $this->assertInstanceOf('ZF\OAuth2\Adapter\MongoAdapter', $adapter);
+        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Adapter\MongoAdapter', $adapter);
     }
 
     public function testCanPassAdapterConfigurationWhenCreatingInstance()
     {
         $this->services->setService('Config', array(
-            'zf-oauth2' => array(
+            'api-tools-oauth2' => array(
                 'mongo' => array(
                     'locator_name' => 'testdb',
                 ),
@@ -104,7 +106,7 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
         $this->services->setService('testdb', $mock);
 
         $adapter = $this->factory->createService($this->services);
-        $this->assertInstanceOf('ZF\OAuth2\Adapter\MongoAdapter', $adapter);
+        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Adapter\MongoAdapter', $adapter);
 
         $r = new ReflectionObject($adapter);
         $c = $r->getProperty('config');
