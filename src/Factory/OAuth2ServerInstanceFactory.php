@@ -1,19 +1,21 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014-2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
-namespace ZF\OAuth2\Factory;
+namespace Laminas\ApiTools\OAuth2\Factory;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use ZF\OAuth2\Controller\Exception;
-use OAuth2\Server as OAuth2Server;
+use Laminas\ApiTools\OAuth2\Controller\Exception;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 use OAuth2\GrantType\AuthorizationCode;
 use OAuth2\GrantType\ClientCredentials;
+use OAuth2\GrantType\JwtBearer;
 use OAuth2\GrantType\RefreshToken;
 use OAuth2\GrantType\UserCredentials;
-use OAuth2\GrantType\JwtBearer;
+use OAuth2\Server as OAuth2Server;
 
 class OAuth2ServerInstanceFactory
 {

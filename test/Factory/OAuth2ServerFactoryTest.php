@@ -1,18 +1,20 @@
 <?php
-/**
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- */
-namespace ZFTest\OAuth2\Factory;
 
-use Zend\ServiceManager\ServiceManager;
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
-use ZF\OAuth2\Factory\OAuth2ServerFactory;
+/**
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
+ */
+namespace LaminasTest\ApiTools\OAuth2\Factory;
+
+use Laminas\ApiTools\OAuth2\Factory\OAuth2ServerFactory;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use OAuth2\GrantType\AuthorizationCode;
 use OAuth2\GrantType\ClientCredentials;
+use OAuth2\GrantType\JwtBearer;
 use OAuth2\GrantType\RefreshToken;
 use OAuth2\GrantType\UserCredentials;
-use OAuth2\GrantType\JwtBearer;
 
 class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
 {
@@ -33,7 +35,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
 
         $this->setApplicationConfig([
             'modules' => [
-                'ZF\OAuth2',
+                'Laminas\ApiTools\OAuth2',
             ],
             'module_listener_options' => [
                 'module_paths' => [__DIR__ . '/../../'],
@@ -46,7 +48,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
     }
 
     /**
-     * @expectedException \ZF\OAuth2\Controller\Exception\RuntimeException
+     * @expectedException \Laminas\ApiTools\OAuth2\Controller\Exception\RuntimeException
      */
     public function testExceptionThrownOnMissingStorageClass()
     {
@@ -61,7 +63,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $adapter = $this->getMockBuilder('OAuth2\Storage\Pdo')->disableOriginalConstructor()->getMock();
         $this->services->setService('TestAdapter', $adapter);
         $this->services->setService('config', [
-            'zf-oauth2' => [
+            'api-tools-oauth2' => [
                 'storage' => 'TestAdapter',
                 'grant_types' => [
                     'client_credentials' => true,
@@ -89,7 +91,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $expectedService->addGrantType(new JwtBearer($adapter, ''));
 
         $service = $this->factory->createService($this->services);
-        $this->assertInstanceOf('ZF\OAuth2\Factory\OAuth2ServerInstanceFactory', $service);
+        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Factory\OAuth2ServerInstanceFactory', $service);
         $server = $service();
         $this->assertInstanceOf('OAuth2\Server', $server);
         $this->assertEquals($expectedService, $server);
@@ -100,7 +102,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $adapter = $this->getMockBuilder('OAuth2\Storage\Pdo')->disableOriginalConstructor()->getMock();
         $this->services->setService('TestAdapter', $adapter);
         $this->services->setService('config', [
-            'zf-oauth2' => [
+            'api-tools-oauth2' => [
                 'storage'        => 'TestAdapter',
                 'enforce_state'  => false,
                 'allow_implicit' => true,
@@ -131,7 +133,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $expectedService->addGrantType(new JwtBearer($adapter, ''));
 
         $service = $this->factory->createService($this->services);
-        $this->assertInstanceOf('ZF\OAuth2\Factory\OAuth2ServerInstanceFactory', $service);
+        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Factory\OAuth2ServerInstanceFactory', $service);
         $server = $service();
         $this->assertInstanceOf('OAuth2\Server', $server);
         $this->assertEquals($expectedService, $server);
@@ -143,7 +145,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
 
         $this->services->setService('TestAdapter', $adapter);
         $this->services->setService('config', [
-            'zf-oauth2' => [
+            'api-tools-oauth2' => [
                 'storage' => 'TestAdapter',
                 'options' => [
                     'enforce_state'   => false,
@@ -176,7 +178,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $expectedService->addGrantType(new JwtBearer($adapter, ''));
 
         $service = $this->factory->createService($this->services);
-        $this->assertInstanceOf('ZF\OAuth2\Factory\OAuth2ServerInstanceFactory', $service);
+        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Factory\OAuth2ServerInstanceFactory', $service);
         $server = $service();
         $this->assertInstanceOf('OAuth2\Server', $server);
         $this->assertEquals($expectedService, $server);
@@ -211,7 +213,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $this->services->setService('OAuth2\Storage\Scope', $storage['scope']);
 
         $this->services->setService('config', [
-            'zf-oauth2' => [
+            'api-tools-oauth2' => [
                 'storage'        => [
                     'access_token'       => 'OAuth2\Storage\AccessToken',
                     'authorization_code' => 'OAuth2\Storage\AuthorizationCode',
@@ -249,7 +251,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $expectedService->addGrantType(new JwtBearer($storage['jwt_bearer'], ''));
 
         $service = $this->factory->createService($this->services);
-        $this->assertInstanceOf('ZF\OAuth2\Factory\OAuth2ServerInstanceFactory', $service);
+        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Factory\OAuth2ServerInstanceFactory', $service);
         $server = $service();
         $this->assertInstanceOf('OAuth2\Server', $server);
         $this->assertEquals($expectedService, $server);
@@ -260,7 +262,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $adapter = $this->getMockBuilder('OAuth2\Storage\Pdo')->disableOriginalConstructor()->getMock();
         $this->services->setService('TestAdapter', $adapter);
         $this->services->setService('config', [
-            'zf-oauth2' => [
+            'api-tools-oauth2' => [
                 'storage' => 'TestAdapter',
                 'grant_types' => [
                     'client_credentials' => false,
@@ -282,7 +284,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $expectedService->addGrantType(new UserCredentials($adapter));
         $expectedService->addGrantType(new RefreshToken($adapter));
         $service = $this->factory->createService($this->services);
-        $this->assertInstanceOf('ZF\OAuth2\Factory\OAuth2ServerInstanceFactory', $service);
+        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Factory\OAuth2ServerInstanceFactory', $service);
         $server = $service();
         $this->assertInstanceOf('OAuth2\Server', $server);
         $this->assertEquals($expectedService, $server);
@@ -293,7 +295,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $adapter = $this->getMockBuilder('OAuth2\Storage\Pdo')->disableOriginalConstructor()->getMock();
         $this->services->setService('TestAdapter', $adapter);
         $this->services->setService('config', [
-            'zf-oauth2' => [
+            'api-tools-oauth2' => [
                 'storage' => 'TestAdapter',
                 'grant_types' => [
                     'client_credentials' => true,

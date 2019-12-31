@@ -1,15 +1,17 @@
 <?php
+
 /**
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\OAuth2\Controller;
+namespace LaminasTest\ApiTools\OAuth2\Controller;
 
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use MongoClient;
 use MongoConnectionException;
 use MongoDB;
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
 {
@@ -53,7 +55,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
             $this->markTestSkipped($e->getMessage());
         }
 
-        $this->db = $client->selectDB('zf_oauth2_test');
+        $this->db = $client->selectDB('laminas_oauth2_test');
         $this->db->oauth_clients->insert($this->defaultData);
 
         $this->getApplicationServiceLocator()->setService('MongoDB', $this->db);
@@ -77,7 +79,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
         $request->setMethod('POST');
 
         $this->dispatch('/oauth');
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('token');
         $this->assertResponseStatusCode(200);
 
@@ -93,7 +95,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
     {
         $this->dispatch('/oauth/authorize');
 
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('authorize');
         $this->assertResponseStatusCode(400);
 
@@ -117,7 +119,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
 
         $this->dispatch('/oauth/authorize?' . http_build_query($queryData), 'POST', ['authorized' => 'yes']);
         $this->assertTrue($this->getResponse()->isRedirect());
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('authorize');
 
         $location = $this->getResponse()->getHeaders()->get('Location')->getUri();
@@ -133,7 +135,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
         $request->getServer()->set('PHP_AUTH_PW', 'testpass');
 
         $this->dispatch('/oauth');
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('token');
         $this->assertResponseStatusCode(200);
 
@@ -144,7 +146,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
     public function testImplicitClientAuth()
     {
         $config = $this->getApplication()->getConfig();
-        $allowImplicit = isset($config['zf-oauth2']['allow_implicit']) ? $config['zf-oauth2']['allow_implicit'] : false;
+        $allowImplicit = isset($config['api-tools-oauth2']['allow_implicit']) ? $config['api-tools-oauth2']['allow_implicit'] : false;
 
         if (!$allowImplicit) {
             $this->markTestSkipped('The allow implicit client mode is disabled');
@@ -160,7 +162,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
 
         $this->dispatch('/oauth/authorize');
         $this->assertTrue($this->getResponse()->isRedirect());
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('authorize');
 
         $token    = '';
@@ -181,7 +183,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
         $request->setMethod('POST');
 
         $this->dispatch('/oauth');
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('token');
         $this->assertResponseStatusCode(200);
 
@@ -199,7 +201,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
         unset($server['PHP_AUTH_PW']);
 
         $this->dispatch('/oauth/resource');
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('resource');
         $this->assertResponseStatusCode(200);
 
@@ -213,7 +215,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
         $request->setMethod('GET');
 
         $this->dispatch('/oauth/resource');
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('resource');
         $this->assertResponseStatusCode(200);
 

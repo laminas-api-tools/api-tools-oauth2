@@ -1,14 +1,16 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\OAuth2\Adapter;
+namespace Laminas\ApiTools\OAuth2\Adapter;
 
+use Laminas\Crypt\Password\Bcrypt;
 use MongoClient;
 use OAuth2\Storage\Mongo as OAuth2Mongo;
-use Zend\Crypt\Password\Bcrypt;
 
 /**
  * Extension of OAuth2\Storage\PDO that provides Bcrypt client_secret/password

@@ -1,13 +1,15 @@
 <?php
+
 /**
- * @copyright Copyright (c) 2016 João Dias <mail@joaodias.eu>
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\OAuth2\Controller;
+namespace LaminasTest\ApiTools\OAuth2\Controller;
 
+use Laminas\ApiTools\ApiProblem\Exception\DomainException;
 use OAuth2\Storage\Memory;
-use ZF\ApiProblem\Exception\DomainException;
 
 class CustomAdapter extends Memory
 {

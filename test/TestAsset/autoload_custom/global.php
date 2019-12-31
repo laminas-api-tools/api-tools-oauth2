@@ -1,7 +1,9 @@
 <?php
+
 /**
- * @copyright Copyright (c) 2016 João Dias <mail@joaodias.eu>
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
 return [
@@ -22,11 +24,11 @@ return [
     ],
     'service_manager' => [
         'invokables' => [
-            'ZFTest\OAuth2\Controller\CustomAdapter' => 'ZFTest\OAuth2\Controller\CustomAdapter',
+            'LaminasTest\ApiTools\OAuth2\Controller\CustomAdapter' => 'LaminasTest\ApiTools\OAuth2\Controller\CustomAdapter',
         ],
     ],
-    'zf-oauth2' => [
-        'storage' => 'ZFTest\OAuth2\Controller\CustomAdapter',
+    'api-tools-oauth2' => [
+        'storage' => 'LaminasTest\ApiTools\OAuth2\Controller\CustomAdapter',
         'allow_implicit' => true,
         'enforce_state'  => true,
     ],

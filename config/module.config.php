@@ -1,13 +1,19 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\OAuth2;
+namespace Laminas\ApiTools\OAuth2;
 
 return [
     'controllers' => [
+        // Legacy Zend Framework aliases
+        'aliases' => [
+            \ZF\OAuth2\Controller\Auth::class => Controller\Auth::class,
+        ],
         'factories' => [
             Controller\Auth::class => Factory\AuthControllerFactory::class,
         ],
@@ -68,6 +74,14 @@ return [
     'service_manager' => [
         'aliases' => [
             Provider\UserId::class => Provider\UserId\AuthenticationService::class,
+
+            // Legacy Zend Framework aliases
+            \ZF\OAuth2\Provider\UserId::class => Provider\UserId::class,
+            \ZF\OAuth2\Adapter\PdoAdapter::class => Adapter\PdoAdapter::class,
+            \ZF\OAuth2\Adapter\IbmDb2Adapter::class => Adapter\IbmDb2Adapter::class,
+            \ZF\OAuth2\Adapter\MongoAdapter::class => Adapter\MongoAdapter::class,
+            \ZF\OAuth2\Provider\UserId\AuthenticationService::class => Provider\UserId\AuthenticationService::class,
+            \ZF\OAuth2\Service\OAuth2Server::class => Service\OAuth2Server::class,
         ],
         'factories' => [
             Adapter\PdoAdapter::class    => Factory\PdoAdapterFactory::class,
@@ -79,17 +93,17 @@ return [
     ],
     'view_manager' => [
         'template_map' => [
-            'oauth/authorize'    => __DIR__ . '/../view/zf/auth/authorize.phtml',
-            'oauth/receive-code' => __DIR__ . '/../view/zf/auth/receive-code.phtml',
+            'oauth/authorize'    => __DIR__ . '/../view/laminas/auth/authorize.phtml',
+            'oauth/receive-code' => __DIR__ . '/../view/laminas/auth/receive-code.phtml',
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
     ],
-    'zf-oauth2' => [
+    'api-tools-oauth2' => [
         /*
          * Config can include:
-         * - 'storage' => 'name of storage service' - typically ZF\OAuth2\Adapter\PdoAdapter
+         * - 'storage' => 'name of storage service' - typically Laminas\ApiTools\OAuth2\Adapter\PdoAdapter
          * - 'db' => [ // database configuration for the above PdoAdapter
          *       'dsn'      => 'PDO DSN',
          *       'username' => 'username',
@@ -116,14 +130,14 @@ return [
          */
         'api_problem_error_response' => true,
     ],
-    'zf-content-negotiation' => [
+    'api-tools-content-negotiation' => [
         'controllers' => [
             Controller\Auth::class => [
-                'ZF\ContentNegotiation\JsonModel' => [
+                'Laminas\ApiTools\ContentNegotiation\JsonModel' => [
                     'application/json',
                     'application/*+json',
                 ],
-                'Zend\View\Model\ViewModel' => [
+                'Laminas\View\Model\ViewModel' => [
                     'text/html',
                     'application/xhtml+xml',
                 ],
