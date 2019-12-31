@@ -1,15 +1,17 @@
 <?php
+
 /**
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\OAuth2\Factory;
+namespace LaminasTest\ApiTools\OAuth2\Factory;
 
+use Laminas\ApiTools\OAuth2\Factory\PdoAdapterFactory;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use ReflectionObject;
-use Zend\ServiceManager\ServiceManager;
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
-use ZF\OAuth2\Factory\PdoAdapterFactory;
 
 class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
 {
@@ -24,20 +26,20 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
     protected $services;
 
     /**
-     * @expectedException \ZF\OAuth2\Controller\Exception\RuntimeException
+     * @expectedException \Laminas\ApiTools\OAuth2\Controller\Exception\RuntimeException
      */
     public function testExceptionThrownWhenMissingDbCredentials()
     {
         $this->services->setService('Config', array());
         $adapter = $this->factory->createService($this->services);
 
-        $this->assertInstanceOf('ZF\OAuth2\Adapter\PdoAdapter', $adapter);
+        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Adapter\PdoAdapter', $adapter);
     }
 
     public function testInstanceCreated()
     {
         $this->services->setService('Config', array(
-            'zf-oauth2' => array(
+            'api-tools-oauth2' => array(
                 'db' => array(
                     'username' => 'foo',
                     'password' => 'bar',
@@ -46,13 +48,13 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
             ),
         ));
         $adapter = $this->factory->createService($this->services);
-        $this->assertInstanceOf('ZF\OAuth2\Adapter\PdoAdapter', $adapter);
+        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Adapter\PdoAdapter', $adapter);
     }
 
     public function testAllowsPassingOauth2ServerConfigAndPassesOnToUnderlyingAdapter()
     {
         $this->services->setService('Config', array(
-            'zf-oauth2' => array(
+            'api-tools-oauth2' => array(
                 'db' => array(
                     'username' => 'foo',
                     'password' => 'bar',
@@ -64,7 +66,7 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
             ),
         ));
         $adapter = $this->factory->createService($this->services);
-        $this->assertInstanceOf('ZF\OAuth2\Adapter\PdoAdapter', $adapter);
+        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Adapter\PdoAdapter', $adapter);
 
         $r = new ReflectionObject($adapter);
         $c = $r->getProperty('config');
