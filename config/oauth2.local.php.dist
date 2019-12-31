@@ -1,6 +1,6 @@
 <?php
 return array(
-    'zf-oauth2' => array(
+    'api-tools-oauth2' => array(
         'db' => array(
             'dsn'      => 'insert here the DSN for DB connection', // for example "mysql:dbname=oauth2_db;host=localhost"
             'username' => 'insert here the DB username',
@@ -9,6 +9,6 @@ return array(
         'allow_implicit' => false, // default (set to true when you need to support browser-based or mobile apps)
         'access_lifetime' => 3600, // default (set a value in seconds for access tokens lifetime)
         'enforce_state'  => true,  // default
-        'storage'        => 'ZF\OAuth2\Adapter\PdoAdapter', // service name for the OAuth2 storage adapter
+        'storage'        => 'Laminas\ApiTools\OAuth2\Adapter\PdoAdapter', // service name for the OAuth2 storage adapter
     ),
 );

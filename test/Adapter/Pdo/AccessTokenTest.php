@@ -1,6 +1,6 @@
 <?php
 
-namespace ZFTest\OAuth2\Adapter\Pdo;
+namespace LaminasTest\ApiTools\OAuth2\Adapter\Pdo;
 
 use OAuth2\Storage\AccessTokenInterface;
 
