@@ -1,12 +1,14 @@
 <?php
+
 /**
- * @copyright Copyright (c) 2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\OAuth2\Controller;
+namespace LaminasTest\ApiTools\OAuth2\Controller;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class AuthControllerTest extends AbstractHttpControllerTestCase
 {
@@ -36,7 +38,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $request->setMethod('POST');
 
         $this->dispatch('/oauth');
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('token');
         $this->assertResponseStatusCode(200);
 
@@ -54,7 +56,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $_GET['state'] = 'xyz';
 
         $this->dispatch('/oauth/authorize');
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('authorize');
         $this->assertResponseStatusCode(200);
         $this->assertXpathQuery('//form/input[@name="authorized" and @value="yes"]');
@@ -65,7 +67,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
     {
         $this->dispatch('/oauth/authorize');
 
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('authorize');
         $this->assertResponseStatusCode(400);
 
@@ -89,7 +91,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
 
         $this->dispatch('/oauth/authorize');
         $this->assertTrue($this->getResponse()->isRedirect());
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('authorize');
 
         $location = $this->getResponse()->getHeaders()->get('Location')->getUri();
@@ -105,7 +107,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $request->getServer()->set('PHP_AUTH_PW', 'testpass');
 
         $this->dispatch('/oauth');
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('token');
         $this->assertResponseStatusCode(200);
 
@@ -116,7 +118,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
     public function testImplicitClientAuth()
     {
         $config = $this->getApplication()->getConfig();
-        $allowImplicit = isset($config['zf-oauth2']['allow_implicit']) ? $config['zf-oauth2']['allow_implicit'] : false;
+        $allowImplicit = isset($config['api-tools-oauth2']['allow_implicit']) ? $config['api-tools-oauth2']['allow_implicit'] : false;
 
         if (!$allowImplicit) {
             $this->markTestSkipped('The allow implicit client mode is disabled');
@@ -132,7 +134,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
 
         $this->dispatch('/oauth/authorize');
         $this->assertTrue($this->getResponse()->isRedirect());
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('authorize');
 
         $token    = '';
@@ -153,7 +155,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $request->setMethod('POST');
 
         $this->dispatch('/oauth');
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('token');
         $this->assertResponseStatusCode(200);
 
@@ -171,7 +173,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         unset($server['PHP_AUTH_PW']);
 
         $this->dispatch('/oauth/resource');
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('resource');
         $this->assertResponseStatusCode(200);
 
@@ -185,7 +187,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $request->setMethod('GET');
 
         $this->dispatch('/oauth/resource');
-        $this->assertControllerName('ZF\OAuth2\Controller\Auth');
+        $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('resource');
         $this->assertResponseStatusCode(200);
 
