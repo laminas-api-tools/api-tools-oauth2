@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Bcrypt utility
  *
@@ -11,24 +12,24 @@ if (! $autoload) {
     $autoload = realpath(__DIR__ . '/../../../autoload.php');
 }
 
-$zf2Env   = "ZF2_PATH";
+$laminasEnv   = "LAMINAS_PATH";
 
 if (file_exists($autoload)) {
     include $autoload;
-} elseif (getenv($zf2Env)) {
-    include getenv($zf2Env) . '/Zend/Loader/AutoloaderFactory.php';
-    Zend\Loader\AutoloaderFactory::factory(array(
-        'Zend\Loader\StandardAutoloader' => array(
-            'autoregister_zf' => true
+} elseif (getenv($laminasEnv)) {
+    include getenv($laminasEnv) . '/Laminas/Loader/AutoloaderFactory.php';
+    Laminas\Loader\AutoloaderFactory::factory(array(
+        'Laminas\Loader\StandardAutoloader' => array(
+            'autoregister_laminas' => true
         )
     ));
 }
 
-if (!class_exists('Zend\Loader\AutoloaderFactory')) {
-    throw new RuntimeException('Unable to load ZF2. Run `php composer.phar install` or define a ZF2_PATH environment variable.');
+if (!class_exists('Laminas\Loader\AutoloaderFactory')) {
+    throw new RuntimeException('Unable to load Laminas. Run `php composer.phar install` or define a LAMINAS_PATH environment variable.');
 }
 
-$bcrypt = new Zend\Crypt\Password\Bcrypt;
+$bcrypt = new Laminas\Crypt\Password\Bcrypt;
 
 if ($argc < 2) {
     printf("Usage: php bcrypt.php <password> [cost]\n");
