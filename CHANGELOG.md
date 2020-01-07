@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.5.1 - TBD
+## 1.5.1 - 2020-01-07
 
 ### Added
 
@@ -21,6 +21,8 @@ All notable changes to this project will be documented in this file, in reverse 
 - Nothing.
 
 ### Fixed
+
+- [#19](https://github.com/laminas-api-tools/api-tools-oauth2/pull/19) adds a missing `<p>` opening tag to the receive-code template.
 
 - Renames the `view/zf/` directory to `view/laminas/`, which is where the code was expecting it following migration.
 
