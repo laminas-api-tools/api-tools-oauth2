@@ -44,7 +44,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- Renames the `view/zf/` directory to `view/laminas/`, which is where the code was expecting it following migration.
 
 ## 1.5.0 - 2018-05-07
 
