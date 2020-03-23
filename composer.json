@@ -47,6 +47,6 @@
         ]
     },
     "replace": {
-        "zfcampus/zf-oauth2": "self.version"
+        "zfcampus/zf-oauth2": "~0.9.0.0"
     }
 }
