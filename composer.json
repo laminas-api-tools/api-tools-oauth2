@@ -77,6 +77,6 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "replace": {
-        "zfcampus/zf-oauth2": "self.version"
+        "zfcampus/zf-oauth2": "~1.5.0.0"
     }
 }
