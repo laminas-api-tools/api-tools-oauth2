@@ -76,6 +76,6 @@
         "test": "phpunit"
     },
     "replace": {
-        "zfcampus/zf-oauth2": "self.version"
+        "zfcampus/zf-oauth2": "~1.4.0.0"
     }
 }
