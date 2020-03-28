@@ -24,7 +24,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 1.5.2 - TBD
+## 1.5.2 - 2020-03-28
 
 ### Added
 
@@ -44,7 +44,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- Fixed `replace` version constraint in composer.json so repository can be used as replacement of `zfcampus/zf-oauth2:^1.5.0`.
 
 ## 1.5.1 - 2020-01-07
 
