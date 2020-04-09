@@ -78,7 +78,6 @@ return [
             // Legacy Zend Framework aliases
             'ZF\OAuth2\Provider\UserId' => 'Laminas\ApiTools\OAuth2\Provider\UserId',
             \ZF\OAuth2\Adapter\PdoAdapter::class => Adapter\PdoAdapter::class,
-            \ZF\OAuth2\Adapter\IbmDb2Adapter::class => Adapter\IbmDb2Adapter::class,
             \ZF\OAuth2\Adapter\MongoAdapter::class => Adapter\MongoAdapter::class,
             \ZF\OAuth2\Provider\UserId\AuthenticationService::class => Provider\UserId\AuthenticationService::class,
             'ZF\OAuth2\Service\OAuth2Server' => 'Laminas\ApiTools\OAuth2\Service\OAuth2Server',
