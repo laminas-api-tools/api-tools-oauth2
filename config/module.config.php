@@ -84,7 +84,6 @@ return [
         ],
         'factories' => [
             Adapter\PdoAdapter::class    => Factory\PdoAdapterFactory::class,
-            Adapter\IbmDb2Adapter::class => Factory\IbmDb2AdapterFactory::class,
             Adapter\MongoAdapter::class  => Factory\MongoAdapterFactory::class,
             Provider\UserId\AuthenticationService::class => Provider\UserId\AuthenticationServiceFactory::class,
             'Laminas\ApiTools\OAuth2\Service\OAuth2Server'  => Factory\OAuth2ServerFactory::class
