@@ -147,7 +147,9 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
     public function testImplicitClientAuth()
     {
         $config = $this->getApplication()->getConfig();
-        $allowImplicit = isset($config['api-tools-oauth2']['allow_implicit']) ? $config['api-tools-oauth2']['allow_implicit'] : false;
+        $oauthConfig = $config['api-tools-oauth2'];
+
+        $allowImplicit = isset($oauthConfig['allow_implicit']) ? $oauthConfig['allow_implicit'] : false;
 
         if (! $allowImplicit) {
             $this->markTestSkipped('The allow implicit client mode is disabled');
