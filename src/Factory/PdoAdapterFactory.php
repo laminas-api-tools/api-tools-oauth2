@@ -28,19 +28,19 @@ class PdoAdapterFactory
             );
         }
 
-        $username = isset($config['api-tools-oauth2']['db']['username']) ? $config['api-tools-oauth2']['db']['username'] : null;
-        $password = isset($config['api-tools-oauth2']['db']['password']) ? $config['api-tools-oauth2']['db']['password'] : null;
-        $options  = isset($config['api-tools-oauth2']['db']['options']) ? $config['api-tools-oauth2']['db']['options'] : [];
+        $oauthConfig = $config['api-tools-oauth2'];
+
+        $username = isset($oauthConfig['db']['username']) ? $oauthConfig['db']['username'] : null;
+        $password = isset($oauthConfig['db']['password']) ? $oauthConfig['db']['password'] : null;
+        $options  = isset($oauthConfig['db']['options']) ? $oauthConfig['db']['options'] : [];
 
         $oauth2ServerConfig = [];
-        if (isset($config['api-tools-oauth2']['storage_settings'])
-            && is_array($config['api-tools-oauth2']['storage_settings'])
-        ) {
-            $oauth2ServerConfig = $config['api-tools-oauth2']['storage_settings'];
+        if (isset($oauthConfig['storage_settings']) && is_array($oauthConfig['storage_settings'])) {
+            $oauth2ServerConfig = $oauthConfig['storage_settings'];
         }
 
         return new PdoAdapter([
-            'dsn'      => $config['api-tools-oauth2']['db']['dsn'],
+            'dsn'      => $oauthConfig['db']['dsn'],
             'username' => $username,
             'password' => $password,
             'options'  => $options,
