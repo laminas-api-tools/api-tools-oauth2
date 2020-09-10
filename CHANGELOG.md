@@ -2,27 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.6.0 - TBD
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
+## 1.6.0 - 2020-09-10
 
 ### Removed
 
 - [#21](https://github.com/laminas-api-tools/api-tools-oauth2/pull/21) removes the `IbmDb2Adapter` and related factory. The functionality was dependent on [an unmerged patch against the upstream bshaffer/oauth2-server-php library](https://github.com/bshaffer/oauth2-server-php/pull/565), and has never worked as a result.
 
-### Fixed
 
-- Nothing.
+-----
+
+### Release Notes for [1.6.0](https://github.com/laminas-api-tools/api-tools-oauth2/milestone/1)
+
+
+
+### 1.6.0
+
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
+
+#### Enhancement
+
+ - [21: Remove IbmDb2 Adapter](https://github.com/laminas-api-tools/api-tools-oauth2/pull/21) thanks to @alexdenvir
 
 ## 1.5.2 - 2020-03-28
 
