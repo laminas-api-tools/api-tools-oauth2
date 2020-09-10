@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#21](https://github.com/laminas-api-tools/api-tools-oauth2/pull/21) removes the `IbmDb2Adapter` and related factory. The functionality was dependent on [an unmerged patch against the upstream bshaffer/oauth2-server-php library](https://github.com/bshaffer/oauth2-server-php/pull/565), and has never worked as a result.
 
 ### Fixed
 
