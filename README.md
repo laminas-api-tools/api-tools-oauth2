@@ -1,7 +1,7 @@
 # api-tools-oauth2
 
-[![Build Status](https://travis-ci.com/laminas-api-tools/api-tools-oauth2.svg?branch=master)](https://travis-ci.com/laminas-api-tools/api-tools-oauth2)
-[![Coverage Status](https://coveralls.io/repos/github/laminas-api-tools/api-tools-oauth2/badge.svg?branch=master)](https://coveralls.io/github/laminas-api-tools/api-tools-oauth2?branch=master)
+[![Build Status](https://travis-ci.com/laminas-api-tools/api-tools-oauth2.svg)](https://travis-ci.com/laminas-api-tools/api-tools-oauth2)
+[![Coverage Status](https://coveralls.io/repos/github/laminas-api-tools/api-tools-oauth2/badge.svg)](https://coveralls.io/github/laminas-api-tools/api-tools-oauth2)
 
 Laminas module for [OAuth2](http://oauth.net/2/) authentication.
 
