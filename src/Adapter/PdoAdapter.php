@@ -58,7 +58,7 @@ class PdoAdapter extends OAuth2Pdo
     /**
      * @param string $string Passed by reference
      */
-    protected function createBcryptHash(&$string)
+    protected function createBcryptHash(&$string): void
     {
         $string = $this->getBcrypt()->create($string);
     }

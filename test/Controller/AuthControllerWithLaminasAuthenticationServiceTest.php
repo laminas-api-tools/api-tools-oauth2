@@ -32,7 +32,7 @@ class AuthControllerWithLaminasAuthenticationServiceTest extends AbstractHttpCon
         $this->setupDb();
     }
 
-    public function setupDb()
+    public function setupDb(): void
     {
         $pdo = $this->getApplication()->getServiceManager()->get(PdoAdapter::class);
         $r   = new ReflectionProperty($pdo, 'db');
@@ -64,7 +64,7 @@ class AuthControllerWithLaminasAuthenticationServiceTest extends AbstractHttpCon
         return $authentication;
     }
 
-    public function testAuthorizeCode()
+    public function testAuthorizeCode(): void
     {
         $request = $this->getRequest();
         $request->setQuery(new Parameters([

@@ -17,7 +17,7 @@ class AuthControllerWithCustomAdapterTest extends AbstractHttpControllerTestCase
         parent::setUp();
     }
 
-    public function testToken()
+    public function testToken(): void
     {
         /** @var Request $request */
         $request = $this->getRequest();

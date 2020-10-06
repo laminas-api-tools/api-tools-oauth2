@@ -18,7 +18,7 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
     /** @var ServiceManager */
     protected $services;
 
-    public function testExceptionThrownWhenMissingDbCredentials()
+    public function testExceptionThrownWhenMissingDbCredentials(): void
     {
         $this->expectException(RuntimeException::class);
         $this->services->setService('config', []);
@@ -28,7 +28,7 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
         $smFactory($this->services);
     }
 
-    public function testInstanceCreated()
+    public function testInstanceCreated(): void
     {
         $this->services->setService('config', [
             'api-tools-oauth2' => [
@@ -43,7 +43,7 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
         $this->assertInstanceOf(PdoAdapter::class, $adapter);
     }
 
-    public function testAllowsPassingOauth2ServerConfigAndPassesOnToUnderlyingAdapter()
+    public function testAllowsPassingOauth2ServerConfigAndPassesOnToUnderlyingAdapter(): void
     {
         $this->services->setService('config', [
             'api-tools-oauth2' => [
@@ -67,7 +67,7 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
         $this->assertEquals('my_users', $config['user_table']);
     }
 
-    public function testAllowsPassingDbOptions()
+    public function testAllowsPassingDbOptions(): void
     {
         $this->services->setService('config', [
             'api-tools-oauth2' => [
@@ -88,7 +88,7 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
     protected function setUp(): void
     {
         $this->factory  = new PdoAdapterFactory();
-        $this->services = $services = new ServiceManager();
+        $this->services = new ServiceManager();
 
         $this->setApplicationConfig([
             'modules'                  => [

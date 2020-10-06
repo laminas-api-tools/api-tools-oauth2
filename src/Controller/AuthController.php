@@ -17,8 +17,8 @@ use OAuth2\Request as OAuth2Request;
 use OAuth2\Response as OAuth2Response;
 use OAuth2\Server as OAuth2Server;
 use RuntimeException;
+use Webmozart\Assert\Assert;
 
-use function call_user_func;
 use function get_class;
 use function gettype;
 use function is_callable;
@@ -75,6 +75,7 @@ class AuthController extends AbstractActionController
      * should be returned.
      *
      * @param bool $apiProblemErrorResponse
+     * @return void
      */
     public function setApiProblemErrorResponse($apiProblemErrorResponse)
     {
@@ -147,8 +148,6 @@ class AuthController extends AbstractActionController
 
     /**
      * Test resource (/oauth/resource)
-     *
-     * @return ResponseInterface
      */
     public function resourceAction(): Response
     {
@@ -157,6 +156,11 @@ class AuthController extends AbstractActionController
         // Handle a request for an OAuth2.0 Access Token and send the response to the client
         if (! $server->verifyResourceRequest($this->getOAuth2Request())) {
             $response = $server->getResponse();
+            Assert::isInstanceOf(
+                $response,
+                OAuth2Response::class,
+                'Did not receive valid OAuth2 response instance from OAuth2 Server'
+            );
             return $this->getApiProblemResponse($response);
         }
 
@@ -176,7 +180,10 @@ class AuthController extends AbstractActionController
      */
     public function authorizeAction()
     {
-        $server   = $this->getOAuth2Server($this->params('oauth'));
+        $serverType = $this->params('oauth');
+        Assert::nullOrStringNotEmpty($serverType);
+
+        $this->getOAuth2Server($serverType);
         $request  = $this->getOAuth2Request();
         $response = new OAuth2Response();
 
@@ -282,9 +289,8 @@ class AuthController extends AbstractActionController
         $headers        = $laminasRequest->getHeaders();
 
         // Marshal content type, so we can seed it into the $_SERVER array
-        $contentType = '';
         if ($headers->has('Content-Type')) {
-            $contentType = $headers->get('Content-Type')->getFieldValue();
+            $headers->get('Content-Type')->getFieldValue();
         }
 
         // Get $_SERVER superglobal
@@ -326,6 +332,8 @@ class AuthController extends AbstractActionController
     private function setHttpResponse(OAuth2Response $response): Response
     {
         $httpResponse = $this->getResponse();
+        Assert::isInstanceOf($httpResponse, Response::class, 'Cannot convert OAuth2Response to HTTP response');
+
         $httpResponse->setStatusCode($response->getStatusCode());
 
         $headers = $httpResponse->getHeaders();
@@ -343,7 +351,7 @@ class AuthController extends AbstractActionController
      * is invoked with the provided $type as an argument, and the value
      * returned.
      *
-     * @param string $type
+     * @param null|string $type
      * @return OAuth2Server
      * @throws RuntimeException If the factory does not return an OAuth2Server instance.
      */
@@ -353,7 +361,7 @@ class AuthController extends AbstractActionController
             return $this->server;
         }
 
-        $server = call_user_func($this->serverFactory, $type);
+        $server = ($this->serverFactory)($type);
         if (! $server instanceof OAuth2Server) {
             throw new RuntimeException(sprintf(
                 'OAuth2\Server factory did not return a valid instance; received %s',

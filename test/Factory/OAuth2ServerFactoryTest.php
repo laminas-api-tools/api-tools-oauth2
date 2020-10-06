@@ -39,7 +39,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
     protected function setUp(): void
     {
         $this->factory  = new OAuth2ServerFactory();
-        $this->services = $services = new ServiceManager();
+        $this->services = new ServiceManager();
 
         $this->setApplicationConfig([
             'modules'                  => [
@@ -55,7 +55,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         parent::setUp();
     }
 
-    public function testExceptionThrownOnMissingStorageClass()
+    public function testExceptionThrownOnMissingStorageClass(): void
     {
         $this->expectException(RuntimeException::class);
 
@@ -67,7 +67,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $factory();
     }
 
-    public function testServiceCreatedWithDefaults()
+    public function testServiceCreatedWithDefaults(): void
     {
         $adapter = $this->getMockBuilder(Pdo::class)->disableOriginalConstructor()->getMock();
         $this->services->setService('TestAdapter', $adapter);
@@ -106,7 +106,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $this->assertEquals($expectedService, $server);
     }
 
-    public function testServiceCreatedWithOverriddenValues()
+    public function testServiceCreatedWithOverriddenValues(): void
     {
         $adapter = $this->getMockBuilder(Pdo::class)->disableOriginalConstructor()->getMock();
         $this->services->setService('TestAdapter', $adapter);
@@ -148,7 +148,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $this->assertEquals($expectedService, $server);
     }
 
-    public function testServiceCreatedWithOverriddenValuesInOptionsSubArray()
+    public function testServiceCreatedWithOverriddenValuesInOptionsSubArray(): void
     {
         $adapter = $this->getMockBuilder(Pdo::class)->disableOriginalConstructor()->getMock();
 
@@ -193,7 +193,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $this->assertEquals($expectedService, $server);
     }
 
-    public function testServiceCreatedWithStoragesAsArray()
+    public function testServiceCreatedWithStoragesAsArray(): void
     {
         if (defined('HHVM_VERSION') && version_compare(constant('HHVM_VERSION'), '3.8', 'lt')) {
             $this->markTestSkipped('Skipping test until we have HHVM 3.8 support');
@@ -266,7 +266,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $this->assertEquals($expectedService, $server);
     }
 
-    public function testServiceCreatedWithSelectedGrandTypes()
+    public function testServiceCreatedWithSelectedGrandTypes(): void
     {
         $adapter = $this->getMockBuilder(Pdo::class)->disableOriginalConstructor()->getMock();
         $this->services->setService('TestAdapter', $adapter);
@@ -299,7 +299,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $this->assertEquals($expectedService, $server);
     }
 
-    public function testSubsequentCallsReturnTheSameInstance()
+    public function testSubsequentCallsReturnTheSameInstance(): void
     {
         $adapter = $this->getMockBuilder(Pdo::class)->disableOriginalConstructor()->getMock();
         $this->services->setService('TestAdapter', $adapter);

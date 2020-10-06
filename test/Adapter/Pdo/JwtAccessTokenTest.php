@@ -9,7 +9,10 @@ use DateTime;
  */
 class JwtAccessTokenTest extends AbstractBaseTest
 {
-    /** @dataProvider provideStorage */
+    /**
+     * @dataProvider provideStorage
+     * @psalm-return never
+     */
     public function testJwtWithJti(object $storage)
     {
         $this->markTestIncomplete('JWT access token is not yet supported in PDO adapter');

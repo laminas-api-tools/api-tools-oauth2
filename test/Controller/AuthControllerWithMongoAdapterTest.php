@@ -72,7 +72,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
         parent::tearDown();
     }
 
-    public function testToken()
+    public function testToken(): void
     {
         $request = $this->getRequest();
         $request->getPost()->set('grant_type', 'client_credentials');
@@ -93,7 +93,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
         $this->assertTrue(! empty($response['token_type']));
     }
 
-    public function testAuthorizeErrorParam()
+    public function testAuthorizeErrorParam(): void
     {
         $this->dispatch('/oauth/authorize');
 
@@ -110,7 +110,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
         $this->assertEquals('400', $response['status']);
     }
 
-    public function testAuthorizeCode()
+    public function testAuthorizeCode(): void
     {
         $queryData = [
             'response_type' => 'code',
@@ -146,7 +146,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
         $this->assertTrue(! empty($response['access_token']));
     }
 
-    public function testImplicitClientAuth()
+    public function testImplicitClientAuth(): void
     {
         $config      = $this->getApplication()->getConfig();
         $oauthConfig = $config['api-tools-oauth2'];
@@ -179,7 +179,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
         $this->assertTrue(! empty($token));
     }
 
-    public function testResource()
+    public function testResource(): void
     {
         $request = $this->getRequest();
         $request->getPost()->set('grant_type', 'client_credentials');

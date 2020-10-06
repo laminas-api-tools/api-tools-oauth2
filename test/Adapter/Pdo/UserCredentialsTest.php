@@ -10,7 +10,7 @@ use function is_array;
 class UserCredentialsTest extends AbstractBaseTest
 {
     /** @dataProvider provideStorage */
-    public function testCheckUserCredentials(UserCredentialsInterface $storage)
+    public function testCheckUserCredentials(UserCredentialsInterface $storage): void
     {
         if ($storage instanceof NullStorage) {
             $this->markTestSkipped('Skipped Storage: ' . $storage->getMessage());
@@ -38,6 +38,7 @@ class UserCredentialsTest extends AbstractBaseTest
     /**
      * @dataProvider provideStorage
      * @todo Support OpenID, and provide validation via testing.
+     * @psalm-return never
      */
     public function testUserClaims(UserCredentialsInterface $storage)
     {
