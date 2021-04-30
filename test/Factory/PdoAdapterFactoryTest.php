@@ -20,6 +20,7 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
 
     public function testExceptionThrownWhenMissingDbCredentials()
     {
+        $this->expectException(RuntimeException::class);
         $this->services->setService('config', []);
         $smFactory = $this->factory;
 
@@ -84,7 +85,7 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
         $this->assertInstanceOf(PdoAdapter::class, $adapter);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->factory  = new PdoAdapterFactory();
         $this->services = $services = new ServiceManager();

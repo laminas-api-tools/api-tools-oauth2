@@ -4,13 +4,14 @@ namespace LaminasTest\ApiTools\OAuth2\Adapter\Pdo;
 
 use Laminas\ApiTools\OAuth2\Adapter\PdoAdapter;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use ReflectionException;
 use ReflectionProperty;
 
 use function file_get_contents;
 
-abstract class BaseTest extends AbstractHttpControllerTestCase
+abstract class AbstractBaseTest extends AbstractHttpControllerTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setApplicationConfig(
             include __DIR__ . '/../../TestAsset/pdo.application.config.php'
@@ -22,7 +23,10 @@ abstract class BaseTest extends AbstractHttpControllerTestCase
         $serviceManager->setAllowOverride(true);
     }
 
-    /** @psalm-return array<array-key, array{0: PdoAdapter}> */
+    /**
+     * @psalm-return array<array-key, array{0: PdoAdapter}>
+     * @throws ReflectionException
+     */
     public function provideStorage(): array
     {
         $this->setUp();

@@ -10,7 +10,7 @@ use function json_decode;
 
 class AuthControllerWithCustomAdapterTest extends AbstractHttpControllerTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setApplicationConfig(include __DIR__ . '/../TestAsset/custom.application.config.php');
 

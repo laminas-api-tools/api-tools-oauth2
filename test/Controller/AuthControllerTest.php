@@ -15,7 +15,10 @@ use Laminas\Stdlib\Parameters;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use OAuth2\Request as OAuth2Request;
 use OAuth2\Server as OAuth2Server;
+use PDO;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
+use ReflectionException;
 use ReflectionProperty;
 
 use function array_key_exists;
@@ -25,10 +28,12 @@ use function preg_match;
 
 class AuthControllerTest extends AbstractHttpControllerTestCase
 {
-    /** @var Adapter */
+    use ProphecyTrait;
+
+    /** @var Adatper|PDO */
     protected $db;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setApplicationConfig(include __DIR__ . '/../TestAsset/pdo.application.config.php');
         parent::setUp();
@@ -46,7 +51,11 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $db->exec($sql);
     }
 
-    public function getDb(): Adapter
+    /**
+     * @return Adapter|PDO
+     * @throws ReflectionException
+     */
+    public function getDb()
     {
         if ($this->db) {
             return $this->db;

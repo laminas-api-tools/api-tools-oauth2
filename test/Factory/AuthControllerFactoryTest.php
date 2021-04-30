@@ -40,7 +40,7 @@ class AuthControllerFactoryTest extends AbstractHttpControllerTestCase
         $this->assertEquals(new AuthController($oauthServerFactory, $userIdProvider), $controller);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->factory = new AuthControllerFactory();
 

@@ -36,7 +36,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
     /** @var ServiceManager */
     protected $services;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->factory  = new OAuth2ServerFactory();
         $this->services = $services = new ServiceManager();
@@ -57,6 +57,8 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
 
     public function testExceptionThrownOnMissingStorageClass()
     {
+        $this->expectException(RuntimeException::class);
+
         $this->services->setService('config', []);
         $smFactory = $this->factory;
         $factory   = $smFactory($this->services, 'OAuth2Server');

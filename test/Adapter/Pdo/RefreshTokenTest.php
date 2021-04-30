@@ -7,7 +7,7 @@ use OAuth2\Storage\RefreshTokenInterface;
 
 use function time;
 
-class RefreshTokenTest extends BaseTest
+class RefreshTokenTest extends AbstractBaseTest
 {
     /** @dataProvider provideStorage */
     public function testSetRefreshToken(RefreshTokenInterface $storage)

@@ -4,6 +4,7 @@ namespace LaminasTest\ApiTools\OAuth2\Factory;
 
 use Laminas\ApiTools\OAuth2\Adapter\MongoAdapter;
 use Laminas\ApiTools\OAuth2\Adapter\PdoAdapter;
+use Laminas\ApiTools\OAuth2\Controller\Exception\RuntimeException;
 use Laminas\ApiTools\OAuth2\Factory\MongoAdapterFactory;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
@@ -23,7 +24,7 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
     /** @var ServiceManager */
     protected $services;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (
             ! (extension_loaded('mongodb') || extension_loaded('mongo'))
@@ -53,9 +54,8 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
     public function testExceptionThrownWhenMissingMongoCredentials()
     {
         $this->services->setService('config', []);
-        $adapter = $this->factory->createService($this->services);
-
-        $this->assertInstanceOf(PdoAdapter::class, $adapter);
+        $this->expectException(RuntimeException::class);
+        $this->factory->createService($this->services);
     }
 
     public function testInstanceCreated()

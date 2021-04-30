@@ -22,7 +22,7 @@ class AuthControllerWithLaminasAuthenticationServiceTest extends AbstractHttpCon
     /** @var PDO */
     protected $db;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setApplicationConfig(
             include __DIR__ . '/../TestAsset/laminas.authenticationservice.application.config.php'

@@ -6,7 +6,7 @@ use OAuth2\Storage\ClientInterface;
 
 use function rand;
 
-class ClientTest extends BaseTest
+class ClientTest extends AbstractBaseTest
 {
     /** @dataProvider provideStorage */
     public function testGetClientDetails(ClientInterface $storage)

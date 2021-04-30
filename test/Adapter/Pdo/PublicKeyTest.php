@@ -7,7 +7,7 @@ use function file_get_contents;
 /**
  * @todo This adapter logic is not supported in the PDO adapter
  */
-class PublicKeyTest extends BaseTest
+class PublicKeyTest extends AbstractBaseTest
 {
     /** @dataProvider provideStorage */
     public function testSetAccessToken(object $storage)

@@ -6,7 +6,7 @@ use OAuth2\Storage\AccessTokenInterface;
 
 use function time;
 
-class AccessTokenTest extends BaseTest
+class AccessTokenTest extends AbstractBaseTest
 {
     /** @dataProvider provideStorage */
     public function testSetAccessToken(AccessTokenInterface $storage)

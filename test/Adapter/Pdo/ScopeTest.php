@@ -22,6 +22,11 @@ class ScopeTest extends BaseTest
 
         if (! $storage instanceof ScopeInterface) {
             // incompatible storage
+            $this->markTestSkipped(sprintf(
+                'Skipped Storage of type %s; does not implement %s ',
+                get_class($storage),
+                ScopeInterface::class
+            ));
             return;
         }
 
@@ -44,6 +49,11 @@ class ScopeTest extends BaseTest
 
         if (! $storage instanceof ScopeInterface) {
             // incompatible storage
+            $this->markTestSkipped(sprintf(
+                'Skipped Storage of type %s; does not implement %s ',
+                get_class($storage),
+                ScopeInterface::class
+            ));
             return;
         }
 
