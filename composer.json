@@ -1,7 +1,6 @@
 {
     "name": "laminas-api-tools/api-tools-oauth2",
     "description": "Laminas module for implementing an OAuth2 server",
-    "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
         "api-tools",
@@ -10,19 +9,7 @@
         "framework"
     ],
     "homepage": "https://api-tools.getlaminas.org",
-    "support": {
-        "docs": "https://api-tools.getlaminas.org/documentation",
-        "issues": "https://github.com/laminas-api-tools/api-tools-oauth2/issues",
-        "source": "https://github.com/laminas-api-tools/api-tools-oauth2",
-        "rss": "https://github.com/laminas-api-tools/api-tools-oauth2/releases.atom",
-        "chat": "https://laminas.dev/chat",
-        "forum": "https://discourse.laminas.dev"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-    },
+    "license": "BSD-3-Clause",
     "require": {
         "php": "^5.6 || ^7.0",
         "bshaffer/oauth2-server-php": "^1.10",
@@ -33,6 +20,9 @@
         "laminas/laminas-mvc": "^2.7.15 || ^3.0.2",
         "laminas/laminas-servicemanager": "^2.7.6 || ^3.1",
         "laminas/laminas-zendframework-bridge": "^1.0"
+    },
+    "replace": {
+        "zfcampus/zf-oauth2": "^1.5.0"
     },
     "require-dev": {
         "laminas/laminas-authentication": "^2.5.3",
@@ -49,6 +39,10 @@
     "suggest": {
         "alcaeus/mongo-php-adapter": "^1.0.5, if you are using ext/mongodb and wish to use the MongoAdapter for OAuth2 credential storage."
     },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {},
     "autoload": {
         "psr-4": {
             "Laminas\\ApiTools\\OAuth2\\": "src/"
@@ -72,7 +66,12 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
-    "replace": {
-        "zfcampus/zf-oauth2": "^1.5.0"
+    "support": {
+        "issues": "https://github.com/laminas-api-tools/api-tools-oauth2/issues",
+        "forum": "https://discourse.laminas.dev",
+        "chat": "https://laminas.dev/chat",
+        "source": "https://github.com/laminas-api-tools/api-tools-oauth2",
+        "docs": "https://api-tools.getlaminas.org/documentation",
+        "rss": "https://github.com/laminas-api-tools/api-tools-oauth2/releases.atom"
     }
 }
