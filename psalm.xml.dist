@@ -15,6 +15,10 @@
         <ignoreFiles>
             <directory name=".github"/>
             <directory name="vendor"/>
+            <file name="src/Adapter/MongoAdapter.php"/>
+            <file name="src/Factory/MongoAdapterFactory.php"/>
+            <file name="test/Controller/AuthControllerWithMongoAdapterTest.php"/>
+            <file name="test/Factory/MongoAdapterFactoryTest.php"/>
         </ignoreFiles>
     </projectFiles>
 

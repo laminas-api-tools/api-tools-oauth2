@@ -54,7 +54,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
         try {
             $client = new MongoClient("mongodb://127.0.0.1:27017");
         } catch (MongoConnectionException $e) {
-            $this->markTestSkipped($e->getMessage());
+            $this->markTestSkipped((string) $e->getMessage());
         }
 
         $this->db = $client->selectDB('laminas_oauth2_test');
