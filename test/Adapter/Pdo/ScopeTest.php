@@ -11,7 +11,7 @@ use function get_class;
 use function sort;
 use function sprintf;
 
-class ScopeTest extends BaseTest
+class ScopeTest extends AbstractBaseTest
 {
     /** @dataProvider provideStorage */
     public function testScopeExists(object $storage)
