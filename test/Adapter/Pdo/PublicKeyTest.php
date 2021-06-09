@@ -9,7 +9,10 @@ use function file_get_contents;
  */
 class PublicKeyTest extends AbstractBaseTest
 {
-    /** @dataProvider provideStorage */
+    /**
+     * @dataProvider provideStorage
+     * @psalm-return never
+     */
     public function testSetAccessToken(object $storage)
     {
         $this->markTestIncomplete('Public key functionality is not yet supported in all providers');

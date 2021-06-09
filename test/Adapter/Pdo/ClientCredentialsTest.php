@@ -7,7 +7,7 @@ use OAuth2\Storage\ClientCredentialsInterface;
 class ClientCredentialsTest extends AbstractBaseTest
 {
     /** @dataProvider provideStorage */
-    public function testCheckClientCredentials(ClientCredentialsInterface $storage)
+    public function testCheckClientCredentials(ClientCredentialsInterface $storage): void
     {
         if ($storage instanceof NullStorage) {
             $this->markTestSkipped('Skipped Storage: ' . $storage->getMessage());

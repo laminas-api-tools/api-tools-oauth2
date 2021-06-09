@@ -9,7 +9,7 @@ use function rand;
 class ClientTest extends AbstractBaseTest
 {
     /** @dataProvider provideStorage */
-    public function testGetClientDetails(ClientInterface $storage)
+    public function testGetClientDetails(ClientInterface $storage): void
     {
         if ($storage instanceof NullStorage) {
             $this->markTestSkipped('Skipped Storage: ' . $storage->getMessage());
@@ -30,7 +30,7 @@ class ClientTest extends AbstractBaseTest
     }
 
     /** @dataProvider provideStorage */
-    public function testCheckRestrictedGrantType(ClientInterface $storage)
+    public function testCheckRestrictedGrantType(ClientInterface $storage): void
     {
         if ($storage instanceof NullStorage) {
             $this->markTestSkipped('Skipped Storage: ' . $storage->getMessage());
@@ -51,7 +51,7 @@ class ClientTest extends AbstractBaseTest
     }
 
     /** @dataProvider provideStorage */
-    public function testGetAccessToken(ClientInterface $storage)
+    public function testGetAccessToken(ClientInterface $storage): void
     {
         if ($storage instanceof NullStorage) {
             $this->markTestSkipped('Skipped Storage: ' . $storage->getMessage());
@@ -69,7 +69,7 @@ class ClientTest extends AbstractBaseTest
     }
 
     /** @dataProvider provideStorage */
-    public function testSaveClient(ClientInterface $storage)
+    public function testSaveClient(ClientInterface $storage): void
     {
         if ($storage instanceof NullStorage) {
             $this->markTestSkipped('Skipped Storage: ' . $storage->getMessage());
@@ -99,7 +99,7 @@ class ClientTest extends AbstractBaseTest
     }
 
     /** @dataProvider provideStorage */
-    public function testIsPublicClient(ClientInterface $storage)
+    public function testIsPublicClient(ClientInterface $storage): void
     {
         $this->assertFalse($storage->isPublicClient('testclient'));
         // FIXME:  add a test which can return true
@@ -108,7 +108,7 @@ class ClientTest extends AbstractBaseTest
     }
 
     /** @dataProvider provideStorage */
-    public function testGetClientScope(ClientInterface $storage)
+    public function testGetClientScope(ClientInterface $storage): void
     {
         $this->assertEquals('clientscope1', $storage->getClientScope('testclient'));
         $this->assertFalse($storage->getClientScope('invalidclient'));

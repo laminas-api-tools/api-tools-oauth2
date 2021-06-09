@@ -29,7 +29,9 @@ class CustomProblemDetailsException extends RuntimeException implements ProblemE
         return $this->title;
     }
 
-    /** @return array */
+    /**
+     * @return Traversable|array|null
+     */
     public function getAdditionalDetails()
     {
         return $this->details;

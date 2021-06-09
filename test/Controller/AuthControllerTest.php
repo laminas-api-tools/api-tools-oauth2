@@ -30,7 +30,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
 {
     use ProphecyTrait;
 
-    /** @var Adatper|PDO */
+    /** @var Adapter|PDO */
     protected $db;
 
     protected function setUp(): void
@@ -40,7 +40,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $this->setupDb();
     }
 
-    public function setupDb()
+    public function setupDb(): void
     {
         $pdo = $this->getApplication()->getServiceManager()->get(PdoAdapter::class);
         $r   = new ReflectionProperty($pdo, 'db');
@@ -68,14 +68,14 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         return $this->db;
     }
 
-    public function setRequest(AuthController $controller, Request $request)
+    public function setRequest(AuthController $controller, Request $request): void
     {
         $r = new ReflectionProperty($controller, 'request');
         $r->setAccessible(true);
         $r->setValue($controller, $request);
     }
 
-    public function setBodyParamsPlugin(AuthController $controller)
+    public function setBodyParamsPlugin(AuthController $controller): void
     {
         $plugins = $controller->getPluginManager();
         $plugins->setService('bodyParams', new TestAsset\BodyParams());
@@ -92,7 +92,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $plugins->setService('params', $params->reveal());
     }
 
-    public function testToken()
+    public function testToken(): void
     {
         $request = $this->getRequest();
         $request->getPost()->set('grant_type', 'client_credentials');
@@ -112,7 +112,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $this->assertTrue(! empty($response['token_type']));
     }
 
-    public function testTokenErrorIsApiProblem()
+    public function testTokenErrorIsApiProblem(): void
     {
         $request = $this->getRequest();
         $request->getPost()->set('grant_type', 'fake_grant_type');
@@ -134,7 +134,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $this->assertEquals('400', $response['status']);
     }
 
-    public function testTokenErrorIsOAuth2Format()
+    public function testTokenErrorIsOAuth2Format(): void
     {
         $request = $this->getRequest();
         $request->getPost()->set('grant_type', 'fake_grant_type');
@@ -157,7 +157,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $this->assertEquals('Grant type "fake_grant_type" not supported', $response['error_description']);
     }
 
-    public function testTokenRevoke()
+    public function testTokenRevoke(): void
     {
         $request = $this->getRequest();
         $request->getPost()->set('token', '00bdec1ee9ee80762f39e5340495a31a203cd460');
@@ -176,7 +176,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $this->assertTrue($response['revoked']);
     }
 
-    public function testTokenRevokeWithoutTokenIsError()
+    public function testTokenRevokeWithoutTokenIsError(): void
     {
         $request = $this->getRequest();
         $request->getPost()->set('token_type_hint', 'access_token');
@@ -196,7 +196,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $this->assertEquals('400', $response['status']);
     }
 
-    public function testAuthorizeForm()
+    public function testAuthorizeForm(): void
     {
         $request = $this->getRequest();
         $request->getHeaders()->addHeaderLine('Accept', 'text/html');
@@ -213,7 +213,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $this->assertXpathQuery('//form/input[@name="authorized" and @value="no"]');
     }
 
-    public function testAuthorizeParamErrorIsApiProblem()
+    public function testAuthorizeParamErrorIsApiProblem(): void
     {
         $this->dispatch('/oauth/authorize');
 
@@ -230,7 +230,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $this->assertEquals('400', $response['status']);
     }
 
-    public function testAuthorizeParamErrorIsOAuth2Format()
+    public function testAuthorizeParamErrorIsOAuth2Format(): void
     {
         $this->setIsOAuth2FormatResponse();
 
@@ -248,7 +248,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $this->assertEquals('No client id supplied', $response['error_description']);
     }
 
-    public function testAuthorizeCode()
+    public function testAuthorizeCode(): void
     {
         $request = $this->getRequest();
         $request->setQuery(new Parameters([
@@ -301,7 +301,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $this->assertTrue(! empty($response['access_token']));
     }
 
-    public function testImplicitClientAuth()
+    public function testImplicitClientAuth(): void
     {
         $config      = $this->getApplication()->getConfig();
         $oauthConfig = $config['api-tools-oauth2'];
@@ -334,7 +334,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $this->assertTrue(! empty($token));
     }
 
-    public function testResource()
+    public function testResource(): void
     {
         $request = $this->getRequest();
         $request->getPost()->set('grant_type', 'client_credentials');
@@ -388,7 +388,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $this->assertEquals('You accessed my APIs!', $response['message']);
     }
 
-    protected function setIsOAuth2FormatResponse()
+    protected function setIsOAuth2FormatResponse(): void
     {
         $serviceManager = $this->getApplication()->getServiceManager();
 
@@ -399,7 +399,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $serviceManager->setService('config', $config);
     }
 
-    public function testTokenActionUsesCodeFromTokenExceptionIfPresentToCreateApiProblem()
+    public function testTokenActionUsesCodeFromTokenExceptionIfPresentToCreateApiProblem(): void
     {
         $exception          = new TestAsset\CustomProblemDetailsException('problem', 409);
         $exception->type    = 'custom';
@@ -410,7 +410,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $oauth2Server
             ->handleTokenRequest(Argument::type(OAuth2Request::class))
             ->willThrow($exception);
-        $factory = function () use ($oauth2Server) {
+        $factory = function () use ($oauth2Server): OAuth2Server {
             return $oauth2Server->reveal();
         };
 
@@ -433,7 +433,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $this->assertEquals('details', $problem->some);
     }
 
-    public function testTokenActionUses401CodeIfTokenExceptionCodeIsInvalidWhenCreatingApiProblem()
+    public function testTokenActionUses401CodeIfTokenExceptionCodeIsInvalidWhenCreatingApiProblem(): void
     {
         $exception          = new TestAsset\CustomProblemDetailsException('problem', 601);
         $exception->type    = 'custom';
@@ -444,7 +444,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $oauth2Server
             ->handleTokenRequest(Argument::type(OAuth2Request::class))
             ->willThrow($exception);
-        $factory = function () use ($oauth2Server) {
+        $factory = function () use ($oauth2Server): OAuth2Server {
             return $oauth2Server->reveal();
         };
 

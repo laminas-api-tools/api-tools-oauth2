@@ -10,7 +10,7 @@ use function time;
 class AuthorizationCodeTest extends AbstractBaseTest
 {
     /** @dataProvider provideStorage */
-    public function testGetAuthorizationCode(AuthorizationCodeInterface $storage)
+    public function testGetAuthorizationCode(AuthorizationCodeInterface $storage): void
     {
         if ($storage instanceof NullStorage) {
             $this->markTestSkipped('Skipped Storage: ' . $storage->getMessage());
@@ -26,7 +26,7 @@ class AuthorizationCodeTest extends AbstractBaseTest
     }
 
     /** @dataProvider provideStorage */
-    public function testSetAuthorizationCode(AuthorizationCodeInterface $storage)
+    public function testSetAuthorizationCode(AuthorizationCodeInterface $storage): void
     {
         if ($storage instanceof NullStorage) {
             $this->markTestSkipped('Skipped Storage: ' . $storage->getMessage());
@@ -85,15 +85,15 @@ class AuthorizationCodeTest extends AbstractBaseTest
         $this->assertEquals($code['expires'], $expires);
     }
 
-        /** @dataProvider provideStorage */
-    public function testExpireAccessToken(AccessTokenInterface $storage)
+    /** @dataProvider provideStorage */
+    public function testExpireAccessToken(AccessTokenInterface $storage): void
     {
         if ($storage instanceof NullStorage) {
             $this->markTestSkipped('Skipped Storage: ' . $storage->getMessage());
         }
 
         // create a valid code
-        $expires = time() + 20;
+        time() + 20;
         $success = $storage->setAuthorizationCode(
             'code-to-expire',
             'oauth_test_client',

@@ -34,7 +34,7 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
         }
 
         $this->factory  = new MongoAdapterFactory();
-        $this->services = $services = new ServiceManager();
+        $this->services = new ServiceManager();
 
         $this->setApplicationConfig([
             'modules'                  => [
@@ -50,14 +50,14 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
         parent::setUp();
     }
 
-    public function testExceptionThrownWhenMissingMongoCredentials()
+    public function testExceptionThrownWhenMissingMongoCredentials(): void
     {
         $this->services->setService('config', []);
         $this->expectException(RuntimeException::class);
         $this->factory->createService($this->services);
     }
 
-    public function testInstanceCreated()
+    public function testInstanceCreated(): void
     {
         $this->services->setService('config', [
             'api-tools-oauth2' => [
@@ -72,7 +72,7 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
         $this->assertInstanceOf(MongoAdapter::class, $adapter);
     }
 
-    public function testInstanceCreatedWithMongoDbInServiceLocator()
+    public function testInstanceCreatedWithMongoDbInServiceLocator(): void
     {
         $this->services->setService('config', [
             'api-tools-oauth2' => [
@@ -90,7 +90,7 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
         $this->assertInstanceOf(MongoAdapter::class, $adapter);
     }
 
-    public function testCanPassAdapterConfigurationWhenCreatingInstance()
+    public function testCanPassAdapterConfigurationWhenCreatingInstance(): void
     {
         $this->services->setService('config', [
             'api-tools-oauth2' => [

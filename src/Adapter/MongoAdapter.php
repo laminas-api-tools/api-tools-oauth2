@@ -61,7 +61,7 @@ class MongoAdapter extends OAuth2Mongo
     /**
      * @param string $string Passed by reference
      */
-    protected function createBcryptHash(&$string)
+    protected function createBcryptHash(&$string): void
     {
         $string = $this->getBcrypt()->create($string);
     }

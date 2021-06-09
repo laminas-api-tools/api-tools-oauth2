@@ -9,7 +9,10 @@ use function time;
 
 class RefreshTokenTest extends AbstractBaseTest
 {
-    /** @dataProvider provideStorage */
+    /**
+     * @dataProvider provideStorage
+     * @return void
+     */
     public function testSetRefreshToken(RefreshTokenInterface $storage)
     {
         if ($storage instanceof NullStorage) {

@@ -8,7 +8,10 @@ use function time;
 
 class AccessTokenTest extends AbstractBaseTest
 {
-    /** @dataProvider provideStorage */
+    /**
+     * @dataProvider provideStorage
+     * @return void
+     */
     public function testSetAccessToken(AccessTokenInterface $storage)
     {
         if ($storage instanceof NullStorage) {

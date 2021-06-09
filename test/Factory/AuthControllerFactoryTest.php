@@ -22,9 +22,9 @@ class AuthControllerFactoryTest extends AbstractHttpControllerTestCase
     /** @var ServiceManager */
     protected $services;
 
-    public function testControllerCreated()
+    public function testControllerCreated(): void
     {
-        $oauthServerFactory = function () {
+        $oauthServerFactory = function (): void {
         };
         $this->services->setService('Laminas\ApiTools\OAuth2\Service\OAuth2Server', $oauthServerFactory);
 
@@ -54,7 +54,7 @@ class AuthControllerFactoryTest extends AbstractHttpControllerTestCase
         $sm = new ServiceManager();
         $sm->setService('ServiceManager', $services);
 
-        $this->controllers = $controllers = new ControllerManager($this->services);
+        $this->controllers = new ControllerManager($this->services);
 
         $this->setApplicationConfig([
             'modules'                  => [

@@ -14,7 +14,7 @@ use function sprintf;
 class ScopeTest extends AbstractBaseTest
 {
     /** @dataProvider provideStorage */
-    public function testScopeExists(object $storage)
+    public function testScopeExists(object $storage): void
     {
         if ($storage instanceof NullStorage) {
             $this->markTestSkipped('Skipped Storage: ' . $storage->getMessage());
@@ -41,7 +41,7 @@ class ScopeTest extends AbstractBaseTest
     }
 
     /** @dataProvider provideStorage */
-    public function testGetDefaultScope(object $storage)
+    public function testGetDefaultScope(object $storage): void
     {
         if ($storage instanceof NullStorage) {
             $this->markTestSkipped('Skipped Storage: ' . $storage->getMessage());
