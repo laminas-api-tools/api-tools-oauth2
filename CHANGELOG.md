@@ -2,27 +2,35 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.7.0 - TBD
+## 1.7.0 - 2021-06-09
+
+
+-----
+
+### Release Notes for [1.7.0](https://github.com/laminas-api-tools/api-tools-oauth2/milestone/3)
 
 ### Added
 
-- Nothing.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
+- This release adds support for PHP 8.0.
 
 ### Removed
 
-- Nothing.
+- This release removes support for PHP versions prior to 7.3.
 
-### Fixed
+### 1.7.0
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **3**
+- Total contributors: **3**
+
+#### Enhancement
+
+ - [32: Switch to GHA CI Workflow](https://github.com/laminas-api-tools/api-tools-oauth2/pull/32) thanks to @weierophinney
+ - [29: PHP 8.0 support](https://github.com/laminas-api-tools/api-tools-oauth2/pull/29) thanks to @eimkua1
+
+#### Enhancement,hacktoberfest-accepted
+
+ - [26: Qa/psalm](https://github.com/laminas-api-tools/api-tools-oauth2/pull/26) thanks to @superrosko
 
 ## 1.6.0 - 2020-09-10
 
