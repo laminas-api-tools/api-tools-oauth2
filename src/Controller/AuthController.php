@@ -147,6 +147,8 @@ class AuthController extends AbstractActionController
 
     /**
      * Test resource (/oauth/resource)
+     *
+     * @return ResponseInterface
      */
     public function resourceAction(): Response
     {

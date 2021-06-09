@@ -4,6 +4,7 @@ namespace LaminasTest\ApiTools\OAuth2\Controller\TestAsset;
 
 use Laminas\ApiTools\ApiProblem\Exception\ProblemExceptionInterface;
 use RuntimeException;
+use Traversable;
 
 class CustomProblemDetailsException extends RuntimeException implements ProblemExceptionInterface
 {
@@ -13,7 +14,7 @@ class CustomProblemDetailsException extends RuntimeException implements ProblemE
     /** @var string */
     public $title;
 
-    /** @var array */
+    /** @var null|array|Traversable */
     public $details;
 
     /** @return string */

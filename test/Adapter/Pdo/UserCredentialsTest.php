@@ -7,7 +7,7 @@ use OAuth2\Storage\UserCredentialsInterface;
 
 use function is_array;
 
-class UserCredentialsTest extends BaseTest
+class UserCredentialsTest extends AbstractBaseTest
 {
     /** @dataProvider provideStorage */
     public function testCheckUserCredentials(UserCredentialsInterface $storage)

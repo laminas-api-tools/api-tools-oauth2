@@ -4,7 +4,7 @@ namespace LaminasTest\ApiTools\OAuth2\Adapter\Pdo;
 
 use OAuth2\Storage\ClientCredentialsInterface;
 
-class ClientCredentialsTest extends BaseTest
+class ClientCredentialsTest extends AbstractBaseTest
 {
     /** @dataProvider provideStorage */
     public function testCheckClientCredentials(ClientCredentialsInterface $storage)
