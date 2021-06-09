@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\ApiTools\OAuth2\Controller;
 
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
@@ -13,11 +7,18 @@ use MongoClient;
 use MongoConnectionException;
 use MongoDB;
 
+use function array_key_exists;
+use function class_exists;
+use function extension_loaded;
+use function http_build_query;
+use function json_decode;
+use function preg_match;
+use function sprintf;
+use function version_compare;
+
 class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
 {
-    /**
-     * @var MongoDB
-     */
+    /** @var MongoDB */
     protected $db;
 
     /**
@@ -38,7 +39,8 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
 
     protected function setUp()
     {
-        if (! (extension_loaded('mongodb') || extension_loaded('mongo'))
+        if (
+            ! (extension_loaded('mongodb') || extension_loaded('mongo'))
             || ! class_exists(MongoClient::class)
             || version_compare(MongoClient::VERSION, '1.4.1', '<')
         ) {
@@ -114,7 +116,7 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
             'response_type' => 'code',
             'client_id'     => 'testclient',
             'state'         => 'xyz',
-            'redirect_uri'  => '/oauth/receivecode'
+            'redirect_uri'  => '/oauth/receivecode',
         ];
 
         $this->dispatch('/oauth/authorize?' . http_build_query($queryData), 'POST', ['authorized' => 'yes']);
@@ -146,10 +148,10 @@ class AuthControllerWithMongoAdapterTest extends AbstractHttpControllerTestCase
 
     public function testImplicitClientAuth()
     {
-        $config = $this->getApplication()->getConfig();
+        $config      = $this->getApplication()->getConfig();
         $oauthConfig = $config['api-tools-oauth2'];
 
-        $allowImplicit = isset($oauthConfig['allow_implicit']) ? $oauthConfig['allow_implicit'] : false;
+        $allowImplicit = $oauthConfig['allow_implicit'] ?? false;
 
         if (! $allowImplicit) {
             $this->markTestSkipped('The allow implicit client mode is disabled');

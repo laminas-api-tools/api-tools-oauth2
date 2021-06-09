@@ -1,35 +1,30 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\ApiTools\OAuth2\Provider\UserId;
 
 use Laminas\Authentication\AuthenticationServiceInterface;
 use Laminas\Stdlib\RequestInterface;
 
+use function is_array;
+use function is_object;
+use function method_exists;
+use function property_exists;
+use function ucfirst;
+
 class AuthenticationService implements UserIdProviderInterface
 {
-    /**
-     * @var AuthenticationServiceInterface
-     */
+    /** @var AuthenticationServiceInterface */
     private $authenticationService;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $userId = 'id';
 
     /**
      *  Set authentication service
      *
-     * @param AuthenticationServiceInterface $service
      * @param array $config
      */
-    public function __construct(AuthenticationServiceInterface $service = null, $config = [])
+    public function __construct(?AuthenticationServiceInterface $service = null, $config = [])
     {
         $this->authenticationService = $service;
 
@@ -41,7 +36,6 @@ class AuthenticationService implements UserIdProviderInterface
     /**
      * Use implementation of Laminas\Authentication\AuthenticationServiceInterface to fetch the identity.
      *
-     * @param  RequestInterface $request
      * @return mixed
      */
     public function __invoke(RequestInterface $request)

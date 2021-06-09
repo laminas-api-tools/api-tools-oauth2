@@ -1,0 +1,7 @@
+{
+    "extensions": [
+        "mongodb",
+        "pdo",
+        "pdo-sqlite"
+    ]
+}

@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\ApiTools\OAuth2\Factory;
 
 use Interop\Container\ContainerInterface;
@@ -19,12 +13,11 @@ use OAuth2\Server as OAuth2Server;
 class AuthControllerFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
      * @param string $requestedName
      * @param null|array $options
      * @return AuthController
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $authController = new AuthController(
             $this->getOAuth2ServerFactory($container),
@@ -39,7 +32,6 @@ class AuthControllerFactory implements FactoryInterface
     }
 
     /**
-     * @param ServiceLocatorInterface $controllers
      * @param null|string $name
      * @param null|string $requestedName
      * @return AuthController
@@ -63,7 +55,6 @@ class AuthControllerFactory implements FactoryInterface
      * For BC purposes, if the OAuth2Server service returns an actual
      * instance, this will wrap it in a closure before returning it.
      *
-     * @param ContainerInterface $container
      * @return callable
      */
     private function getOAuth2ServerFactory(ContainerInterface $container)
@@ -81,7 +72,6 @@ class AuthControllerFactory implements FactoryInterface
     /**
      * Determine whether or not to render API Problem error responses.
      *
-     * @param ContainerInterface $container
      * @return bool
      */
     private function marshalApiProblemErrorResponse(ContainerInterface $container)
@@ -92,7 +82,7 @@ class AuthControllerFactory implements FactoryInterface
 
         $config = $container->get('config');
 
-        return (isset($config['api-tools-oauth2']['api_problem_error_response'])
-            && $config['api-tools-oauth2']['api_problem_error_response'] === true);
+        return isset($config['api-tools-oauth2']['api_problem_error_response'])
+            && $config['api-tools-oauth2']['api_problem_error_response'] === true;
     }
 }

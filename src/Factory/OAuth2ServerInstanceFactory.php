@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
- */
 namespace Laminas\ApiTools\OAuth2\Factory;
 
 use Interop\Container\ContainerInterface;
@@ -17,21 +12,19 @@ use OAuth2\GrantType\RefreshToken;
 use OAuth2\GrantType\UserCredentials;
 use OAuth2\Server as OAuth2Server;
 
+use function array_merge;
+use function is_array;
+use function is_string;
+
 class OAuth2ServerInstanceFactory
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $config;
 
-    /**
-     * @var ServiceLocatorInterface
-     */
+    /** @var ServiceLocatorInterface */
     private $services;
 
-    /**
-     * @var OAuth2Server
-     */
+    /** @var OAuth2Server */
     private $server;
 
     /**
@@ -81,29 +74,19 @@ class OAuth2ServerInstanceFactory
             $storage[$storageKey] = $this->services->get($storagesService);
         }
 
-        $enforceState   = isset($config['enforce_state'])
-            ? $config['enforce_state']
-            : true;
-        $allowImplicit  = isset($config['allow_implicit'])
-            ? $config['allow_implicit']
-            : false;
-        $accessLifetime = isset($config['access_lifetime'])
-            ? $config['access_lifetime']
-            : 3600;
-        $audience = isset($config['audience'])
-            ? $config['audience']
-            : '';
-        $options        = isset($config['options'])
-            ? $config['options']
-            : [];
+        $enforceState   = $config['enforce_state'] ?? true;
+        $allowImplicit  = $config['allow_implicit'] ?? false;
+        $accessLifetime = $config['access_lifetime'] ?? 3600;
+        $audience       = $config['audience'] ?? '';
+        $options        = $config['options'] ?? [];
         $options        = array_merge([
             'enforce_state'   => $enforceState,
             'allow_implicit'  => $allowImplicit,
-            'access_lifetime' => $accessLifetime
+            'access_lifetime' => $accessLifetime,
         ], $options);
 
         // Pass a storage object or array of storage objects to the OAuth2 server class
-        $server = new OAuth2Server($storage, $options);
+        $server              = new OAuth2Server($storage, $options);
         $availableGrantTypes = $config['grant_types'];
 
         if (isset($availableGrantTypes['client_credentials']) && $availableGrantTypes['client_credentials'] === true) {

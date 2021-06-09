@@ -1,15 +1,9 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\ApiTools\OAuth2\Controller;
 
 use Laminas\ApiTools\ApiProblem\ApiProblemResponse;
-use Laminas\ApiTools\ApiProblem\Exception\ProblemExceptionInterface;
+use Laminas\ApiTools\OAuth2\Adapter\PdoAdapter;
 use Laminas\ApiTools\OAuth2\Controller\AuthController;
 use Laminas\ApiTools\OAuth2\Provider\UserId\UserIdProviderInterface;
 use Laminas\Db\Adapter\Adapter;
@@ -23,10 +17,15 @@ use OAuth2\Request as OAuth2Request;
 use OAuth2\Server as OAuth2Server;
 use Prophecy\Argument;
 use ReflectionProperty;
-use RuntimeException;
+
+use function array_key_exists;
+use function file_get_contents;
+use function json_decode;
+use function preg_match;
 
 class AuthControllerTest extends AbstractHttpControllerTestCase
 {
+    /** @var Adapter */
     protected $db;
 
     protected function setUp()
@@ -38,8 +37,8 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
 
     public function setupDb()
     {
-        $pdo = $this->getApplication()->getServiceManager()->get('Laminas\ApiTools\OAuth2\Adapter\PdoAdapter');
-        $r = new ReflectionProperty($pdo, 'db');
+        $pdo = $this->getApplication()->getServiceManager()->get(PdoAdapter::class);
+        $r   = new ReflectionProperty($pdo, 'db');
         $r->setAccessible(true);
         $db = $r->getValue($pdo);
 
@@ -47,14 +46,14 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $db->exec($sql);
     }
 
-    public function getDb()
+    public function getDb(): Adapter
     {
         if ($this->db) {
             return $this->db;
         }
 
-        $adapter = $this->getApplication()->getServiceManager()->get('Laminas\ApiTools\OAuth2\Adapter\PdoAdapter');
-        $r = new ReflectionProperty($adapter, 'db');
+        $adapter = $this->getApplication()->getServiceManager()->get(PdoAdapter::class);
+        $r       = new ReflectionProperty($adapter, 'db');
         $r->setAccessible(true);
         $this->db = new Adapter(new PdoDriver($r->getValue($adapter)));
         return $this->db;
@@ -73,7 +72,8 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $plugins->setService('bodyParams', new TestAsset\BodyParams());
     }
 
-    public function setParamsPlugin(AuthController $controller, $key, $value)
+    /** @param mixed $value */
+    public function setParamsPlugin(AuthController $controller, string $key, $value): void
     {
         $params = $this->prophesize(Params::class);
         $params->__invoke($key)->willReturn($value);
@@ -265,13 +265,13 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
 
         // test data in database is correct
         $adapter = $this->getDb();
-        $sql = new Sql($adapter);
-        $select = $sql->select();
+        $sql     = new Sql($adapter);
+        $select  = $sql->select();
         $select->from('oauth_authorization_codes');
         $select->where(['authorization_code' => $code]);
 
         $selectString = $sql->getSqlStringForSqlObject($select);
-        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE)->toArray();
+        $results      = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE)->toArray();
         $this->assertEquals(null, $results[0]['user_id']);
 
         // test get token from authorized code
@@ -294,10 +294,10 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
 
     public function testImplicitClientAuth()
     {
-        $config = $this->getApplication()->getConfig();
+        $config      = $this->getApplication()->getConfig();
         $oauthConfig = $config['api-tools-oauth2'];
 
-        $allowImplicit = isset($oauthConfig['allow_implicit']) ? $oauthConfig['allow_implicit'] : false;
+        $allowImplicit = $oauthConfig['allow_implicit'] ?? false;
 
         if (! $allowImplicit) {
             $this->markTestSkipped('The allow implicit client mode is disabled');
@@ -392,9 +392,9 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
 
     public function testTokenActionUsesCodeFromTokenExceptionIfPresentToCreateApiProblem()
     {
-        $exception = new TestAsset\CustomProblemDetailsException('problem', 409);
-        $exception->type = 'custom';
-        $exception->title = 'title';
+        $exception          = new TestAsset\CustomProblemDetailsException('problem', 409);
+        $exception->type    = 'custom';
+        $exception->title   = 'title';
         $exception->details = ['some' => 'details'];
 
         $oauth2Server = $this->prophesize(OAuth2Server::class);
@@ -426,9 +426,9 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
 
     public function testTokenActionUses401CodeIfTokenExceptionCodeIsInvalidWhenCreatingApiProblem()
     {
-        $exception = new TestAsset\CustomProblemDetailsException('problem', 601);
-        $exception->type = 'custom';
-        $exception->title = 'title';
+        $exception          = new TestAsset\CustomProblemDetailsException('problem', 601);
+        $exception->type    = 'custom';
+        $exception->title   = 'title';
         $exception->details = ['some' => 'details'];
 
         $oauth2Server = $this->prophesize(OAuth2Server::class);

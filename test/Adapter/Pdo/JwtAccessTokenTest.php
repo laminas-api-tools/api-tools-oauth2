@@ -1,33 +1,30 @@
 <?php
 
-/**
- * FIXME:  This adapter logic is not supported in the PDO adapter
- */
-
 namespace LaminasTest\ApiTools\OAuth2\Adapter\Pdo;
 
 use DateTime;
 
+/**
+ * @todo This adapter logic is not supported in the PDO adapter.
+ */
 class JwtAccessTokenTest extends BaseTest
 {
     /** @dataProvider provideStorage */
-    public function testJwtWithJti($storage)
+    public function testJwtWithJti(object $storage)
     {
+        $this->markTestIncomplete('JWT access token is not yet supported in PDO adapter');
+
         $expires = new DateTime('today +1 day');
         $expires = $expires->format('U');
 
-        $client_id   = 'oauth_test_client';
-        $subject = 'jtisubject';
+        $clientId = 'oauth_test_client';
+        $subject  = 'jtisubject';
         $audience = 'http://unittest';
-        $jti = 'jti';
+        $jti      = 'jti';
 
-        $this->assertFalse(false);
-        return;
+        $this->assertTrue($storage->setJti($clientId, $subject, $audience, $expires, $jti));
 
-        $this->assertTrue($storage->setJti($client_id, $subject, $audience, $expires, $jti));
-
-        $storage->getJti($client_id, $subject, $audience, $expires, $jti);
-
-        $this->assertFalse($storage->getJti($client_id, $subject, $audience, $expires, 'invlalid'));
+        $storage->getJti($clientId, $subject, $audience, $expires, $jti);
+        $this->assertFalse($storage->getJti($clientId, $subject, $audience, $expires, 'invlalid'));
     }
 }

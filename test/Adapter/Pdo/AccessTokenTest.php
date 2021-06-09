@@ -4,6 +4,8 @@ namespace LaminasTest\ApiTools\OAuth2\Adapter\Pdo;
 
 use OAuth2\Storage\AccessTokenInterface;
 
+use function time;
+
 class AccessTokenTest extends BaseTest
 {
     /** @dataProvider provideStorage */
@@ -32,7 +34,7 @@ class AccessTokenTest extends BaseTest
         $this->assertArrayHasKey('expires', $token);
         $this->assertEquals($token['access_token'], 'newtoken');
         $this->assertEquals($token['client_id'], 'oauth_test_client');
-        $this->assertEquals($token['user_id'], '1'); # reference from client
+        $this->assertEquals($token['user_id'], '1'); // reference from client
         $this->assertEquals($token['expires'], $expires);
 
         // change existing token
@@ -48,7 +50,7 @@ class AccessTokenTest extends BaseTest
         $this->assertArrayHasKey('expires', $token);
         $this->assertEquals($token['access_token'], 'newtoken');
         $this->assertEquals($token['client_id'], 'oauth_test_client2');
-        $this->assertEquals($token['user_id'], '1'); # reference from client
+        $this->assertEquals($token['user_id'], '1'); // reference from client
         $this->assertEquals($token['expires'], $expires);
     }
 }

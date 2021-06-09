@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\ApiTools\OAuth2\Controller;
 
 use InvalidArgumentException;
@@ -16,46 +10,47 @@ use Laminas\ApiTools\ContentNegotiation\ViewModel;
 use Laminas\ApiTools\OAuth2\Provider\UserId\UserIdProviderInterface;
 use Laminas\Http\PhpEnvironment\Request as PhpEnvironmentRequest;
 use Laminas\Http\Request as HttpRequest;
+use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Stdlib\ResponseInterface;
 use OAuth2\Request as OAuth2Request;
 use OAuth2\Response as OAuth2Response;
 use OAuth2\Server as OAuth2Server;
 use RuntimeException;
 
+use function call_user_func;
+use function get_class;
+use function gettype;
+use function is_callable;
+use function is_object;
+use function json_encode;
+use function sprintf;
+
 class AuthController extends AbstractActionController
 {
-    /**
-     * @var boolean
-     */
+    /** @var boolean */
     protected $apiProblemErrorResponse = true;
 
-    /**
-     * @var OAuth2Server
-     */
+    /** @var OAuth2Server */
     protected $server;
 
-    /**
-     * @var callable Factory for generating an OAuth2Server instance.
-     */
+    /** @var callable Factory for generating an OAuth2Server instance. */
     protected $serverFactory;
 
-    /**
-     * @var UserIdProviderInterface
-     */
+    /** @var UserIdProviderInterface */
     protected $userIdProvider;
 
     /**
      * Constructor
      *
      * @param callable $serverFactory
-     * @param UserIdProviderInterface $userIdProvider
      */
     public function __construct($serverFactory, UserIdProviderInterface $userIdProvider)
     {
         if (! is_callable($serverFactory)) {
             throw new InvalidArgumentException(sprintf(
                 'OAuth2 Server factory must be a PHP callable; received %s',
-                (is_object($serverFactory) ? get_class($serverFactory) : gettype($serverFactory))
+                is_object($serverFactory) ? get_class($serverFactory) : gettype($serverFactory)
             ));
         }
         $this->serverFactory  = $serverFactory;
@@ -89,12 +84,12 @@ class AuthController extends AbstractActionController
     /**
      * Token Action (/oauth)
      */
-    public function tokenAction()
+    public function tokenAction(): ?Response
     {
         $request = $this->getRequest();
         if (! $request instanceof HttpRequest) {
             // not an HTTP request; nothing left to do
-            return;
+            return null;
         }
 
         if ($request->isOptions()) {
@@ -104,7 +99,7 @@ class AuthController extends AbstractActionController
         }
 
         $oauth2request = $this->getOAuth2Request();
-        $oauth2server = $this->getOAuth2Server($this->params('oauth'));
+        $oauth2server  = $this->getOAuth2Server($this->params('oauth'));
         try {
             $response = $oauth2server->handleTokenRequest($oauth2request);
         } catch (ProblemExceptionInterface $ex) {
@@ -126,12 +121,12 @@ class AuthController extends AbstractActionController
     /**
      * Token Revoke (/oauth/revoke)
      */
-    public function revokeAction()
+    public function revokeAction(): ?Response
     {
         $request = $this->getRequest();
         if (! $request instanceof HttpRequest) {
             // not an HTTP request; nothing left to do
-            return;
+            return null;
         }
 
         if ($request->isOptions()) {
@@ -141,7 +136,7 @@ class AuthController extends AbstractActionController
         }
 
         $oauth2request = $this->getOAuth2Request();
-        $response = $this->getOAuth2Server($this->params('oauth'))->handleRevokeRequest($oauth2request);
+        $response      = $this->getOAuth2Server($this->params('oauth'))->handleRevokeRequest($oauth2request);
 
         if ($response->isClientError()) {
             return $this->getErrorResponse($response);
@@ -153,13 +148,13 @@ class AuthController extends AbstractActionController
     /**
      * Test resource (/oauth/resource)
      */
-    public function resourceAction()
+    public function resourceAction(): Response
     {
         $server = $this->getOAuth2Server($this->params('oauth'));
 
         // Handle a request for an OAuth2.0 Access Token and send the response to the client
         if (! $server->verifyResourceRequest($this->getOAuth2Request())) {
-            $response   = $server->getResponse();
+            $response = $server->getResponse();
             return $this->getApiProblemResponse($response);
         }
 
@@ -174,6 +169,8 @@ class AuthController extends AbstractActionController
 
     /**
      * Authorize action (/oauth/authorize)
+     *
+     * @return Response|ViewModel
      */
     public function authorizeAction()
     {
@@ -191,12 +188,12 @@ class AuthController extends AbstractActionController
         $authorized = $request->request('authorized', false);
         if (empty($authorized)) {
             $clientId = $request->query('client_id', false);
-            $view = new ViewModel(['clientId' => $clientId]);
+            $view     = new ViewModel(['clientId' => $clientId]);
             $view->setTemplate('oauth/authorize');
             return $view;
         }
 
-        $isAuthorized   = ($authorized === 'yes');
+        $isAuthorized   = $authorized === 'yes';
         $userIdProvider = $this->userIdProvider;
 
         $this->server->handleAuthorizeRequest(
@@ -217,19 +214,18 @@ class AuthController extends AbstractActionController
     /**
      * Receive code action prints the code/token access
      */
-    public function receiveCodeAction()
+    public function receiveCodeAction(): ViewModel
     {
         $code = $this->params()->fromQuery('code', false);
         $view = new ViewModel([
-            'code' => $code
+            'code' => $code,
         ]);
         $view->setTemplate('oauth/receive-code');
         return $view;
     }
 
     /**
-     * @param OAuth2Response $response
-     * @return ApiProblemResponse|\Laminas\Stdlib\ResponseInterface
+     * @return ApiProblemResponse|ResponseInterface
      */
     protected function getErrorResponse(OAuth2Response $response)
     {
@@ -243,15 +239,14 @@ class AuthController extends AbstractActionController
     /**
      * Map OAuth2Response to ApiProblemResponse
      *
-     * @param OAuth2Response $response
      * @return ApiProblemResponse
      */
     protected function getApiProblemResponse(OAuth2Response $response)
     {
         $parameters       = $response->getParameters();
-        $errorUri         = isset($parameters['error_uri']) ? $parameters['error_uri'] : null;
-        $error            = isset($parameters['error']) ? $parameters['error'] : null;
-        $errorDescription = isset($parameters['error_description']) ? $parameters['error_description'] : null;
+        $errorUri         = $parameters['error_uri'] ?? null;
+        $error            = $parameters['error'] ?? null;
+        $errorDescription = $parameters['error_description'] ?? null;
 
         return new ApiProblemResponse(
             new ApiProblem(
@@ -282,7 +277,7 @@ class AuthController extends AbstractActionController
     protected function getOAuth2Request()
     {
         $laminasRequest = $this->getRequest();
-        $headers    = $laminasRequest->getHeaders();
+        $headers        = $laminasRequest->getHeaders();
 
         // Marshal content type, so we can seed it into the $_SERVER array
         $contentType = '';
@@ -325,11 +320,8 @@ class AuthController extends AbstractActionController
 
     /**
      * Convert the OAuth2 response to a \Laminas\Http\Response
-     *
-     * @param $response OAuth2Response
-     * @return \Laminas\Http\Response
      */
-    private function setHttpResponse(OAuth2Response $response)
+    private function setHttpResponse(OAuth2Response $response): Response
     {
         $httpResponse = $this->getResponse();
         $httpResponse->setStatusCode($response->getStatusCode());
@@ -351,7 +343,7 @@ class AuthController extends AbstractActionController
      *
      * @param string $type
      * @return OAuth2Server
-     * @throws RuntimeException if the factory does not return an OAuth2Server instance.
+     * @throws RuntimeException If the factory does not return an OAuth2Server instance.
      */
     private function getOAuth2Server($type)
     {
@@ -363,7 +355,7 @@ class AuthController extends AbstractActionController
         if (! $server instanceof OAuth2Server) {
             throw new RuntimeException(sprintf(
                 'OAuth2\Server factory did not return a valid instance; received %s',
-                (is_object($server) ? get_class($server) : gettype($server))
+                is_object($server) ? get_class($server) : gettype($server)
             ));
         }
         $this->server = $server;

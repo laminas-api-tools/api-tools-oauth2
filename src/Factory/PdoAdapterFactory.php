@@ -1,21 +1,17 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\ApiTools\OAuth2\Factory;
 
 use Interop\Container\ContainerInterface;
 use Laminas\ApiTools\OAuth2\Adapter\PdoAdapter;
 use Laminas\ApiTools\OAuth2\Controller\Exception;
+use Laminas\ServiceManager\ServiceLocatorInterface;
+
+use function is_array;
 
 class PdoAdapterFactory
 {
     /**
-     * @param  ContainerInterface $container
      * @return PdoAdapter
      */
     public function __invoke(ContainerInterface $container)
@@ -30,9 +26,9 @@ class PdoAdapterFactory
 
         $oauthConfig = $config['api-tools-oauth2'];
 
-        $username = isset($oauthConfig['db']['username']) ? $oauthConfig['db']['username'] : null;
-        $password = isset($oauthConfig['db']['password']) ? $oauthConfig['db']['password'] : null;
-        $options  = isset($oauthConfig['db']['options']) ? $oauthConfig['db']['options'] : [];
+        $username = $oauthConfig['db']['username'] ?? null;
+        $password = $oauthConfig['db']['password'] ?? null;
+        $options  = $oauthConfig['db']['options'] ?? [];
 
         $oauth2ServerConfig = [];
         if (isset($oauthConfig['storage_settings']) && is_array($oauthConfig['storage_settings'])) {
@@ -50,7 +46,7 @@ class PdoAdapterFactory
     /**
      * Provided for backwards compatibility; proxies to __invoke().
      *
-     * @param \Laminas\ServiceManager\ServiceLocatorInterface $container
+     * @param ServiceLocatorInterface $container
      * @return PdoAdapter
      */
     public function createService($container)

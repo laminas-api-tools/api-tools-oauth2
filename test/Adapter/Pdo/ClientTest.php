@@ -4,6 +4,8 @@ namespace LaminasTest\ApiTools\OAuth2\Adapter\Pdo;
 
 use OAuth2\Storage\ClientInterface;
 
+use function rand;
+
 class ClientTest extends BaseTest
 {
     /** @dataProvider provideStorage */
@@ -75,7 +77,7 @@ class ClientTest extends BaseTest
             return;
         }
 
-        $clientId = 'some-client-'.rand();
+        $clientId = 'some-client-' . rand();
 
         // create a new client
         $success = $storage->setClientDetails(

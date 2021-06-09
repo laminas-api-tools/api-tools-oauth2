@@ -5,6 +5,8 @@ namespace LaminasTest\ApiTools\OAuth2\Adapter\Pdo;
 use OAuth2\Storage\AccessTokenInterface;
 use OAuth2\Storage\AuthorizationCodeInterface;
 
+use function time;
+
 class AuthorizationCodeTest extends BaseTest
 {
     /** @dataProvider provideStorage */
@@ -54,7 +56,7 @@ class AuthorizationCodeTest extends BaseTest
         $this->assertArrayHasKey('expires', $code);
         $this->assertEquals($code['authorization_code'], 'newcode');
         $this->assertEquals($code['client_id'], 'oauth_test_client');
-        $this->assertEquals($code['user_id'], '1'); # reference from oauth_test_client
+        $this->assertEquals($code['user_id'], '1'); // reference from oauth_test_client
         $this->assertEquals($code['redirect_uri'], 'http://example.com');
         $this->assertEquals($code['expires'], $expires);
 
@@ -78,7 +80,7 @@ class AuthorizationCodeTest extends BaseTest
         $this->assertArrayHasKey('expires', $code);
         $this->assertEquals($code['authorization_code'], 'newcode');
         $this->assertEquals($code['client_id'], 'oauth_test_client2');
-        $this->assertEquals($code['user_id'], '1'); # reference from oauth_test_client
+        $this->assertEquals($code['user_id'], '1'); // reference from oauth_test_client
         $this->assertEquals($code['redirect_uri'], 'http://example.org');
         $this->assertEquals($code['expires'], $expires);
     }

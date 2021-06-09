@@ -1,33 +1,29 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
- */
+use Laminas\ApiTools\OAuth2\Adapter\PdoAdapter;
 
-return array(
-    'view_manager' => array(
+return [
+    'view_manager'     => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
         'doctype'                  => 'HTML5',
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
-        'template_map' => array(
-            'layout/layout'           => __DIR__ . '/../../view/layout/layout.phtml',
-            'error/404'               => __DIR__ . '/../../view/error/404.phtml',
-            'error/index'             => __DIR__ . '/../../view/error/index.phtml',
-        ),
-        'template_path_stack' => array(
+        'template_map'             => [
+            'layout/layout' => __DIR__ . '/../../view/layout/layout.phtml',
+            'error/404'     => __DIR__ . '/../../view/error/404.phtml',
+            'error/index'   => __DIR__ . '/../../view/error/index.phtml',
+        ],
+        'template_path_stack'      => [
             __DIR__ . '/../view',
-        ),
-    ),
-    'api-tools-oauth2' => array(
-        'storage' => 'Laminas\ApiTools\OAuth2\Adapter\PdoAdapter',
-        'db' => array(
+        ],
+    ],
+    'api-tools-oauth2' => [
+        'storage'        => PdoAdapter::class,
+        'db'             => [
             'dsn' => 'sqlite::memory:',
-        ),
+        ],
         'allow_implicit' => true,
         'enforce_state'  => true,
-    ),
-);
+    ],
+];

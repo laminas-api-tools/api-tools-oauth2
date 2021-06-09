@@ -1,12 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
- */
-
 use Laminas\Crypt\Password\Bcrypt;
 
 $autoload = realpath(__DIR__ . '/../vendor/autoload.php');
@@ -23,7 +17,7 @@ if (! $autoload) {
 
 include $autoload;
 
-$help = <<< EOH
+$help   = <<<EOH
 Usage:
   php bcrypt.php <password> [cost]
 
