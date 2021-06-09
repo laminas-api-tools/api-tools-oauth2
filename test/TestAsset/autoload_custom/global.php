@@ -1,34 +1,30 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
- */
+use LaminasTest\ApiTools\OAuth2\Controller\CustomAdapter;
 
 return [
-    'view_manager' => [
+    'view_manager'     => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
         'doctype'                  => 'HTML5',
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
-        'template_map' => [
-            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
-            'error/404'               => __DIR__ . '/../view/error/404.phtml',
-            'error/index'             => __DIR__ . '/../view/error/index.phtml',
+        'template_map'             => [
+            'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
+            'error/404'     => __DIR__ . '/../view/error/404.phtml',
+            'error/index'   => __DIR__ . '/../view/error/index.phtml',
         ],
-        'template_path_stack' => [
+        'template_path_stack'      => [
             __DIR__ . '/../view',
         ],
     ],
-    'service_manager' => [
+    'service_manager'  => [
         'invokables' => [
-            'LaminasTest\ApiTools\OAuth2\Controller\CustomAdapter' => 'LaminasTest\ApiTools\OAuth2\Controller\CustomAdapter',
+            CustomAdapter::class => CustomAdapter::class,
         ],
     ],
     'api-tools-oauth2' => [
-        'storage' => 'LaminasTest\ApiTools\OAuth2\Controller\CustomAdapter',
+        'storage'        => CustomAdapter::class,
         'allow_implicit' => true,
         'enforce_state'  => true,
     ],

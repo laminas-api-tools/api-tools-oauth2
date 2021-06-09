@@ -1,18 +1,18 @@
 <?php
 
-/**
- * FIXME:  This adapter logic is not supported in the PDO adapter
- */
-
 namespace LaminasTest\ApiTools\OAuth2\Adapter\Pdo;
 
+use function file_get_contents;
+
+/**
+ * @todo This adapter logic is not supported in the PDO adapter
+ */
 class PublicKeyTest extends BaseTest
 {
     /** @dataProvider provideStorage */
-    public function testSetAccessToken($storage)
+    public function testSetAccessToken(object $storage)
     {
-        $this->assertFalse(false);
-        return;
+        $this->markTestIncomplete('Public key functionality is not yet supported in all providers');
 
         $globalPublicKey  = file_get_contents(__DIR__ . '/../../TestAsset/data/pubkey.pem');
         $globalPrivateKey = file_get_contents(__DIR__ . '/../../TestAsset/data/key.pem');

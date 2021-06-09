@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\ApiTools\OAuth2\Controller;
 
 use Laminas\ApiTools\ApiProblem\Exception\DomainException;
@@ -13,6 +7,11 @@ use OAuth2\Storage\Memory;
 
 class CustomAdapter extends Memory
 {
+    /**
+     * @param string $username
+     * @param string $password
+     * @return bool
+     */
     public function checkUserCredentials($username, $password)
     {
         // mocking logic to throw an exception if the user is banned
@@ -26,7 +25,8 @@ class CustomAdapter extends Memory
         return parent::checkUserCredentials($username, $password);
     }
 
-    public function isPublicClient($client_id)
+    /** @param int|string $clientId */
+    public function isPublicClient($clientId): bool
     {
         return true;
     }

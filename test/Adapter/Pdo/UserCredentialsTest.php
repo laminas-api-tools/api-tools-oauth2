@@ -2,7 +2,10 @@
 
 namespace LaminasTest\ApiTools\OAuth2\Adapter\Pdo;
 
+use OAuth2\Storage\NullStorage;
 use OAuth2\Storage\UserCredentialsInterface;
+
+use function is_array;
 
 class UserCredentialsTest extends BaseTest
 {
@@ -32,14 +35,13 @@ class UserCredentialsTest extends BaseTest
         $this->assertEquals($user['user_id'], 'oauth_test_user');
     }
 
-    /** @dataProvider provideStorage */
+    /**
+     * @dataProvider provideStorage
+     * @todo Support OpenID, and provide validation via testing.
+     */
     public function testUserClaims(UserCredentialsInterface $storage)
     {
-        // FIXME:  openid not supported
-        $this->assertFalse(false);
-        return;
-
-
+        $this->markTestIncomplete('OpenID support is not yet implemented');
 
         $claims = $storage->getUserClaims('oauth_test_user', 'profile');
         $this->assertTrue(is_array($claims));

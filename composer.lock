@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a7109b69cd51fdbd4d3dd7e38951397",
+    "content-hash": "abcfc6cd08d2cbf615506149b92f4602",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -717,6 +717,91 @@
             "time": "2021-02-18T21:58:11+00:00"
         },
         {
+            "name": "laminas/laminas-i18n",
+            "version": "2.11.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-i18n.git",
+                "reference": "5e85a8facc5534e856cc7f5b4326533eede84b8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-i18n/zipball/5e85a8facc5534e856cc7f5b4326533eede84b8a",
+                "reference": "5e85a8facc5534e856cc7f5b4326533eede84b8a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*",
+                "laminas/laminas-stdlib": "^2.7 || ^3.0",
+                "laminas/laminas-zendframework-bridge": "^1.0",
+                "php": "^7.3 || ~8.0.0"
+            },
+            "conflict": {
+                "phpspec/prophecy": "<1.9.0"
+            },
+            "replace": {
+                "zendframework/zend-i18n": "^2.10.1"
+            },
+            "require-dev": {
+                "laminas/laminas-cache": "^2.6.1",
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-config": "^2.6",
+                "laminas/laminas-eventmanager": "^2.6.2 || ^3.0",
+                "laminas/laminas-filter": "^2.6.1",
+                "laminas/laminas-servicemanager": "^3.2.1",
+                "laminas/laminas-validator": "^2.6",
+                "laminas/laminas-view": "^2.6.3",
+                "phpunit/phpunit": "^9.3"
+            },
+            "suggest": {
+                "laminas/laminas-cache": "Laminas\\Cache component",
+                "laminas/laminas-config": "Laminas\\Config component",
+                "laminas/laminas-eventmanager": "You should install this package to use the events in the translator",
+                "laminas/laminas-filter": "You should install this package to use the provided filters",
+                "laminas/laminas-i18n-resources": "Translation resources",
+                "laminas/laminas-servicemanager": "Laminas\\ServiceManager component",
+                "laminas/laminas-validator": "You should install this package to use the provided validators",
+                "laminas/laminas-view": "You should install this package to use the provided view helpers"
+            },
+            "type": "library",
+            "extra": {
+                "laminas": {
+                    "component": "Laminas\\I18n",
+                    "config-provider": "Laminas\\I18n\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\I18n\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Provide translations for your application, and filter and validate internationalized values",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "i18n",
+                "laminas"
+            ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-i18n/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-i18n/issues",
+                "rss": "https://github.com/laminas/laminas-i18n/releases.atom",
+                "source": "https://github.com/laminas/laminas-i18n"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-04-07T21:10:50+00:00"
+        },
+        {
             "name": "laminas/laminas-json",
             "version": "3.2.0",
             "source": {
@@ -1058,6 +1143,86 @@
                 }
             ],
             "time": "2020-12-14T21:54:40+00:00"
+        },
+        {
+            "name": "laminas/laminas-mvc-i18n",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-mvc-i18n.git",
+                "reference": "7ece491a02000a6c4ea2c4457fead3d12efc6eba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-mvc-i18n/zipball/7ece491a02000a6c4ea2c4457fead3d12efc6eba",
+                "reference": "7ece491a02000a6c4ea2c4457fead3d12efc6eba",
+                "shasum": ""
+            },
+            "require": {
+                "container-interop/container-interop": "^1.1",
+                "laminas/laminas-i18n": "^2.11",
+                "laminas/laminas-router": "^3.0",
+                "laminas/laminas-servicemanager": "^3.6",
+                "laminas/laminas-stdlib": "^3.3",
+                "laminas/laminas-validator": "^2.14",
+                "laminas/laminas-zendframework-bridge": "^1.2",
+                "php": "^7.3 || ~8.0.0"
+            },
+            "conflict": {
+                "laminas/laminas-mvc": "<3.0.0",
+                "phpspec/prophecy": "<1.8.0"
+            },
+            "replace": {
+                "zendframework/zend-mvc-i18n": "^1.1.1"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~1.0.0",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.5",
+                "psalm/plugin-phpunit": "^0.15.1",
+                "vimeo/psalm": "^4.7"
+            },
+            "suggest": {
+                "laminas/laminas-cache": "To enable caching of translation strings"
+            },
+            "type": "library",
+            "extra": {
+                "laminas": {
+                    "component": "Laminas\\Mvc\\I18n",
+                    "config-provider": "Laminas\\Mvc\\I18n\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Mvc\\I18n\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Integration between laminas-mvc and laminas-i18n",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "i18n",
+                "laminas",
+                "mvc"
+            ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-mvc-i18n/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-mvc-i18n/issues",
+                "rss": "https://github.com/laminas/laminas-mvc-i18n/releases.atom",
+                "source": "https://github.com/laminas/laminas-mvc-i18n"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-04-02T15:49:43+00:00"
         },
         {
             "name": "laminas/laminas-router",
@@ -2279,91 +2444,6 @@
                 }
             ],
             "time": "2021-01-11T14:54:37+00:00"
-        },
-        {
-            "name": "laminas/laminas-i18n",
-            "version": "2.11.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-i18n.git",
-                "reference": "5e85a8facc5534e856cc7f5b4326533eede84b8a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-i18n/zipball/5e85a8facc5534e856cc7f5b4326533eede84b8a",
-                "reference": "5e85a8facc5534e856cc7f5b4326533eede84b8a",
-                "shasum": ""
-            },
-            "require": {
-                "ext-intl": "*",
-                "laminas/laminas-stdlib": "^2.7 || ^3.0",
-                "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.3 || ~8.0.0"
-            },
-            "conflict": {
-                "phpspec/prophecy": "<1.9.0"
-            },
-            "replace": {
-                "zendframework/zend-i18n": "^2.10.1"
-            },
-            "require-dev": {
-                "laminas/laminas-cache": "^2.6.1",
-                "laminas/laminas-coding-standard": "~1.0.0",
-                "laminas/laminas-config": "^2.6",
-                "laminas/laminas-eventmanager": "^2.6.2 || ^3.0",
-                "laminas/laminas-filter": "^2.6.1",
-                "laminas/laminas-servicemanager": "^3.2.1",
-                "laminas/laminas-validator": "^2.6",
-                "laminas/laminas-view": "^2.6.3",
-                "phpunit/phpunit": "^9.3"
-            },
-            "suggest": {
-                "laminas/laminas-cache": "Laminas\\Cache component",
-                "laminas/laminas-config": "Laminas\\Config component",
-                "laminas/laminas-eventmanager": "You should install this package to use the events in the translator",
-                "laminas/laminas-filter": "You should install this package to use the provided filters",
-                "laminas/laminas-i18n-resources": "Translation resources",
-                "laminas/laminas-servicemanager": "Laminas\\ServiceManager component",
-                "laminas/laminas-validator": "You should install this package to use the provided validators",
-                "laminas/laminas-view": "You should install this package to use the provided view helpers"
-            },
-            "type": "library",
-            "extra": {
-                "laminas": {
-                    "component": "Laminas\\I18n",
-                    "config-provider": "Laminas\\I18n\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laminas\\I18n\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Provide translations for your application, and filter and validate internationalized values",
-            "homepage": "https://laminas.dev",
-            "keywords": [
-                "i18n",
-                "laminas"
-            ],
-            "support": {
-                "chat": "https://laminas.dev/chat",
-                "docs": "https://docs.laminas.dev/laminas-i18n/",
-                "forum": "https://discourse.laminas.dev",
-                "issues": "https://github.com/laminas/laminas-i18n/issues",
-                "rss": "https://github.com/laminas/laminas-i18n/releases.atom",
-                "source": "https://github.com/laminas/laminas-i18n"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2021-04-07T21:10:50+00:00"
         },
         {
             "name": "laminas/laminas-log",

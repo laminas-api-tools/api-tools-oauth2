@@ -1,13 +1,9 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\ApiTools\OAuth2\Factory;
 
+use Laminas\ApiTools\OAuth2\Adapter\PdoAdapter;
+use Laminas\ApiTools\OAuth2\Controller\Exception\RuntimeException;
 use Laminas\ApiTools\OAuth2\Factory\PdoAdapterFactory;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
@@ -16,26 +12,19 @@ use ReflectionObject;
 
 class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
 {
-    /**
-     * @var PdoAdapterFactory
-     */
+    /** @var PdoAdapterFactory */
     protected $factory;
 
-    /**
-     * @var ServiceManager
-     */
+    /** @var ServiceManager */
     protected $services;
 
-    /**
-     * @expectedException \Laminas\ApiTools\OAuth2\Controller\Exception\RuntimeException
-     */
     public function testExceptionThrownWhenMissingDbCredentials()
     {
         $this->services->setService('config', []);
         $smFactory = $this->factory;
-        $adapter = $smFactory($this->services);
 
-        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Adapter\PdoAdapter', $adapter);
+        $this->expectException(RuntimeException::class);
+        $smFactory($this->services);
     }
 
     public function testInstanceCreated()
@@ -50,14 +39,14 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
             ],
         ]);
         $adapter = $this->factory->createService($this->services);
-        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Adapter\PdoAdapter', $adapter);
+        $this->assertInstanceOf(PdoAdapter::class, $adapter);
     }
 
     public function testAllowsPassingOauth2ServerConfigAndPassesOnToUnderlyingAdapter()
     {
         $this->services->setService('config', [
             'api-tools-oauth2' => [
-                'db' => [
+                'db'               => [
                     'username' => 'foo',
                     'password' => 'bar',
                     'dsn'      => 'sqlite::memory:',
@@ -68,7 +57,7 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
             ],
         ]);
         $adapter = $this->factory->createService($this->services);
-        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Adapter\PdoAdapter', $adapter);
+        $this->assertInstanceOf(PdoAdapter::class, $adapter);
 
         $r = new ReflectionObject($adapter);
         $c = $r->getProperty('config');
@@ -87,12 +76,12 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
                     'dsn'      => 'sqlite::memory:',
                     'options'  => [
                         PDO::ATTR_EMULATE_PREPARES => true,
-                    ]
+                    ],
                 ],
             ],
         ]);
         $adapter = $this->factory->createService($this->services);
-        $this->assertInstanceOf('Laminas\ApiTools\OAuth2\Adapter\PdoAdapter', $adapter);
+        $this->assertInstanceOf(PdoAdapter::class, $adapter);
     }
 
     protected function setUp()
@@ -101,15 +90,15 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
         $this->services = $services = new ServiceManager();
 
         $this->setApplicationConfig([
-            'modules' => [
+            'modules'                  => [
                 'Laminas\ApiTools\OAuth2',
             ],
-            'module_listener_options' => [
-                'module_paths' => [__DIR__ . '/../../'],
+            'module_listener_options'  => [
+                'module_paths'      => [__DIR__ . '/../../'],
                 'config_glob_paths' => [],
             ],
             'service_listener_options' => [],
-            'service_manager' => [],
+            'service_manager'          => [],
         ]);
         parent::setUp();
     }

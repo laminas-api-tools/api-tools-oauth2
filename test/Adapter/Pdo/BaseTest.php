@@ -1,16 +1,14 @@
-<?php
-
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
- */
+<?php // phpcs:disable WebimpressCodingStandard.NamingConventions.AbstractClass.Prefix
 
 namespace LaminasTest\ApiTools\OAuth2\Adapter\Pdo;
 
+use Laminas\ApiTools\OAuth2\Adapter\PdoAdapter;
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use ReflectionProperty;
 
-abstract class BaseTest extends \Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase
+use function file_get_contents;
+
+abstract class BaseTest extends AbstractHttpControllerTestCase
 {
     protected function setUp()
     {
@@ -24,12 +22,13 @@ abstract class BaseTest extends \Laminas\Test\PHPUnit\Controller\AbstractHttpCon
         $serviceManager->setAllowOverride(true);
     }
 
-    public function provideStorage()
+    /** @psalm-return array<array-key, array{0: PdoAdapter}> */
+    public function provideStorage(): array
     {
         $this->setUp();
 
         $serviceManager = $this->getApplication()->getServiceManager();
-        $pdo = $serviceManager->get('Laminas\ApiTools\OAuth2\Adapter\PdoAdapter');
+        $pdo            = $serviceManager->get(PdoAdapter::class);
 
         $r = new ReflectionProperty($pdo, 'db');
         $r->setAccessible(true);

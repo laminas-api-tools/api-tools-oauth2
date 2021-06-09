@@ -1,14 +1,12 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\ApiTools\OAuth2\Controller;
 
+use Laminas\Http\Request;
+use Laminas\Http\Response;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+
+use function json_decode;
 
 class AuthControllerWithCustomAdapterTest extends AbstractHttpControllerTestCase
 {
@@ -21,7 +19,7 @@ class AuthControllerWithCustomAdapterTest extends AbstractHttpControllerTestCase
 
     public function testToken()
     {
-        /** @var \Laminas\Http\Request $request */
+        /** @var Request $request */
         $request = $this->getRequest();
         $request->getPost()->set('grant_type', 'password');
         $request->getPost()->set('client_id', 'public');
@@ -34,9 +32,9 @@ class AuthControllerWithCustomAdapterTest extends AbstractHttpControllerTestCase
         $this->assertActionName('token');
         $this->assertResponseStatusCode(401);
 
-        /** @var \Laminas\Http\Response $response */
+        /** @var Response $response */
         $response = $this->getResponse();
-        $headers = $response->getHeaders();
+        $headers  = $response->getHeaders();
         $this->assertEquals('application/problem+json', $headers->get('content-type')->getFieldValue());
 
         $response = json_decode($this->getResponse()->getContent(), true);

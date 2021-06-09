@@ -1,31 +1,18 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\ApiTools\OAuth2\Adapter;
 
 use Laminas\Crypt\Password\Bcrypt;
 
 /**
  * Trait BcryptTrait
- *
- * @package Laminas\ApiTools\OAuth2\Adapter
- * @author Chuck "MANCHUCK" Reeves <chuck@manchuck.com>
  */
 trait BcryptTrait
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $bcryptCost = 10;
 
-    /**
-     * @var Bcrypt
-     */
+    /** @var Bcrypt */
     protected $bcrypt;
 
     /**
@@ -42,7 +29,7 @@ trait BcryptTrait
     }
 
     /**
-     * @param $value
+     * @param int $value
      * @return $this
      */
     public function setBcryptCost($value)
@@ -53,18 +40,14 @@ trait BcryptTrait
 
     /**
      * Check password using bcrypt
-     *
-     * @param string $user
-     * @param string $password
-     * @return bool
      */
-    protected function checkPassword($user, $password)
+    protected function checkPassword(string $user, string $password): bool
     {
         return $this->verifyHash($password, $user['password']);
     }
 
     /**
-     * @param $string
+     * @param string $string Passed by reference
      */
     protected function createBcryptHash(&$string)
     {
@@ -73,12 +56,8 @@ trait BcryptTrait
 
     /**
      * Check hash using bcrypt
-     *
-     * @param $hash
-     * @param $check
-     * @return bool
      */
-    protected function verifyHash($check, $hash)
+    protected function verifyHash(string $check, string $hash): bool
     {
         return $this->getBcrypt()->verify($check, $hash);
     }

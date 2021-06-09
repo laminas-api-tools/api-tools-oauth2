@@ -1,15 +1,12 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-oauth2 for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-oauth2/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\ApiTools\OAuth2\Adapter;
 
 use Laminas\Crypt\Password\Bcrypt;
 use OAuth2\Storage\Pdo as OAuth2Pdo;
+
+use function func_num_args;
+use function sprintf;
 
 /**
  * Extension of OAuth2\Storage\PDO that provides Bcrypt client_secret/password
@@ -17,14 +14,10 @@ use OAuth2\Storage\Pdo as OAuth2Pdo;
  */
 class PdoAdapter extends OAuth2Pdo
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $bcryptCost = 10;
 
-    /**
-     * @var Bcrypt
-     */
+    /** @var Bcrypt */
     protected $bcrypt;
 
     /**
@@ -41,7 +34,7 @@ class PdoAdapter extends OAuth2Pdo
     }
 
     /**
-     * @param $value
+     * @param int $value
      * @return $this
      */
     public function setBcryptCost($value)
@@ -63,7 +56,7 @@ class PdoAdapter extends OAuth2Pdo
     }
 
     /**
-     * @param $string
+     * @param string $string Passed by reference
      */
     protected function createBcryptHash(&$string)
     {
@@ -73,8 +66,8 @@ class PdoAdapter extends OAuth2Pdo
     /**
      * Check hash using bcrypt
      *
-     * @param $hash
-     * @param $check
+     * @param string $hash
+     * @param string $check
      * @return bool
      */
     protected function verifyHash($check, $hash)
@@ -97,17 +90,17 @@ class PdoAdapter extends OAuth2Pdo
     /**
      * Check client credentials
      *
-     * @param string $client_id
-     * @param string $client_secret
+     * @param string $clientId
+     * @param string $clientSecret
      * @return bool
      */
-    public function checkClientCredentials($client_id, $client_secret = null)
+    public function checkClientCredentials($clientId, $clientSecret = null)
     {
         $stmt = $this->db->prepare(sprintf(
             'SELECT * from %s where client_id = :client_id',
             $this->config['client_table']
         ));
-        $stmt->execute(compact('client_id'));
+        $stmt->execute(['client_id' => $clientId]);
         $result = $stmt->fetch();
 
         // Do not bother verifying if the secret is missing or empty.
@@ -116,59 +109,84 @@ class PdoAdapter extends OAuth2Pdo
         }
 
         // bcrypt verify
-        return $this->verifyHash($client_secret, $result['client_secret']);
+        return $this->verifyHash($clientSecret, $result['client_secret']);
     }
 
     /**
      * Set client details
      *
-     * @param string $client_id
-     * @param string $client_secret
-     * @param string $redirect_uri
-     * @param string $grant_types
-     * @param string $scope_or_user_id If 5 arguments, user_id; if 6, scope.
-     * @param string $user_id
+     * @param string $clientId
+     * @param string $clientSecret
+     * @param string $redirectUri
+     * @param string $grantTypes
+     * @param string $scopeOrUserId If 5 arguments, userId; if 6, scope.
+     * @param string $userId
      * @return bool
      */
     public function setClientDetails(
-        $client_id,
-        $client_secret = null,
-        $redirect_uri = null,
-        $grant_types = null,
-        $scope_or_user_id = null,
-        $user_id = null
+        $clientId,
+        $clientSecret = null,
+        $redirectUri = null,
+        $grantTypes = null,
+        $scopeOrUserId = null,
+        $userId = null
     ) {
         if (func_num_args() > 5) {
-            $scope = $scope_or_user_id;
+            $scope = $scopeOrUserId;
         } else {
-            $user_id = $scope_or_user_id;
-            $scope   = null;
+            $userId = $scopeOrUserId;
+            $scope  = null;
         }
 
-        if (! empty($client_secret)) {
-            $this->createBcryptHash($client_secret);
+        if (! empty($clientSecret)) {
+            $this->createBcryptHash($clientSecret);
         }
         // if it exists, update it.
-        if ($this->getClientDetails($client_id)) {
+        if ($this->getClientDetails($clientId)) {
             $stmt = $this->db->prepare(sprintf(
-                'UPDATE %s '
-                . 'SET '
-                . 'client_secret=:client_secret, '
-                . 'redirect_uri=:redirect_uri, '
-                . 'grant_types=:grant_types, '
-                . 'scope=:scope, '
-                . 'user_id=:user_id '
-                . 'WHERE client_id=:client_id',
+                <<<'END'
+                    UPDATE %s
+                    SET
+                      client_secret=:client_secret,
+                      redirect_uri=:redirect_uri,
+                      grant_types=:grant_types,
+                      scope=:scope,
+                      user_id=:user_id
+                    WHERE client_id=:client_id
+                    END,
                 $this->config['client_table']
             ));
         } else {
             $stmt = $this->db->prepare(sprintf(
-                'INSERT INTO %s (client_id, client_secret, redirect_uri, grant_types, scope, user_id) '
-                . 'VALUES (:client_id, :client_secret, :redirect_uri, :grant_types, :scope, :user_id)',
+                <<<'END'
+                    INSERT INTO %s (
+                        client_id,
+                        client_secret,
+                        redirect_uri,
+                        grant_types,
+                        scope,
+                        user_id
+                    )
+                    VALUES (
+                        :client_id,
+                        :client_secret,
+                        :redirect_uri,
+                        :grant_types,
+                        :scope,
+                        :user_id
+                    )
+                    END,
                 $this->config['client_table']
             ));
         }
-        return $stmt->execute(compact('client_id', 'client_secret', 'redirect_uri', 'grant_types', 'scope', 'user_id'));
+        return $stmt->execute([
+            'client_id'     => $clientId,
+            'client_secret' => $clientSecret,
+            'redirect_uri'  => $redirectUri,
+            'grant_types'   => $grantTypes,
+            'scope'         => $scope,
+            'user_id'       => $userId,
+        ]);
     }
 
     /**
@@ -199,6 +217,11 @@ class PdoAdapter extends OAuth2Pdo
             ));
         }
 
-        return $stmt->execute(compact('username', 'password', 'firstName', 'lastName'));
+        return $stmt->execute([
+            'username'  => $username,
+            'password'  => $password,
+            'firstName' => $firstName,
+            'lastName'  => $lastName,
+        ]);
     }
 }
