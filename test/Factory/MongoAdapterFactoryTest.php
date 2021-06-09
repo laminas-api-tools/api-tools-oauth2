@@ -3,7 +3,6 @@
 namespace LaminasTest\ApiTools\OAuth2\Factory;
 
 use Laminas\ApiTools\OAuth2\Adapter\MongoAdapter;
-use Laminas\ApiTools\OAuth2\Adapter\PdoAdapter;
 use Laminas\ApiTools\OAuth2\Controller\Exception\RuntimeException;
 use Laminas\ApiTools\OAuth2\Factory\MongoAdapterFactory;
 use Laminas\ServiceManager\ServiceManager;

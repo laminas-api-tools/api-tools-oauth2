@@ -7,7 +7,9 @@ use OAuth2\Storage\NullStorage;
 use OAuth2\Storage\ScopeInterface;
 
 use function explode;
+use function get_class;
 use function sort;
+use function sprintf;
 
 class ScopeTest extends BaseTest
 {

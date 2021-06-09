@@ -215,8 +215,6 @@ class AuthController extends AbstractActionController
 
     /**
      * Receive code action prints the code/token access
-     *
-     * @return ViewModel
      */
     public function receiveCodeAction(): ViewModel
     {
