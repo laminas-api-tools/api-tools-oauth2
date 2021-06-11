@@ -31,7 +31,8 @@
         "laminas/laminas-mvc": "^2.7.15 || ^3.0.2",
         "laminas/laminas-mvc-i18n": "^1.2",
         "laminas/laminas-servicemanager": "^2.7.6 || ^3.1",
-        "laminas/laminas-zendframework-bridge": "^1.1"
+        "laminas/laminas-zendframework-bridge": "^1.1",
+        "webmozart/assert": "^1.10"
     },
     "require-dev": {
         "laminas/laminas-authentication": "^2.8",
