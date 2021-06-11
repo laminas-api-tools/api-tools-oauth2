@@ -2,27 +2,26 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.7.1 - TBD
+## 1.7.1 - 2021-06-11
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
+### Release Notes for [1.7.1](https://github.com/laminas-api-tools/api-tools-oauth2/milestone/5)
 
 ### Fixed
 
-- Nothing.
+- Adds a missing package requirement, webmozar/assert.
+
+### 1.7.1
+
+- Total issues resolved: **1**
+- Total pull requests resolved: **1**
+- Total contributors: **2**
+
+#### Bug
+
+ - [34: Ensure webmozart/assert is present as a package requirement](https://github.com/laminas-api-tools/api-tools-oauth2/pull/34) thanks to @weierophinney and @diego-sorribas
 
 ## 1.7.0 - 2021-06-09
 
