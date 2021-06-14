@@ -2,27 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.7.2 - TBD
+## 1.7.2 - 2021-06-14
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [1.7.2](https://github.com/laminas-api-tools/api-tools-oauth2/milestone/7)
 
-- Nothing.
+1.7.x bugfix release (patch)
 
-### Deprecated
+### 1.7.2
 
-- Nothing.
+- Total issues resolved: **1**
+- Total pull requests resolved: **1**
+- Total contributors: **2**
 
-### Removed
+#### BC Break,Bug
 
-- Nothing.
-
-### Fixed
-
-- Nothing.
+ - [37: Fix BC break in BcryptTrait](https://github.com/laminas-api-tools/api-tools-oauth2/pull/37) thanks to @weierophinney and @cvigorsICBF
 
 ## 1.7.1 - 2021-06-11
 
