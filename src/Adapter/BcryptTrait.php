@@ -40,8 +40,12 @@ trait BcryptTrait
 
     /**
      * Check password using bcrypt
+     *
+     * @param array<string, string> $user
+     * @param string $password
+     * @return bool
      */
-    protected function checkPassword(string $user, string $password): bool
+    protected function checkPassword($user, $password)
     {
         return $this->verifyHash($password, $user['password']);
     }
