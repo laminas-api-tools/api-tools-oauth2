@@ -49,7 +49,7 @@ class MongoAdapter extends OAuth2Mongo
     /**
      * Check password using bcrypt
      *
-     * @param string $user
+     * @param array<string, string> $user
      * @param string $password
      * @return bool
      */

@@ -46,7 +46,7 @@ class PdoAdapter extends OAuth2Pdo
     /**
      * Check password using bcrypt
      *
-     * @param string $user
+     * @param array<array-key, mixed> $user
      * @param string $password
      * @return bool
      */
