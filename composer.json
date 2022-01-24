@@ -22,7 +22,7 @@
         "sort-packages": true
     },
     "require": {
-        "php": "^7.3 || ~8.0.0 || ~8.1.0",
+        "php": "^7.4 || ~8.0.0 || ~8.1.0",
         "bshaffer/oauth2-server-php": "^1.10",
         "laminas-api-tools/api-tools-api-problem": "^1.4",
         "laminas-api-tools/api-tools-content-negotiation": "^1.5",
