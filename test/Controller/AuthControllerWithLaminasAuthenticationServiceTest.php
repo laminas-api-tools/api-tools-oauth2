@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\ApiTools\OAuth2\Controller;
 
 use Laminas\ApiTools\OAuth2\Adapter\PdoAdapter;
@@ -81,7 +83,7 @@ class AuthControllerWithLaminasAuthenticationServiceTest extends AbstractHttpCon
         $this->getAuthenticationService();
 
         $this->dispatch('/oauth/authorize');
-        $this->assertTrue($this->getResponse()->isRedirect(), var_export($this->getResponse(), 1));
+        $this->assertTrue($this->getResponse()->isRedirect(), var_export($this->getResponse(), true));
         $this->assertControllerName('Laminas\ApiTools\OAuth2\Controller\Auth');
         $this->assertActionName('authorize');
 

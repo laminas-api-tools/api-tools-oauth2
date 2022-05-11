@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\ApiTools\OAuth2\Controller;
 
 use Laminas\Http\Request;
-use Laminas\Http\Response;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 use function json_decode;
@@ -32,7 +33,6 @@ class AuthControllerWithCustomAdapterTest extends AbstractHttpControllerTestCase
         $this->assertActionName('token');
         $this->assertResponseStatusCode(401);
 
-        /** @var Response $response */
         $response = $this->getResponse();
         $headers  = $response->getHeaders();
         $this->assertEquals('application/problem+json', $headers->get('content-type')->getFieldValue());

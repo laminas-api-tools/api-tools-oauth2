@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\ApiTools\OAuth2\Controller;
 
 use Laminas\ApiTools\ApiProblem\ApiProblemResponse;
@@ -30,7 +32,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
 {
     use ProphecyTrait;
 
-    /** @var Adapter|PDO */
+    /** @var Adapter|PDO|null */
     protected $db;
 
     protected function setUp(): void
@@ -336,6 +338,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
 
     public function testResource(): void
     {
+        /** @var \Laminas\Http\PhpEnvironment\Request $request */
         $request = $this->getRequest();
         $request->getPost()->set('grant_type', 'client_credentials');
         $request->getServer()->set('PHP_AUTH_USER', 'testclient');

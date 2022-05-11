@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\ApiTools\OAuth2\Factory;
 
 use Laminas\ApiTools\OAuth2\Adapter\PdoAdapter;
@@ -39,7 +41,7 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
                 ],
             ],
         ]);
-        $adapter = $this->factory->createService($this->services);
+        $adapter = ($this->factory)($this->services);
         $this->assertInstanceOf(PdoAdapter::class, $adapter);
     }
 
@@ -57,7 +59,7 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
                 ],
             ],
         ]);
-        $adapter = $this->factory->createService($this->services);
+        $adapter = ($this->factory)($this->services);
         $this->assertInstanceOf(PdoAdapter::class, $adapter);
 
         $r = new ReflectionObject($adapter);
@@ -81,7 +83,7 @@ class PdoAdapterFactoryTest extends AbstractHttpControllerTestCase
                 ],
             ],
         ]);
-        $adapter = $this->factory->createService($this->services);
+        $adapter = ($this->factory)($this->services);
         $this->assertInstanceOf(PdoAdapter::class, $adapter);
     }
 

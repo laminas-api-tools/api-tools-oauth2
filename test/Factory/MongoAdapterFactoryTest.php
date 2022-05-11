@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\ApiTools\OAuth2\Factory;
 
 use Laminas\ApiTools\OAuth2\Adapter\MongoAdapter;
@@ -54,7 +56,7 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
     {
         $this->services->setService('config', []);
         $this->expectException(RuntimeException::class);
-        $this->factory->createService($this->services);
+        ($this->factory)($this->services);
     }
 
     public function testInstanceCreated(): void
@@ -68,7 +70,7 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
             ],
         ]);
 
-        $adapter = $this->factory->createService($this->services);
+        $adapter = ($this->factory)($this->services);
         $this->assertInstanceOf(MongoAdapter::class, $adapter);
     }
 
@@ -86,7 +88,7 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
             ->getMock();
         $this->services->setService('testdb', $mock);
 
-        $adapter = $this->factory->createService($this->services);
+        $adapter = ($this->factory)($this->services);
         $this->assertInstanceOf(MongoAdapter::class, $adapter);
     }
 
@@ -107,7 +109,7 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
             ->getMock();
         $this->services->setService('testdb', $mock);
 
-        $adapter = $this->factory->createService($this->services);
+        $adapter = ($this->factory)($this->services);
         $this->assertInstanceOf(MongoAdapter::class, $adapter);
 
         $r = new ReflectionObject($adapter);

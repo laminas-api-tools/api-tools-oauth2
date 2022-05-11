@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\ApiTools\OAuth2\Controller;
 
 use Laminas\ApiTools\ApiProblem\Exception\DomainException;

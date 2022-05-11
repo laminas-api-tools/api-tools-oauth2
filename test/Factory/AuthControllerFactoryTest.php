@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\ApiTools\OAuth2\Factory;
 
 use Laminas\ApiTools\OAuth2\Controller\AuthController;
@@ -8,8 +10,6 @@ use Laminas\ApiTools\OAuth2\Provider\UserId\UserIdProviderInterface;
 use Laminas\Mvc\Controller\ControllerManager;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
-
-use function method_exists;
 
 class AuthControllerFactoryTest extends AbstractHttpControllerTestCase
 {
@@ -32,9 +32,7 @@ class AuthControllerFactoryTest extends AbstractHttpControllerTestCase
             ->getMock();
         $this->services->setService('Laminas\ApiTools\OAuth2\Provider\UserId', $userIdProvider);
 
-        $controller       = $this->isV2ServiceManager($this->services)
-            ? $controller = $this->factory->createService($this->controllers)
-            : $controller = $this->factory->__invoke($this->services, AuthController::class);
+        $controller = $this->factory->__invoke($this->services, AuthController::class);
 
         $this->assertInstanceOf(AuthController::class, $controller);
         $this->assertEquals(new AuthController($oauthServerFactory, $userIdProvider), $controller);
@@ -68,10 +66,5 @@ class AuthControllerFactoryTest extends AbstractHttpControllerTestCase
             'service_manager'          => [],
         ]);
         parent::setUp();
-    }
-
-    protected function isV2ServiceManager(ServiceManager $services): bool
-    {
-        return ! method_exists($services, 'configure');
     }
 }
