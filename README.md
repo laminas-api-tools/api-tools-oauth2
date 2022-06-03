@@ -1,7 +1,6 @@
 # api-tools-oauth2
 
-[![Build Status](https://travis-ci.com/laminas-api-tools/api-tools-oauth2.svg)](https://travis-ci.com/laminas-api-tools/api-tools-oauth2)
-[![Coverage Status](https://coveralls.io/repos/github/laminas-api-tools/api-tools-oauth2/badge.svg)](https://coveralls.io/github/laminas-api-tools/api-tools-oauth2)
+[![Build Status](https://github.com/laminas-api-tools/api-tools-oauth2/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/laminas-api-tools/api-tools-oauth2/actions/workflows/continuous-integration.yml)
 
 > ## 🇷🇺 Русским гражданам
 > 

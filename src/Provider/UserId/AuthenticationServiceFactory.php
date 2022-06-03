@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\ApiTools\OAuth2\Provider\UserId;
 
-use Interop\Container\ContainerInterface;
+use Interop\Container\ContainerInterface; // phpcs:ignore WebimpressCodingStandard.PHP.CorrectClassNameCase.Invalid
 use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class AuthenticationServiceFactory

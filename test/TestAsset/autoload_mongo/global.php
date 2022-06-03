@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Laminas\ApiTools\OAuth2\Adapter\MongoAdapter;
 
 return [

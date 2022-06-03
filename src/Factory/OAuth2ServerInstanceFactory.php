@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\ApiTools\OAuth2\Factory;
 
-use Interop\Container\ContainerInterface;
+use Interop\Container\ContainerInterface; // phpcs:ignore WebimpressCodingStandard.PHP.CorrectClassNameCase.Invalid
 use Laminas\ApiTools\OAuth2\Controller\Exception;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use OAuth2\GrantType\AuthorizationCode;
@@ -24,12 +26,12 @@ class OAuth2ServerInstanceFactory
     /** @var ServiceLocatorInterface */
     private $services;
 
-    /** @var OAuth2Server */
+    /** @var OAuth2Server|null */
     private $server;
 
     /**
-     * @var array $config Configuration to use when creating the instance.
-     * @var ContainerInterface $services ServiceLocator for retrieving storage adapters.
+     * @param array $config Configuration to use when creating the instance.
+     * @param ContainerInterface $services ServiceLocator for retrieving storage adapters.
      */
     public function __construct(array $config, ContainerInterface $services)
     {

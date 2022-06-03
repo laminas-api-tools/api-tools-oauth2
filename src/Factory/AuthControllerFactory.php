@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\ApiTools\OAuth2\Factory;
 
-use Interop\Container\ContainerInterface;
+use Interop\Container\ContainerInterface; // phpcs:ignore WebimpressCodingStandard.PHP.CorrectClassNameCase.Invalid
 use Laminas\ApiTools\OAuth2\Controller\AuthController;
 use Laminas\ApiTools\OAuth2\Provider\UserId;
-use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use OAuth2\Server as OAuth2Server;
@@ -38,15 +39,9 @@ class AuthControllerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $controllers, $name = null, $requestedName = null)
     {
-        if ($controllers instanceof AbstractPluginManager) {
-            $container = $controllers->getServiceLocator() ?: $controllers;
-        } else {
-            $container = $controllers;
-        }
-
         $requestedName = $requestedName ?: AuthController::class;
 
-        return $this($container, $requestedName);
+        return $this($controllers, $requestedName);
     }
 
     /**

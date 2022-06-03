@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\ApiTools\OAuth2\Factory;
 
 use Laminas\ApiTools\OAuth2\Controller\Exception\RuntimeException;
@@ -99,7 +101,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $expectedService->addGrantType(new RefreshToken($adapter));
         $expectedService->addGrantType(new JwtBearer($adapter, ''));
 
-        $service = $this->factory->createService($this->services);
+        $service = ($this->factory)($this->services);
         $this->assertInstanceOf(OAuth2ServerInstanceFactory::class, $service);
         $server = $service();
         $this->assertInstanceOf(Server::class, $server);
@@ -141,7 +143,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $expectedService->addGrantType(new RefreshToken($adapter));
         $expectedService->addGrantType(new JwtBearer($adapter, ''));
 
-        $service = $this->factory->createService($this->services);
+        $service = ($this->factory)($this->services);
         $this->assertInstanceOf(OAuth2ServerInstanceFactory::class, $service);
         $server = $service();
         $this->assertInstanceOf(Server::class, $server);
@@ -186,7 +188,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $expectedService->addGrantType(new RefreshToken($adapter));
         $expectedService->addGrantType(new JwtBearer($adapter, ''));
 
-        $service = $this->factory->createService($this->services);
+        $service = ($this->factory)($this->services);
         $this->assertInstanceOf(OAuth2ServerInstanceFactory::class, $service);
         $server = $service();
         $this->assertInstanceOf(Server::class, $server);
@@ -259,7 +261,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
         $expectedService->addGrantType(new RefreshToken($storage['refresh_token']));
         $expectedService->addGrantType(new JwtBearer($storage['jwt_bearer'], ''));
 
-        $service = $this->factory->createService($this->services);
+        $service = ($this->factory)($this->services);
         $this->assertInstanceOf(OAuth2ServerInstanceFactory::class, $service);
         $server = $service();
         $this->assertInstanceOf(Server::class, $server);
@@ -292,7 +294,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
 
         $expectedService->addGrantType(new UserCredentials($adapter));
         $expectedService->addGrantType(new RefreshToken($adapter));
-        $service = $this->factory->createService($this->services);
+        $service = ($this->factory)($this->services);
         $this->assertInstanceOf(OAuth2ServerInstanceFactory::class, $service);
         $server = $service();
         $this->assertInstanceOf(Server::class, $server);
@@ -316,7 +318,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
             ],
         ]);
 
-        $factory = $this->factory->createService($this->services);
+        $factory = ($this->factory)($this->services);
         $server  = $factory();
         $this->assertSame($server, $factory());
     }

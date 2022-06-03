@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use LaminasTest\ApiTools\OAuth2\Controller\CustomAdapter;
 
 return [

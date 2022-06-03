@@ -1,74 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.7.3@38c452ae584467e939d55377aaf83b5a26f19dd1">
+<files psalm-version="4.23.0@f1fe6ff483bf325c803df9f510d09a03fd796f88">
   <file src="bin/bcrypt.php">
     <UnresolvableInclude occurrences="1">
       <code>include $autoload</code>
     </UnresolvableInclude>
   </file>
-  <file src="src/Adapter/MongoAdapter.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>null === $this-&gt;bcrypt</code>
-    </DocblockTypeContradiction>
-    <InvalidArrayOffset occurrences="1">
-      <code>$user['password']</code>
-    </InvalidArrayOffset>
-    <MissingReturnType occurrences="1">
-      <code>createBcryptHash</code>
-    </MissingReturnType>
-    <MixedArgument occurrences="2">
-      <code>$result['client_secret']</code>
-      <code>$user['password']</code>
-    </MixedArgument>
-    <MixedArrayAccess occurrences="1">
-      <code>$result['client_secret']</code>
-    </MixedArrayAccess>
-    <MixedAssignment occurrences="1">
-      <code>$result</code>
-    </MixedAssignment>
-    <MixedMethodCall occurrences="5">
-      <code>findOne</code>
-      <code>insert</code>
-      <code>insert</code>
-      <code>update</code>
-      <code>update</code>
-    </MixedMethodCall>
-    <ParamNameMismatch occurrences="8">
-      <code>$clientId</code>
-      <code>$clientId</code>
-      <code>$clientSecret</code>
-      <code>$clientSecret</code>
-      <code>$grantTypes</code>
-      <code>$redirectUri</code>
-      <code>$scopeOrUserId</code>
-      <code>$userId</code>
-    </ParamNameMismatch>
-    <PossiblyNullArgument occurrences="1">
-      <code>$clientSecret</code>
-    </PossiblyNullArgument>
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>$bcrypt</code>
-    </PropertyNotSetInConstructor>
-    <RedundantCastGivenDocblockType occurrences="1">
-      <code>(int) $value</code>
-    </RedundantCastGivenDocblockType>
-    <UndefinedDocblockClass occurrences="1">
-      <code>MongoDB|array&lt;string, string|int&gt;</code>
-    </UndefinedDocblockClass>
-  </file>
   <file src="src/Adapter/PdoAdapter.php">
     <DocblockTypeContradiction occurrences="1">
       <code>null === $this-&gt;bcrypt</code>
     </DocblockTypeContradiction>
-    <ImplementedParamTypeMismatch occurrences="2">
+    <ImplementedParamTypeMismatch occurrences="1">
       <code>$grantTypes</code>
-      <code>$user</code>
     </ImplementedParamTypeMismatch>
-    <InvalidArrayOffset occurrences="1">
-      <code>$user['password']</code>
-    </InvalidArrayOffset>
-    <MissingReturnType occurrences="1">
-      <code>createBcryptHash</code>
-    </MissingReturnType>
     <MixedArgument occurrences="8">
       <code>$config['bcrypt_cost']</code>
       <code>$result['client_secret']</code>
@@ -110,9 +53,6 @@
       <code>is_object($serverFactory)</code>
     </DocblockTypeContradiction>
     <InvalidCatch occurrences="1"/>
-    <InvalidScalarArgument occurrences="1">
-      <code>$status</code>
-    </InvalidScalarArgument>
     <LessSpecificReturnStatement occurrences="7">
       <code>$httpResponse</code>
       <code>$this-&gt;getErrorResponse($response)</code>
@@ -122,12 +62,6 @@
       <code>$this-&gt;getResponse()</code>
       <code>$this-&gt;getResponse()</code>
     </LessSpecificReturnStatement>
-    <MismatchingDocblockReturnType occurrences="1">
-      <code>ResponseInterface</code>
-    </MismatchingDocblockReturnType>
-    <MissingReturnType occurrences="1">
-      <code>setApiProblemErrorResponse</code>
-    </MissingReturnType>
     <MixedArgument occurrences="13">
       <code>$bodyParams</code>
       <code>$error</code>
@@ -152,16 +86,14 @@
       <code>$headers['PHP_AUTH_USER']</code>
       <code>$server['REQUEST_METHOD']</code>
     </MixedArrayAssignment>
-    <MixedAssignment occurrences="16">
+    <MixedAssignment occurrences="14">
       <code>$authorized</code>
       <code>$bodyParams</code>
       <code>$clientId</code>
       <code>$code</code>
-      <code>$contentType</code>
       <code>$error</code>
       <code>$errorDescription</code>
       <code>$errorUri</code>
-      <code>$headers</code>
       <code>$headers</code>
       <code>$headers</code>
       <code>$headers['PHP_AUTH_PW']</code>
@@ -170,11 +102,7 @@
       <code>$server</code>
       <code>$server['REQUEST_METHOD']</code>
     </MixedAssignment>
-    <MixedInferredReturnType occurrences="1">
-      <code>ResponseInterface</code>
-    </MixedInferredReturnType>
-    <MixedMethodCall occurrences="9">
-      <code>addHeaderLine</code>
+    <MixedMethodCall occurrences="8">
       <code>addHeaders</code>
       <code>fromQuery</code>
       <code>get</code>
@@ -190,11 +118,6 @@
       <code>Response</code>
       <code>Response|ViewModel</code>
     </MoreSpecificReturnType>
-    <PossiblyInvalidCast occurrences="3">
-      <code>$this-&gt;params('oauth')</code>
-      <code>$this-&gt;params('oauth')</code>
-      <code>$this-&gt;params('oauth')</code>
-    </PossiblyInvalidCast>
     <PossiblyNullArgument occurrences="1">
       <code>$errorDescription</code>
     </PossiblyNullArgument>
@@ -230,19 +153,11 @@
     <UndefinedMagicMethod occurrences="1">
       <code>bodyParams</code>
     </UndefinedMagicMethod>
-    <UnusedVariable occurrences="3">
-      <code>$contentType</code>
-      <code>$contentType</code>
-      <code>$server</code>
-    </UnusedVariable>
   </file>
   <file src="src/Factory/AuthControllerFactory.php">
     <DeprecatedInterface occurrences="1">
       <code>AuthControllerFactory</code>
     </DeprecatedInterface>
-    <DeprecatedMethod occurrences="1">
-      <code>getServiceLocator</code>
-    </DeprecatedMethod>
     <MixedArgument occurrences="2">
       <code>$container-&gt;get(UserId::class)</code>
       <code>UserId::class</code>
@@ -265,48 +180,6 @@
     <UndefinedClass occurrences="1">
       <code>UserId</code>
     </UndefinedClass>
-  </file>
-  <file src="src/Factory/MongoAdapterFactory.php">
-    <InvalidArgument occurrences="1">
-      <code>$this-&gt;getMongoDb($container, $config)</code>
-    </InvalidArgument>
-    <MixedArgument occurrences="3">
-      <code>$config</code>
-      <code>$config</code>
-      <code>$dbLocatorName</code>
-    </MixedArgument>
-    <MixedArrayAccess occurrences="4">
-      <code>$config['api-tools-oauth2']['mongo']</code>
-      <code>$config['api-tools-oauth2']['mongo']['dsn']</code>
-      <code>$config['api-tools-oauth2']['mongo']['options']</code>
-      <code>$config['api-tools-oauth2']['storage_settings']</code>
-    </MixedArrayAccess>
-    <MixedArrayAssignment occurrences="1">
-      <code>$options['connect']</code>
-    </MixedArrayAssignment>
-    <MixedAssignment occurrences="5">
-      <code>$config</code>
-      <code>$dbLocatorName</code>
-      <code>$mongo</code>
-      <code>$options</code>
-      <code>$server</code>
-    </MixedAssignment>
-    <MixedInferredReturnType occurrences="1">
-      <code>MongoDB</code>
-    </MixedInferredReturnType>
-    <MixedPropertyFetch occurrences="1">
-      <code>$mongo-&gt;{$config['api-tools-oauth2']['mongo']['database']}</code>
-    </MixedPropertyFetch>
-    <MixedReturnStatement occurrences="2">
-      <code>$container-&gt;get($dbLocatorName)</code>
-      <code>$mongo-&gt;{$config['api-tools-oauth2']['mongo']['database']}</code>
-    </MixedReturnStatement>
-    <UndefinedClass occurrences="1">
-      <code>MongoClient</code>
-    </UndefinedClass>
-    <UndefinedDocblockClass occurrences="1">
-      <code>MongoDB</code>
-    </UndefinedDocblockClass>
   </file>
   <file src="src/Factory/OAuth2ServerFactory.php">
     <MixedArgument occurrences="1">
@@ -353,15 +226,9 @@
       <code>$server-&gt;getStorage('refresh_token')</code>
       <code>$server-&gt;getStorage('user_credentials')</code>
     </PossiblyNullArgument>
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>$server</code>
-    </PropertyNotSetInConstructor>
     <PropertyTypeCoercion occurrences="1">
       <code>$services</code>
     </PropertyTypeCoercion>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>$this-&gt;server</code>
-    </RedundantConditionGivenDocblockType>
   </file>
   <file src="src/Factory/PdoAdapterFactory.php">
     <InvalidArgument occurrences="1"/>
@@ -433,19 +300,11 @@
     </UndefinedInterfaceMethod>
   </file>
   <file src="test/Adapter/Pdo/AccessTokenTest.php">
-    <MissingReturnType occurrences="1">
-      <code>testSetAccessToken</code>
-    </MissingReturnType>
     <UndefinedClass occurrences="1">
       <code>NullStorage</code>
     </UndefinedClass>
   </file>
   <file src="test/Adapter/Pdo/AuthorizationCodeTest.php">
-    <MissingReturnType occurrences="3">
-      <code>testExpireAccessToken</code>
-      <code>testGetAuthorizationCode</code>
-      <code>testSetAuthorizationCode</code>
-    </MissingReturnType>
     <UndefinedClass occurrences="3">
       <code>NullStorage</code>
       <code>NullStorage</code>
@@ -453,22 +312,11 @@
     </UndefinedClass>
   </file>
   <file src="test/Adapter/Pdo/ClientCredentialsTest.php">
-    <MissingReturnType occurrences="1">
-      <code>testCheckClientCredentials</code>
-    </MissingReturnType>
     <UndefinedClass occurrences="1">
       <code>NullStorage</code>
     </UndefinedClass>
   </file>
   <file src="test/Adapter/Pdo/ClientTest.php">
-    <MissingReturnType occurrences="6">
-      <code>testCheckRestrictedGrantType</code>
-      <code>testGetAccessToken</code>
-      <code>testGetClientDetails</code>
-      <code>testGetClientScope</code>
-      <code>testIsPublicClient</code>
-      <code>testSaveClient</code>
-    </MissingReturnType>
     <UndefinedClass occurrences="4">
       <code>NullStorage</code>
       <code>NullStorage</code>
@@ -481,79 +329,70 @@
     </UndefinedInterfaceMethod>
   </file>
   <file src="test/Adapter/Pdo/JwtAccessTokenTest.php">
-    <MissingReturnType occurrences="1">
-      <code>testJwtWithJti</code>
-    </MissingReturnType>
-    <MixedMethodCall occurrences="3">
-      <code>getJti</code>
-      <code>getJti</code>
-      <code>setJti</code>
-    </MixedMethodCall>
+    <UnevaluatedCode occurrences="9">
+      <code>$audience = 'http://unittest';</code>
+      <code>$clientId = 'oauth_test_client';</code>
+      <code>$expires = $expires-&gt;format('U');</code>
+      <code>$expires = new DateTime('today +1 day');</code>
+      <code>$jti      = 'jti';</code>
+      <code>$storage-&gt;getJti($clientId, $subject, $audience, $expires, $jti);</code>
+      <code>$subject  = 'jtisubject';</code>
+      <code>$this-&gt;assertFalse($storage-&gt;getJti($clientId, $subject, $audience, $expires, 'invlalid'));</code>
+      <code>$this-&gt;assertTrue($storage-&gt;setJti($clientId, $subject, $audience, $expires, $jti));</code>
+    </UnevaluatedCode>
   </file>
   <file src="test/Adapter/Pdo/JwtBearerTest.php">
-    <MissingReturnType occurrences="1">
-      <code>testGetClientKey</code>
-    </MissingReturnType>
-    <UndefinedClass occurrences="1">
-      <code>NullStorage</code>
-    </UndefinedClass>
+    <UnevaluatedCode occurrences="8">
+      <code>$key = $storage-&gt;getClientKey('oauth_test_client', 'nor-is-this');</code>
+      <code>$key = $storage-&gt;getClientKey('oauth_test_client', 'test_subject');</code>
+      <code>$key = $storage-&gt;getClientKey('this-is-not-real', 'nor-is-this');</code>
+      <code>$this-&gt;assertFalse($key);</code>
+      <code>$this-&gt;assertFalse($key);</code>
+      <code>$this-&gt;assertNotNull($key);</code>
+    </UnevaluatedCode>
   </file>
   <file src="test/Adapter/Pdo/PublicKeyTest.php">
-    <MissingReturnType occurrences="1">
-      <code>testSetAccessToken</code>
-    </MissingReturnType>
-    <MixedMethodCall occurrences="9">
-      <code>getEncryptionAlgorithm</code>
-      <code>getEncryptionAlgorithm</code>
-      <code>getEncryptionAlgorithm</code>
-      <code>getPrivateKey</code>
-      <code>getPrivateKey</code>
-      <code>getPrivateKey</code>
-      <code>getPublicKey</code>
-      <code>getPublicKey</code>
-      <code>getPublicKey</code>
-    </MixedMethodCall>
+    <UnevaluatedCode occurrences="11">
+      <code>$globalPrivateKey = file_get_contents(__DIR__ . '/../../TestAsset/data/key.pem');</code>
+      <code>$globalPublicKey  = file_get_contents(__DIR__ . '/../../TestAsset/data/pubkey.pem');</code>
+      <code>$this-&gt;assertEquals($globalPrivateKey, $storage-&gt;getPrivateKey('oauth_test_client'));</code>
+      <code>$this-&gt;assertEquals($globalPublicKey, $storage-&gt;getPublicKey('oauth_test_client'));</code>
+      <code>$this-&gt;assertEquals('rsa', $storage-&gt;getEncryptionAlgorithm('oauth_test_client'));</code>
+      <code>$this-&gt;assertFalse($storage-&gt;getEncryptionAlgorithm('invalidclient'));</code>
+      <code>$this-&gt;assertFalse($storage-&gt;getEncryptionAlgorithm('oauth_test_client2'));</code>
+      <code>$this-&gt;assertFalse($storage-&gt;getPrivateKey('invalidclient'));</code>
+      <code>$this-&gt;assertFalse($storage-&gt;getPrivateKey('oauth_test_client2'));</code>
+      <code>$this-&gt;assertFalse($storage-&gt;getPublicKey('invalidclient'));</code>
+      <code>$this-&gt;assertFalse($storage-&gt;getPublicKey('oauth_test_client2'));</code>
+    </UnevaluatedCode>
   </file>
   <file src="test/Adapter/Pdo/RefreshTokenTest.php">
-    <MissingReturnType occurrences="1">
-      <code>testSetRefreshToken</code>
-    </MissingReturnType>
     <UndefinedClass occurrences="1">
       <code>NullStorage</code>
     </UndefinedClass>
   </file>
   <file src="test/Adapter/Pdo/ScopeTest.php">
-    <MissingReturnType occurrences="2">
-      <code>testGetDefaultScope</code>
-      <code>testScopeExists</code>
-    </MissingReturnType>
     <UndefinedClass occurrences="2">
       <code>NullStorage</code>
       <code>NullStorage</code>
     </UndefinedClass>
   </file>
   <file src="test/Adapter/Pdo/UserCredentialsTest.php">
-    <MissingReturnType occurrences="2">
-      <code>testCheckUserCredentials</code>
-      <code>testUserClaims</code>
-    </MissingReturnType>
-    <MixedAssignment occurrences="4">
-      <code>$claims</code>
-      <code>$claims</code>
-      <code>$claims</code>
-      <code>$claims</code>
-    </MixedAssignment>
     <UndefinedClass occurrences="1">
       <code>NullStorage</code>
     </UndefinedClass>
-    <UndefinedInterfaceMethod occurrences="6">
-      <code>getUserClaims</code>
-      <code>getUserClaims</code>
-      <code>getUserClaims</code>
-      <code>getUserClaims</code>
-      <code>getUserClaims</code>
-      <code>getUserClaims</code>
-    </UndefinedInterfaceMethod>
+    <UnevaluatedCode occurrences="10">
+      <code>$claims = $storage-&gt;getUserClaims('oauth_test_user', 'address');</code>
+      <code>$claims = $storage-&gt;getUserClaims('oauth_test_user', 'email');</code>
+      <code>$claims = $storage-&gt;getUserClaims('oauth_test_user', 'phone');</code>
+      <code>$claims = $storage-&gt;getUserClaims('oauth_test_user', 'profile');</code>
+      <code>$this-&gt;assertFalse($claims = $storage-&gt;getUserClaims('invalid', 'invalid'));</code>
+      <code>$this-&gt;assertFalse($storage-&gt;getUserClaims('oauth_test_user', 'invalid'));</code>
+      <code>$this-&gt;assertTrue(is_array($claims));</code>
+      <code>$this-&gt;assertTrue(is_array($claims));</code>
+      <code>$this-&gt;assertTrue(is_array($claims));</code>
+      <code>$this-&gt;assertTrue(is_array($claims));</code>
+    </UnevaluatedCode>
   </file>
   <file src="test/Controller/AuthControllerTest.php">
     <ArgumentTypeCoercion occurrences="2">
@@ -563,46 +402,13 @@
     <DeprecatedMethod occurrences="1">
       <code>getSqlStringForSqlObject</code>
     </DeprecatedMethod>
-    <InvalidPropertyAssignmentValue occurrences="1">
-      <code>new Adapter(new PdoDriver($r-&gt;getValue($adapter)))</code>
-    </InvalidPropertyAssignmentValue>
-    <InvalidReturnStatement occurrences="1">
-      <code>$this-&gt;db</code>
-    </InvalidReturnStatement>
-    <InvalidReturnType occurrences="1">
-      <code>Adapter|PDO</code>
-    </InvalidReturnType>
-    <MissingClosureReturnType occurrences="2">
-      <code>function () use ($oauth2Server) {</code>
-      <code>function () use ($oauth2Server) {</code>
-    </MissingClosureReturnType>
-    <MissingReturnType occurrences="17">
-      <code>setBodyParamsPlugin</code>
-      <code>setIsOAuth2FormatResponse</code>
-      <code>setRequest</code>
-      <code>setupDb</code>
-      <code>testAuthorizeCode</code>
-      <code>testAuthorizeForm</code>
-      <code>testAuthorizeParamErrorIsApiProblem</code>
-      <code>testAuthorizeParamErrorIsOAuth2Format</code>
-      <code>testImplicitClientAuth</code>
-      <code>testResource</code>
-      <code>testToken</code>
-      <code>testTokenActionUses401CodeIfTokenExceptionCodeIsInvalidWhenCreatingApiProblem</code>
-      <code>testTokenActionUsesCodeFromTokenExceptionIfPresentToCreateApiProblem</code>
-      <code>testTokenErrorIsApiProblem</code>
-      <code>testTokenErrorIsOAuth2Format</code>
-      <code>testTokenRevoke</code>
-      <code>testTokenRevokeWithoutTokenIsError</code>
-    </MissingReturnType>
-    <MixedArgument occurrences="18">
+    <MixedArgument occurrences="17">
       <code>$adapter</code>
       <code>$adapter::QUERY_MODE_EXECUTE</code>
       <code>$location</code>
       <code>$location</code>
       <code>$pdo</code>
       <code>$r-&gt;getValue($adapter)</code>
-      <code>$select</code>
       <code>$this-&gt;getResponse()-&gt;getContent()</code>
       <code>$this-&gt;getResponse()-&gt;getContent()</code>
       <code>$this-&gt;getResponse()-&gt;getContent()</code>
@@ -645,17 +451,12 @@
     <MixedArrayAssignment occurrences="1">
       <code>$config['api-tools-oauth2']</code>
     </MixedArrayAssignment>
-    <MixedAssignment occurrences="26">
+    <MixedAssignment occurrences="20">
       <code>$adapter</code>
       <code>$allowImplicit</code>
       <code>$config</code>
       <code>$config</code>
       <code>$db</code>
-      <code>$headers</code>
-      <code>$headers</code>
-      <code>$headers</code>
-      <code>$headers</code>
-      <code>$headers</code>
       <code>$location</code>
       <code>$location</code>
       <code>$oauthConfig</code>
@@ -669,29 +470,12 @@
       <code>$response</code>
       <code>$response</code>
       <code>$results</code>
-      <code>$select</code>
       <code>$server</code>
       <code>$token</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="49">
-      <code>addHeaderLine</code>
+    <MixedMethodCall occurrences="32">
       <code>addHeaderLine</code>
       <code>exec</code>
-      <code>from</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>getFieldValue</code>
-      <code>getFieldValue</code>
-      <code>getFieldValue</code>
-      <code>getFieldValue</code>
-      <code>getFieldValue</code>
-      <code>getUri</code>
-      <code>getUri</code>
       <code>set</code>
       <code>set</code>
       <code>set</code>
@@ -722,7 +506,6 @@
       <code>set</code>
       <code>set</code>
       <code>set</code>
-      <code>where</code>
     </MixedMethodCall>
     <MixedOperand occurrences="1">
       <code>$token</code>
@@ -731,35 +514,35 @@
       <code>$adapter</code>
       <code>$response</code>
     </PossiblyInvalidArgument>
-    <PossiblyUndefinedMethod occurrences="1">
+    <PossiblyInvalidMethodCall occurrences="8">
+      <code>addHeaderLine</code>
+      <code>getFieldValue</code>
+      <code>getFieldValue</code>
+      <code>getFieldValue</code>
+      <code>getFieldValue</code>
+      <code>getFieldValue</code>
+      <code>getUri</code>
+      <code>getUri</code>
+    </PossiblyInvalidMethodCall>
+    <PossiblyUndefinedMethod occurrences="7">
+      <code>addHeaderLine</code>
+      <code>getFieldValue</code>
+      <code>getFieldValue</code>
+      <code>getFieldValue</code>
+      <code>getFieldValue</code>
+      <code>getFieldValue</code>
       <code>toArray</code>
     </PossiblyUndefinedMethod>
     <PossiblyUndefinedVariable occurrences="2">
       <code>$code</code>
       <code>$code</code>
     </PossiblyUndefinedVariable>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>$this-&gt;db</code>
-    </RedundantConditionGivenDocblockType>
-    <UndefinedDocblockClass occurrences="1">
-      <code>Adatper|PDO</code>
-    </UndefinedDocblockClass>
-    <UndefinedInterfaceMethod occurrences="61">
+    <UndefinedInterfaceMethod occurrences="44">
       <code>bootstrap</code>
       <code>bootstrap</code>
       <code>bootstrap</code>
       <code>getConfig</code>
       <code>getHeaders</code>
-      <code>getHeaders</code>
-      <code>getHeaders</code>
-      <code>getHeaders</code>
-      <code>getHeaders</code>
-      <code>getHeaders</code>
-      <code>getHeaders</code>
-      <code>getHeaders</code>
-      <code>getHeaders</code>
-      <code>getPost</code>
-      <code>getPost</code>
       <code>getPost</code>
       <code>getPost</code>
       <code>getPost</code>
@@ -786,14 +569,7 @@
       <code>getServer</code>
       <code>getServer</code>
       <code>getServer</code>
-      <code>getServer</code>
-      <code>getServer</code>
-      <code>getServer</code>
-      <code>isRedirect</code>
-      <code>isRedirect</code>
       <code>setAllowOverride</code>
-      <code>setMethod</code>
-      <code>setMethod</code>
       <code>setMethod</code>
       <code>setMethod</code>
       <code>setMethod</code>
@@ -807,11 +583,12 @@
       <code>setQuery</code>
       <code>setService</code>
     </UndefinedInterfaceMethod>
+    <UndefinedMethod occurrences="2">
+      <code>getUri</code>
+      <code>getUri</code>
+    </UndefinedMethod>
   </file>
   <file src="test/Controller/AuthControllerWithCustomAdapterTest.php">
-    <MissingReturnType occurrences="1">
-      <code>testToken</code>
-    </MissingReturnType>
     <MixedArgument occurrences="1">
       <code>$this-&gt;getResponse()-&gt;getContent()</code>
     </MixedArgument>
@@ -837,13 +614,6 @@
     </PossiblyUndefinedMethod>
   </file>
   <file src="test/Controller/AuthControllerWithLaminasAuthenticationServiceTest.php">
-    <InvalidScalarArgument occurrences="1">
-      <code>1</code>
-    </InvalidScalarArgument>
-    <MissingReturnType occurrences="2">
-      <code>setupDb</code>
-      <code>testAuthorizeCode</code>
-    </MissingReturnType>
     <MixedArgument occurrences="4">
       <code>$code</code>
       <code>$location</code>
@@ -865,12 +635,10 @@
     <MixedInferredReturnType occurrences="1">
       <code>AuthenticationService</code>
     </MixedInferredReturnType>
-    <MixedMethodCall occurrences="11">
+    <MixedMethodCall occurrences="9">
       <code>andReturn</code>
       <code>andReturn</code>
       <code>exec</code>
-      <code>get</code>
-      <code>getUri</code>
       <code>set</code>
       <code>set</code>
       <code>set</code>
@@ -881,9 +649,9 @@
     <MixedReturnStatement occurrences="1">
       <code>$authentication</code>
     </MixedReturnStatement>
-    <PossiblyNullArgument occurrences="1">
-      <code>var_export($this-&gt;getResponse(), 1)</code>
-    </PossiblyNullArgument>
+    <PossiblyInvalidMethodCall occurrences="1">
+      <code>getUri</code>
+    </PossiblyInvalidMethodCall>
     <PossiblyUndefinedMethod occurrences="2">
       <code>once</code>
       <code>once</code>
@@ -892,15 +660,13 @@
       <code>$code</code>
       <code>$code</code>
     </PossiblyUndefinedVariable>
-    <UndefinedInterfaceMethod occurrences="11">
+    <UndefinedInterfaceMethod occurrences="9">
       <code>bootstrap</code>
-      <code>getHeaders</code>
       <code>getPost</code>
       <code>getPost</code>
       <code>getPost</code>
       <code>getServer</code>
       <code>getServer</code>
-      <code>isRedirect</code>
       <code>setMethod</code>
       <code>setPost</code>
       <code>setQuery</code>
@@ -909,133 +675,9 @@
       <code>once</code>
       <code>once</code>
     </UndefinedMagicMethod>
-  </file>
-  <file src="test/Controller/AuthControllerWithMongoAdapterTest.php">
-    <MissingReturnType occurrences="5">
-      <code>testAuthorizeCode</code>
-      <code>testAuthorizeErrorParam</code>
-      <code>testImplicitClientAuth</code>
-      <code>testResource</code>
-      <code>testToken</code>
-    </MissingReturnType>
-    <MixedArgument occurrences="10">
-      <code>$location</code>
-      <code>$location</code>
-      <code>$this-&gt;getResponse()-&gt;getContent()</code>
-      <code>$this-&gt;getResponse()-&gt;getContent()</code>
-      <code>$this-&gt;getResponse()-&gt;getContent()</code>
-      <code>$this-&gt;getResponse()-&gt;getContent()</code>
-      <code>$this-&gt;getResponse()-&gt;getContent()</code>
-      <code>$this-&gt;getResponse()-&gt;getContent()</code>
-      <code>$token</code>
-      <code>MongoClient::VERSION</code>
-    </MixedArgument>
-    <MixedArrayAccess occurrences="13">
-      <code>$config['api-tools-oauth2']</code>
-      <code>$oauthConfig['allow_implicit']</code>
-      <code>$post['access_token']</code>
-      <code>$post['grant_type']</code>
-      <code>$response['detail']</code>
-      <code>$response['message']</code>
-      <code>$response['message']</code>
-      <code>$response['status']</code>
-      <code>$response['success']</code>
-      <code>$response['success']</code>
-      <code>$response['title']</code>
-      <code>$server['PHP_AUTH_PW']</code>
-      <code>$server['PHP_AUTH_USER']</code>
-    </MixedArrayAccess>
-    <MixedAssignment occurrences="13">
-      <code>$allowImplicit</code>
-      <code>$config</code>
-      <code>$headers</code>
-      <code>$location</code>
-      <code>$location</code>
-      <code>$oauthConfig</code>
-      <code>$post</code>
-      <code>$response</code>
-      <code>$response</code>
-      <code>$response</code>
-      <code>$server</code>
-      <code>$this-&gt;db</code>
-      <code>$token</code>
-    </MixedAssignment>
-    <MixedMethodCall occurrences="24">
-      <code>addHeaderLine</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>getFieldValue</code>
+    <UndefinedMethod occurrences="1">
       <code>getUri</code>
-      <code>getUri</code>
-      <code>set</code>
-      <code>set</code>
-      <code>set</code>
-      <code>set</code>
-      <code>set</code>
-      <code>set</code>
-      <code>set</code>
-      <code>set</code>
-      <code>set</code>
-      <code>set</code>
-      <code>set</code>
-      <code>set</code>
-      <code>set</code>
-      <code>set</code>
-      <code>set</code>
-      <code>set</code>
-      <code>set</code>
-    </MixedMethodCall>
-    <MixedPropertyFetch occurrences="1">
-      <code>$this-&gt;db-&gt;oauth_clients</code>
-    </MixedPropertyFetch>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$response</code>
-    </PossiblyInvalidArgument>
-    <PossiblyUndefinedVariable occurrences="2">
-      <code>$client</code>
-      <code>$code</code>
-    </PossiblyUndefinedVariable>
-    <UndefinedClass occurrences="2">
-      <code>MongoClient</code>
-      <code>MongoDB</code>
-    </UndefinedClass>
-    <UndefinedDocblockClass occurrences="1">
-      <code>MongoDB</code>
-    </UndefinedDocblockClass>
-    <UndefinedInterfaceMethod occurrences="31">
-      <code>bootstrap</code>
-      <code>bootstrap</code>
-      <code>getConfig</code>
-      <code>getHeaders</code>
-      <code>getHeaders</code>
-      <code>getHeaders</code>
-      <code>getHeaders</code>
-      <code>getPost</code>
-      <code>getPost</code>
-      <code>getPost</code>
-      <code>getPost</code>
-      <code>getPost</code>
-      <code>getPost</code>
-      <code>getPost</code>
-      <code>getQuery</code>
-      <code>getQuery</code>
-      <code>getQuery</code>
-      <code>getQuery</code>
-      <code>getServer</code>
-      <code>getServer</code>
-      <code>getServer</code>
-      <code>getServer</code>
-      <code>getServer</code>
-      <code>getServer</code>
-      <code>getServer</code>
-      <code>isRedirect</code>
-      <code>isRedirect</code>
-      <code>setMethod</code>
-      <code>setMethod</code>
-      <code>setMethod</code>
-      <code>setMethod</code>
-    </UndefinedInterfaceMethod>
+    </UndefinedMethod>
   </file>
   <file src="test/Controller/CustomAdapter.php">
     <MixedInferredReturnType occurrences="1">
@@ -1049,99 +691,25 @@
     </ParamNameMismatch>
   </file>
   <file src="test/Controller/TestAsset/CustomProblemDetailsException.php">
-    <InvalidReturnStatement occurrences="1">
-      <code>$this-&gt;details</code>
-    </InvalidReturnStatement>
-    <InvalidReturnType occurrences="1">
-      <code>array</code>
-    </InvalidReturnType>
     <MissingConstructor occurrences="2">
       <code>$title</code>
       <code>$type</code>
     </MissingConstructor>
-    <NullableReturnStatement occurrences="1">
-      <code>$this-&gt;details</code>
-    </NullableReturnStatement>
-  </file>
-  <file src="test/Factory/AuthControllerFactoryTest.php">
-    <MissingClosureReturnType occurrences="1">
-      <code>function () {</code>
-    </MissingClosureReturnType>
-    <MissingReturnType occurrences="1">
-      <code>testControllerCreated</code>
-    </MissingReturnType>
-    <UnusedVariable occurrences="3">
-      <code>$controller</code>
-      <code>$controller</code>
-      <code>$controllers</code>
-    </UnusedVariable>
-  </file>
-  <file src="test/Factory/MongoAdapterFactoryTest.php">
-    <MissingReturnType occurrences="4">
-      <code>testCanPassAdapterConfigurationWhenCreatingInstance</code>
-      <code>testExceptionThrownWhenMissingMongoCredentials</code>
-      <code>testInstanceCreated</code>
-      <code>testInstanceCreatedWithMongoDbInServiceLocator</code>
-    </MissingReturnType>
-    <MixedArgument occurrences="3">
-      <code>MongoClient::VERSION</code>
-      <code>MongoDB::class</code>
-      <code>MongoDB::class</code>
-    </MixedArgument>
-    <MixedArrayAccess occurrences="1">
-      <code>$config['user_table']</code>
-    </MixedArrayAccess>
-    <MixedAssignment occurrences="1">
-      <code>$config</code>
-    </MixedAssignment>
-    <TooManyArguments occurrences="2">
-      <code>getMockBuilder</code>
-      <code>getMockBuilder</code>
-    </TooManyArguments>
-    <UndefinedClass occurrences="3">
-      <code>MongoClient</code>
-      <code>MongoDB</code>
-      <code>MongoDB</code>
-    </UndefinedClass>
-    <UnusedVariable occurrences="1">
-      <code>$services</code>
-    </UnusedVariable>
   </file>
   <file src="test/Factory/OAuth2ServerFactoryTest.php">
-    <MissingReturnType occurrences="7">
-      <code>testExceptionThrownOnMissingStorageClass</code>
-      <code>testServiceCreatedWithDefaults</code>
-      <code>testServiceCreatedWithOverriddenValues</code>
-      <code>testServiceCreatedWithOverriddenValuesInOptionsSubArray</code>
-      <code>testServiceCreatedWithSelectedGrandTypes</code>
-      <code>testServiceCreatedWithStoragesAsArray</code>
-      <code>testSubsequentCallsReturnTheSameInstance</code>
-    </MissingReturnType>
     <MixedArgument occurrences="1">
       <code>constant('HHVM_VERSION')</code>
     </MixedArgument>
     <TooManyArguments occurrences="1">
       <code>$smFactory</code>
     </TooManyArguments>
-    <UnusedVariable occurrences="1">
-      <code>$services</code>
-    </UnusedVariable>
   </file>
   <file src="test/Factory/PdoAdapterFactoryTest.php">
-    <MissingReturnType occurrences="4">
-      <code>testAllowsPassingDbOptions</code>
-      <code>testAllowsPassingOauth2ServerConfigAndPassesOnToUnderlyingAdapter</code>
-      <code>testExceptionThrownWhenMissingDbCredentials</code>
-      <code>testInstanceCreated</code>
-    </MissingReturnType>
     <MixedArrayAccess occurrences="1">
       <code>$config['user_table']</code>
     </MixedArrayAccess>
     <MixedAssignment occurrences="1">
       <code>$config</code>
     </MixedAssignment>
-    <UnusedVariable occurrences="1">
-      <code>$services</code>
-    </UnusedVariable>
   </file>
 </files>
