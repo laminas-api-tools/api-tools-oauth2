@@ -17,7 +17,7 @@ return array(
         ),
     ),
     'api-tools-oauth2' => array(
-        'storage' => 'Laminas\ApiTools\OAuth2\Adapter\PdoAdapter',
+        'storage' => \Laminas\ApiTools\OAuth2\Adapter\PdoAdapter::class,
         'db' => array(
             'dsn' => 'sqlite::memory:',
         ),
@@ -37,13 +37,13 @@ return array(
     'service_manager' => array(
         'aliases' => array(
             'translator' => 'MvcTranslator',
-            'Laminas\ApiTools\OAuth2\Provider\UserId' => 'Laminas\ApiTools\OAuth2\Provider\UserId\AuthenticationService',
+            'Laminas\ApiTools\OAuth2\Provider\UserId' => \Laminas\ApiTools\OAuth2\Provider\UserId\AuthenticationService::class,
         ),
         'invokables' => array(
-            'Laminas\Authentication\AuthenticationService' => 'Laminas\Authentication\AuthenticationService',
+            \Laminas\Authentication\AuthenticationService::class => \Laminas\Authentication\AuthenticationService::class,
         ),
         'factories' => array(
-            'Laminas\ApiTools\OAuth2\Provider\UserId\AuthenticationService' => 'Laminas\ApiTools\OAuth2\Provider\UserId\AuthenticationServiceFactory',
+            \Laminas\ApiTools\OAuth2\Provider\UserId\AuthenticationService::class => \Laminas\ApiTools\OAuth2\Provider\UserId\AuthenticationServiceFactory::class,
         ),
     ),
 );

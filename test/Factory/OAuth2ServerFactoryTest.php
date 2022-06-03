@@ -63,7 +63,7 @@ class OAuth2ServerFactoryTest extends AbstractHttpControllerTestCase
 
         $this->services->setService('config', []);
         $smFactory = $this->factory;
-        $factory   = $smFactory($this->services, 'OAuth2Server');
+        $factory   = $smFactory($this->services);
 
         $this->expectException(RuntimeException::class);
         $factory();

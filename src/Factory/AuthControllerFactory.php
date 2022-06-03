@@ -59,9 +59,7 @@ class AuthControllerFactory implements FactoryInterface
             return $oauth2ServerFactory;
         }
 
-        return function () use ($oauth2ServerFactory) {
-            return $oauth2ServerFactory;
-        };
+        return fn() => $oauth2ServerFactory;
     }
 
     /**

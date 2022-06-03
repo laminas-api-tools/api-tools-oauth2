@@ -6,7 +6,6 @@ namespace Laminas\ApiTools\OAuth2\Factory;
 
 use Interop\Container\ContainerInterface; // phpcs:ignore WebimpressCodingStandard.PHP.CorrectClassNameCase.Invalid
 use Laminas\ApiTools\OAuth2\Controller\Exception;
-use Laminas\ServiceManager\ServiceLocatorInterface;
 use OAuth2\GrantType\AuthorizationCode;
 use OAuth2\GrantType\ClientCredentials;
 use OAuth2\GrantType\JwtBearer;
@@ -20,14 +19,11 @@ use function is_string;
 
 class OAuth2ServerInstanceFactory
 {
-    /** @var array */
-    private $config;
+    private array $config;
 
-    /** @var ServiceLocatorInterface */
-    private $services;
+    private ContainerInterface $services;
 
-    /** @var OAuth2Server|null */
-    private $server;
+    private ?OAuth2Server $server = null;
 
     /**
      * @param array $config Configuration to use when creating the instance.

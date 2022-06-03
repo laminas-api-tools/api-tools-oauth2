@@ -36,14 +36,14 @@ class JwtBearerTest extends AbstractBaseTest
         $this->assertNotNull($key);
         $this->assertEquals(
             $key,
-            <<<'END'
-                -----BEGIN PUBLIC KEY-----
-                MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCvfF+Cw8nzsc9Twam37SYpAW3+
-                lRGUle/hYnd9obfBvDHKBvgb1WfGCblwjwImGL9u0rEIW2sspkwBEsGGFFBmSaqq
-                fvEER7Yr++VIidOUHkas3cHO1TVoERO3s0THOobw0OzghPnMJL6ayelYOESwfnqR
-                WfuEMSaWaW0G38QPzwIDAQAB
-                -----END PUBLIC KEY-----
-                END
+            <<<'END_WRAP'
+-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCvfF+Cw8nzsc9Twam37SYpAW3+
+lRGUle/hYnd9obfBvDHKBvgb1WfGCblwjwImGL9u0rEIW2sspkwBEsGGFFBmSaqq
+fvEER7Yr++VIidOUHkas3cHO1TVoERO3s0THOobw0OzghPnMJL6ayelYOESwfnqR
+WfuEMSaWaW0G38QPzwIDAQAB
+-----END PUBLIC KEY-----
+END_WRAP
         );
     }
 }
