@@ -413,9 +413,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $oauth2Server
             ->handleTokenRequest(Argument::type(OAuth2Request::class))
             ->willThrow($exception);
-        $factory = function () use ($oauth2Server): OAuth2Server {
-            return $oauth2Server->reveal();
-        };
+        $factory = fn(): OAuth2Server => $oauth2Server->reveal();
 
         $provider = $this->prophesize(UserIdProviderInterface::class)->reveal();
 
@@ -447,9 +445,7 @@ class AuthControllerTest extends AbstractHttpControllerTestCase
         $oauth2Server
             ->handleTokenRequest(Argument::type(OAuth2Request::class))
             ->willThrow($exception);
-        $factory = function () use ($oauth2Server): OAuth2Server {
-            return $oauth2Server->reveal();
-        };
+        $factory = fn(): OAuth2Server => $oauth2Server->reveal();
 
         $provider = $this->prophesize(UserIdProviderInterface::class)->reveal();
 

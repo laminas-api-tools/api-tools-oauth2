@@ -6,7 +6,8 @@ namespace LaminasTest\ApiTools\OAuth2\Adapter\Pdo;
 
 use OAuth2\Storage\ClientInterface;
 
-use function rand;
+use function mt_getrandmax;
+use function random_int;
 
 class ClientTest extends AbstractBaseTest
 {
@@ -79,7 +80,7 @@ class ClientTest extends AbstractBaseTest
             return;
         }
 
-        $clientId = 'some-client-' . rand();
+        $clientId = 'some-client-' . random_int(0, mt_getrandmax());
 
         // create a new client
         $success = $storage->setClientDetails(

@@ -83,7 +83,7 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
                 ],
             ],
         ]);
-        $mock = $this->getMockBuilder(MongoDB::class, [], [], '', false)
+        $mock = $this->getMockBuilder(MongoDB::class)
             ->disableOriginalConstructor()
             ->getMock();
         $this->services->setService('testdb', $mock);
@@ -104,7 +104,7 @@ class MongoAdapterFactoryTest extends AbstractHttpControllerTestCase
                 ],
             ],
         ]);
-        $mock = $this->getMockBuilder(MongoDB::class, [], [], '', false)
+        $mock = $this->getMockBuilder(MongoDB::class)
             ->disableOriginalConstructor()
             ->getMock();
         $this->services->setService('testdb', $mock);

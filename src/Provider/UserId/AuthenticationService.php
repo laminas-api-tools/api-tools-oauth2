@@ -15,11 +15,9 @@ use function ucfirst;
 
 class AuthenticationService implements UserIdProviderInterface
 {
-    /** @var AuthenticationServiceInterface */
-    private $authenticationService;
+    private ?AuthenticationServiceInterface $authenticationService;
 
-    /** @var string */
-    private $userId = 'id';
+    private string $userId = 'id';
 
     /**
      *  Set authentication service
