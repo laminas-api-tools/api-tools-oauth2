@@ -29,7 +29,7 @@
     },
     "require": {
         "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
-        "bshaffer/oauth2-server-php": "^1.12.1",
+        "bshaffer/oauth2-server-php": "^1.14.1",
         "laminas-api-tools/api-tools-api-problem": "^1.5",
         "laminas-api-tools/api-tools-content-negotiation": "^1.8.0",
         "laminas/laminas-crypt": "^3.4",
