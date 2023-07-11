@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Laminas\ApiTools\OAuth2\Factory;
 
-use Interop\Container\ContainerInterface; // phpcs:ignore WebimpressCodingStandard.PHP.CorrectClassNameCase.Invalid
 use Laminas\ApiTools\OAuth2\Controller\Exception;
 use OAuth2\GrantType\AuthorizationCode;
 use OAuth2\GrantType\ClientCredentials;
@@ -12,6 +11,7 @@ use OAuth2\GrantType\JwtBearer;
 use OAuth2\GrantType\RefreshToken;
 use OAuth2\GrantType\UserCredentials;
 use OAuth2\Server as OAuth2Server;
+use Psr\Container\ContainerInterface;
 
 use function array_merge;
 use function is_array;

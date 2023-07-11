@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Laminas\ApiTools\OAuth2\Factory;
 
-use Interop\Container\ContainerInterface; // phpcs:ignore WebimpressCodingStandard.PHP.CorrectClassNameCase.Invalid
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Psr\Container\ContainerInterface;
 
 class OAuth2ServerFactory
 {

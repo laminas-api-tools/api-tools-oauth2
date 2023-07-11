@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Laminas\ApiTools\OAuth2\Factory;
 
-use Interop\Container\ContainerInterface; // phpcs:ignore WebimpressCodingStandard.PHP.CorrectClassNameCase.Invalid
 use Laminas\ApiTools\OAuth2\Adapter\PdoAdapter;
 use Laminas\ApiTools\OAuth2\Controller\Exception;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Psr\Container\ContainerInterface;
 
 use function is_array;
 
