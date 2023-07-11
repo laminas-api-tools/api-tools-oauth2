@@ -9,7 +9,6 @@ use OAuth2\Storage\NullStorage;
 use OAuth2\Storage\ScopeInterface;
 
 use function explode;
-use function get_class;
 use function sort;
 use function sprintf;
 
@@ -28,7 +27,7 @@ class ScopeTest extends AbstractBaseTest
             // incompatible storage
             $this->markTestSkipped(sprintf(
                 'Skipped Storage of type %s; does not implement %s ',
-                get_class($storage),
+                $storage::class,
                 ScopeInterface::class
             ));
             return;
@@ -55,7 +54,7 @@ class ScopeTest extends AbstractBaseTest
             // incompatible storage
             $this->markTestSkipped(sprintf(
                 'Skipped Storage of type %s; does not implement %s ',
-                get_class($storage),
+                $storage::class,
                 ScopeInterface::class
             ));
             return;

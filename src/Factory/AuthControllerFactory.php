@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Laminas\ApiTools\OAuth2\Factory;
 
-use Interop\Container\ContainerInterface; // phpcs:ignore WebimpressCodingStandard.PHP.CorrectClassNameCase.Invalid
 use Laminas\ApiTools\OAuth2\Controller\AuthController;
 use Laminas\ApiTools\OAuth2\Provider\UserId;
 use Laminas\ServiceManager\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use OAuth2\Server as OAuth2Server;
+use Psr\Container\ContainerInterface;
 
 class AuthControllerFactory implements FactoryInterface
 {
