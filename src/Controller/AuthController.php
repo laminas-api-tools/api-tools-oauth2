@@ -21,7 +21,6 @@ use OAuth2\Server as OAuth2Server;
 use RuntimeException;
 use Webmozart\Assert\Assert;
 
-use function get_class;
 use function gettype;
 use function is_callable;
 use function is_object;
@@ -52,7 +51,7 @@ class AuthController extends AbstractActionController
         if (! is_callable($serverFactory)) {
             throw new InvalidArgumentException(sprintf(
                 'OAuth2 Server factory must be a PHP callable; received %s',
-                is_object($serverFactory) ? get_class($serverFactory) : gettype($serverFactory)
+                is_object($serverFactory) ? $serverFactory::class : gettype($serverFactory)
             ));
         }
         $this->serverFactory  = $serverFactory;
@@ -367,7 +366,7 @@ class AuthController extends AbstractActionController
         if (! $server instanceof OAuth2Server) {
             throw new RuntimeException(sprintf(
                 'OAuth2\Server factory did not return a valid instance; received %s',
-                is_object($server) ? get_class($server) : gettype($server)
+                is_object($server) ? $server::class : gettype($server)
             ));
         }
         $this->server = $server;
